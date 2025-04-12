@@ -1,7 +1,8 @@
-package com.carlosreads.talekeeper;
+package com.carlosreads.talekeeper.views;
 
 import android.os.Bundle;
 
+import com.carlosreads.talekeeper.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;

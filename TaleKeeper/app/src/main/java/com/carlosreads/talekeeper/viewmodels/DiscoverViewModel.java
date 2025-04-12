@@ -1,4 +1,4 @@
-package com.carlosreads.talekeeper.ui.dashboard;
+package com.carlosreads.talekeeper.viewmodels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

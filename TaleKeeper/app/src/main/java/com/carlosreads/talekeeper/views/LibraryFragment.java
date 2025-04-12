@@ -1,4 +1,4 @@
-package com.carlosreads.talekeeper.ui.home;
+package com.carlosreads.talekeeper.views;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.carlosreads.talekeeper.databinding.FragmentLibraryBinding;
+import com.carlosreads.talekeeper.viewmodels.LibraryViewModel;
 
 public class LibraryFragment extends Fragment {
 
