@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TaleKeeper</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="library">Library</string>
+    <string name="discover">Discover</string>
+    <string name="profile">Profile</string>
 </resources>
