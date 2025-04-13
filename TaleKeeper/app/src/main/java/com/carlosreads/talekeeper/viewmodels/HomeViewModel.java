@@ -11,9 +11,11 @@ public class HomeViewModel extends ViewModel {
     private final BookRepository bookRepository;
     private final MutableLiveData<Book> spotlightLiveData = new MutableLiveData<>();
 
+
     public HomeViewModel(){
         bookRepository = new BookRepository();
     }
+
 
     public LiveData<Book> getSpotlightData() {
         bookRepository.loadSpotlight(spotlightLiveData);
