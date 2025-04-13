@@ -1,5 +1,6 @@
 package com.carlosreads.talekeeper.views;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -13,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.carlosreads.talekeeper.databinding.FragmentHomeBinding;
+import com.carlosreads.talekeeper.models.Book;
 import com.carlosreads.talekeeper.viewmodels.HomeViewModel;
 
 public class HomeFragment extends Fragment {
@@ -32,6 +35,16 @@ public class HomeFragment extends Fragment {
         binding.setViewModel(homeViewModel);
         binding.setLifecycleOwner(getViewLifecycleOwner());
 
+        homeViewModel.getSpotlightData().observe(getViewLifecycleOwner(), new Observer<Book>() {
+            @Override
+            public void onChanged(Book book) {
+                Glide.with(getContext())
+                        .load(book.getCover_url())
+                        .override(630, (int) (630 * 1.6))
+                        .fitCenter()
+                        .into(binding.coverImg);
+            }
+        });
 
         binding.libraryCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,7 +53,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        homeViewModel.getSpotlightData();
+        binding.spotlight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(requireContext(), "libro", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return root;
     }
