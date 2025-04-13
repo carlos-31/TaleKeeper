@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         // defining with the IDs of the destinations
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_library, R.id.navigation_discover, R.id.navigation_profile)
+                R.id.navigation_home, R.id.navigation_discover, R.id.navigation_profile)
                 .build();
 
         // navController handles the navigation between fragments
