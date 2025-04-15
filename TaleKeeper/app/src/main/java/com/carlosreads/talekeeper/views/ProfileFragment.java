@@ -1,5 +1,6 @@
 package com.carlosreads.talekeeper.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,16 @@ public class ProfileFragment extends Fragment {
 
         final TextView textView = binding.textNotifications;
         profileViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+
+        binding.loginbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent loginIntent = new Intent(requireContext(), LoginActivity.class);
+                startActivity(loginIntent);
+            }
+        });
+
         return root;
     }
 

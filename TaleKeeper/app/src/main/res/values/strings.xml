@@ -5,4 +5,10 @@
     <string name="discover">Discover</string>
     <string name="profile">Profile</string>
     <string name="home">Home</string>
+    <string name="username">Username</string>
+    <string name="sign_up_link">Don’t have an account?\nCreate one here!</string>
+    <string name="log_in">Log In</string>
+    <string name="password">Password</string>
+    <string name="login_title">Log into your account!</string>
+    <string name="home_FAB">Return home button</string>
 </resources>
