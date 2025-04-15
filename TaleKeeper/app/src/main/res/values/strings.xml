@@ -11,4 +11,9 @@
     <string name="password">Password</string>
     <string name="login_title">Log into your account!</string>
     <string name="home_FAB">Return home button</string>
+    <string name="signup_title">Create a new account</string>
+    <string name="name">Name</string>
+    <string name="email">email</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="sign_up">Sign up</string>
 </resources>
