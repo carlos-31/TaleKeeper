@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".views.ProfileFragment"
     android:paddingTop="?attr/actionBarSize"
-    android:paddingBottom="?attr/actionBarSize">
+    android:paddingBottom="?attr/bottomNavigationStyle">
 
     <TextView
         android:id="@+id/text_notifications"
@@ -30,5 +30,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:text="log in"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <Button
+        android:id="@+id/signupbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="sign up"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,6 +38,14 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        binding.signupbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent loginIntent = new Intent(requireContext(), SignupActivity.class);
+                startActivity(loginIntent);
+            }
+        });
+
         return root;
     }
 
