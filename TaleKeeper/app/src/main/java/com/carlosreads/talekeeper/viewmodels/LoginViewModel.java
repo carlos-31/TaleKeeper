@@ -1,4 +1,6 @@
 package com.carlosreads.talekeeper.viewmodels;
 
-public class LoginViewModel {
+import androidx.lifecycle.ViewModel;
+
+public class LoginViewModel extends ViewModel {
 }
