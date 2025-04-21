@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.carlosreads.talekeeper.R;
@@ -53,7 +55,35 @@ public class SignupActivity extends AppCompatActivity {
         binding.signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "aaaaaa sign up btn aaaaaaaaaaaaaaaa");
+                String name = binding.name.getText().toString().trim();
+                String email = binding.inputEmail.getText().toString().trim();
+                String password = binding.password.getText().toString().trim();
+                String password2 = binding.password2.getText().toString().trim();
+
+                if (name.isEmpty() || email.isEmpty() || password.isEmpty() || password2.isEmpty())
+                    Toast.makeText(SignupActivity.this, "pls give me alllll the info :(", Toast.LENGTH_SHORT).show();
+                else
+                    viewModel.validateAndRegister(name, email,password, password2);
+            }
+        });
+
+        viewModel.getRegistrationStatus().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean isRegistered) {
+                if (isRegistered != null) {
+                    if (isRegistered) {
+                        Toast.makeText(SignupActivity.this, "user registered successfully", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                    } else {
+                        Toast.makeText(SignupActivity.this, "something went wrong :(", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        viewModel.getValidationMessage().observe(this, message -> {
+            if (message != null) {
+                Toast.makeText(SignupActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
     }
