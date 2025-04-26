@@ -17,6 +17,7 @@ import java.util.HashMap;
 public class UserRepository {
     private final FirebaseAuth mAuth;
     private DatabaseReference usersInfoRef;
+    private MutableLiveData<Boolean> loginStatus = new MutableLiveData<>();
 
 
     public UserRepository() {
@@ -45,15 +46,34 @@ public class UserRepository {
                                             Log.d(TAG, "user registered");
                                             registrationStatus.setValue(true);
                                         } else {
-                                            Log.e(TAG, "user register oops: " + databaseTask.getException() );
+                                            Log.e(TAG, "user register failed: " + databaseTask.getException() );
                                             registrationStatus.setValue(false);
                                         }
                                     });
                     } else {
-                        Log.e(TAG, "no register for you: " + task.getException());
+                        Log.e(TAG, "error registering user: " + task.getException());
                         registrationStatus.setValue(false);
                     }
                 });
         return registrationStatus;
     }
+
+
+    public LiveData<Boolean> loginUser(String email, String password) {
+        loginStatus.setValue(null);
+
+        //logs in the user with their info
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        //if login successful sets value true to handle log in
+                        loginStatus.setValue(true);
+                        Log.d(TAG,"login: " + mAuth.getCurrentUser());
+                    } else {
+                        loginStatus.setValue(false);
+                    }
+                });
+        return loginStatus;
+    }
+
 }

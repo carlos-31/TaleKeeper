@@ -1,7 +1,10 @@
 package com.carlosreads.talekeeper.views;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -53,19 +56,33 @@ public class LoginActivity extends AppCompatActivity {
                 String email = binding.email.getText().toString().trim();
                 String password = binding.password.getText().toString().trim();
 
+                //checks info is filled out before calling the function
                 if (email.isEmpty() || password.isEmpty())
                     Toast.makeText(LoginActivity.this,
                             "Please fill out your information", Toast.LENGTH_SHORT).show();
-                else{}
-                    //login
+                else
+                    viewModel.login(email,password);
             }
         });
+
+        viewModel.getLoginStatus().observe(this, status -> {
+            if (status != null){
+                if (status) {
+                    //if login successful, sends the user home
+                    Intent home = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(home);
+                    finish();
+                }
+                else
+                    Toast.makeText(this, "Error while loging in", Toast.LENGTH_SHORT).show();
+            }});
 
         binding.signupText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent home = new Intent(LoginActivity.this, SignupActivity.class);
-                startActivity(home);
+                Intent signup = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(signup);
+                finish();
             }
         });
 

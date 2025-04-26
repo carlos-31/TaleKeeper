@@ -59,6 +59,7 @@ public class SignupActivity extends AppCompatActivity {
                 String password = binding.password.getText().toString().trim();
                 String password2 = binding.password2.getText().toString().trim();
 
+                //checks all info is filled in before calling viewmodel
                 if (name.isEmpty() || email.isEmpty() || password.isEmpty() || password2.isEmpty())
                     Toast.makeText(SignupActivity.this,
                             "Please fill out your information", Toast.LENGTH_SHORT).show();
@@ -72,6 +73,7 @@ public class SignupActivity extends AppCompatActivity {
             public void onChanged(Boolean isRegistered) {
                 if (isRegistered != null) {
                     if (isRegistered) {
+                        //if sign up succeeds, send user to login activity
                         Toast.makeText(SignupActivity.this,
                                 "user registered successfully", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(SignupActivity.this,
@@ -86,6 +88,7 @@ public class SignupActivity extends AppCompatActivity {
 
         viewModel.getValidationMessage().observe(this, message -> {
             if (message != null) {
+                //gets the error message, and if not null displays it
                 Toast.makeText(SignupActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
@@ -93,8 +96,9 @@ public class SignupActivity extends AppCompatActivity {
         binding.loginText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent home = new Intent(SignupActivity.this, LoginActivity.class);
-                startActivity(home);
+                Intent login = new Intent(SignupActivity.this, LoginActivity.class);
+                startActivity(login);
+                finish();
             }
         });
     }
