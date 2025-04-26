@@ -61,7 +61,8 @@ public class SignupActivity extends AppCompatActivity {
                 String password2 = binding.password2.getText().toString().trim();
 
                 if (name.isEmpty() || email.isEmpty() || password.isEmpty() || password2.isEmpty())
-                    Toast.makeText(SignupActivity.this, "pls give me alllll the info :(", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity.this,
+                            "Please fill out your information", Toast.LENGTH_SHORT).show();
                 else
                     viewModel.validateAndRegister(name, email,password, password2);
             }
@@ -72,10 +73,13 @@ public class SignupActivity extends AppCompatActivity {
             public void onChanged(Boolean isRegistered) {
                 if (isRegistered != null) {
                     if (isRegistered) {
-                        Toast.makeText(SignupActivity.this, "user registered successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                        Toast.makeText(SignupActivity.this,
+                                "user registered successfully", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(SignupActivity.this,
+                                                    LoginActivity.class));
                     } else {
-                        Toast.makeText(SignupActivity.this, "something went wrong :(", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignupActivity.this,
+                                "something went wrong :(", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

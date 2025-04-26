@@ -1,8 +1,5 @@
 package com.carlosreads.talekeeper.viewmodels;
 
-import static android.content.ContentValues.TAG;
-
-import android.util.Log;
 import android.util.Patterns;
 
 import androidx.lifecycle.LiveData;
@@ -34,12 +31,10 @@ public class SignupViewModel extends ViewModel {
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             validationMessage.setValue("The email is not valid");
-            Log.d(TAG, "email not valid");
             return;
         }
         if (!password.equals(password2) || password.isEmpty()) {
             validationMessage.setValue("The passwords don't match");
-            Log.d(TAG, "password not same");
             return;
         }
 
@@ -48,9 +43,6 @@ public class SignupViewModel extends ViewModel {
             isRegistered.setValue(success);
         });
 
-
-
     }
-
-
+    
 }
