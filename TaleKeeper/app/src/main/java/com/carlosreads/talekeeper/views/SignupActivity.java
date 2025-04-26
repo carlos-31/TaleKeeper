@@ -48,7 +48,6 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent home = new Intent(SignupActivity.this, MainActivity.class);
                 startActivity(home);
-                Log.d(TAG, "???????????");
             }
         });
 
@@ -88,6 +87,14 @@ public class SignupActivity extends AppCompatActivity {
         viewModel.getValidationMessage().observe(this, message -> {
             if (message != null) {
                 Toast.makeText(SignupActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        binding.loginText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent home = new Intent(SignupActivity.this, LoginActivity.class);
+                startActivity(home);
             }
         });
     }

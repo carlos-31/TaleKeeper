@@ -3,6 +3,7 @@ package com.carlosreads.talekeeper.views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +43,28 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent home = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(home);
+            }
+        });
+
+        binding.loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = binding.email.getText().toString().trim();
+                String password = binding.password.getText().toString().trim();
+
+                if (email.isEmpty() || password.isEmpty())
+                    Toast.makeText(LoginActivity.this,
+                            "Please fill out your information", Toast.LENGTH_SHORT).show();
+                else{}
+                    //login
+            }
+        });
+
+        binding.signupText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent home = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(home);
             }
         });
