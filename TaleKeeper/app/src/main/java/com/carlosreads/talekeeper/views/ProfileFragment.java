@@ -17,7 +17,7 @@ import com.carlosreads.talekeeper.viewmodels.ProfileViewModel;
 public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
-    private ProfileViewModel    viewModel;
+    private ProfileViewModel viewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -26,7 +26,8 @@ public class ProfileFragment extends Fragment {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-
+        binding.setViewModel(viewModel);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
 
 
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
