@@ -17,14 +17,16 @@ import com.carlosreads.talekeeper.viewmodels.ProfileViewModel;
 public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
+    private ProfileViewModel    viewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ProfileViewModel profileViewModel =
-                new ViewModelProvider(this).get(ProfileViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
 
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+
 
 
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {

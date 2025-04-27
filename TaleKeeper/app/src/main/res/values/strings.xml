@@ -15,4 +15,6 @@
     <string name="email">Email</string>
     <string name="confirm_password">Confirm password</string>
     <string name="sign_up">Sign up</string>
+    <string name="not_logged_in_msg">This area is for users only.\n Please log in or create an account</string>
+    <string name="not_logged_in_title">Seems like youre not logged in...</string>
 </resources>
