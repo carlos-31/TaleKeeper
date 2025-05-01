@@ -44,7 +44,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         //img and click listener
 
         holder.bind(book);
-
     }
 
     @Override
