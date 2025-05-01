@@ -15,7 +15,7 @@ public class LibraryViewModel extends ViewModel {
 
     public LibraryViewModel() {
         bookRepository = new BookRepository();
-
+        loadBooks();
     }
 
     public LiveData<List<Book>> getBooks() {

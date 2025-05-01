@@ -1,7 +1,9 @@
 package com.carlosreads.talekeeper.adapters;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -42,6 +44,20 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         Book book = books.get(position);
         //img and click listener
+        int width = 200;
+        Glide.with(holder.itemView.getContext())
+                        .load(book.getCover_url())
+                        .override(width,(int) (width * 1.6))
+                        .centerCrop()
+                        .into(holder.binding.bookCover);
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), book.getTitle(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         holder.bind(book);
     }

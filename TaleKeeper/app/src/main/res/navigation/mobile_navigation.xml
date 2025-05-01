@@ -10,13 +10,7 @@
         android:name="com.carlosreads.talekeeper.views.HomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_home">
-
-        <action
-            android:id="@+id/action_home_to_library"
-            app:destination="@+id/library"
-        />
     </fragment>
-
 
 
     <fragment
@@ -37,5 +31,12 @@
         android:label="@string/library"
         tools:layout="@layout/fragment_library" />
 
+
+    <action
+        android:id="@+id/action_to_library"
+        app:destination="@+id/library"
+        app:popUpTo="@id/navigation_home"
+        app:popUpToInclusive="true"
+        />
 
 </navigation>

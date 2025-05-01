@@ -6,11 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.carlosreads.talekeeper.R;
 import com.carlosreads.talekeeper.adapters.BookAdapter;
 import com.carlosreads.talekeeper.databinding.FragmentLibraryBinding;
 import com.carlosreads.talekeeper.viewmodels.LibraryViewModel;
@@ -35,7 +40,26 @@ public class LibraryFragment extends Fragment {
         binding.recyclerView.setAdapter(bookAdapter);
 
         libraryViewModel.getBooks().observe(getViewLifecycleOwner(),
-                                                books -> bookAdapter.setBooks(books));
+                books -> bookAdapter.setBooks(books));
+
+        // removes back arrow from toolbar
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        if (activity.getSupportActionBar() != null) {
+            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        }
+
+        // if user presses back key, this takes them home instead of closing the app
+        requireActivity().getOnBackPressedDispatcher().addCallback(
+                getViewLifecycleOwner(),
+                new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        NavController navController = NavHostFragment
+                                .findNavController(LibraryFragment.this);
+                        navController.navigate(R.id.navigation_home);
+
+                    }
+                });
 
         return root;
     }

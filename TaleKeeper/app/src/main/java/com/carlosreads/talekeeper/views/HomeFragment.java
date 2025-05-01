@@ -57,8 +57,9 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(requireContext(), "library", Toast.LENGTH_SHORT).show();
-                NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.action_home_to_library);
+                NavController navController = Navigation.findNavController(requireActivity(),
+                                                            R.id.nav_host_fragment_activity_main);
+                navController.navigate(R.id.action_to_library);
 
             }
         });
