@@ -5,4 +5,18 @@
     <string name="discover">Discover</string>
     <string name="profile">Profile</string>
     <string name="home">Home</string>
+    <string name="sign_up_link">Don’t have an account?\nCreate one here!</string>
+    <string name="log_in">Log In</string>
+    <string name="password">Password</string>
+    <string name="login_title">Log into your account!</string>
+    <string name="home_FAB">Return home button</string>
+    <string name="signup_title">Create a new account</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="book_cover">The book\'s cover</string>
+    <string name="spotlight_subtitle">Our favourite book changes every day. Come back tomorrow for a new recommendation!</string>
+    <string name="spotlight_title">Today\'s favourite book:</string>
+    <string name="Library_card_home_title">Check out our entire catalog!</string>
 </resources>
