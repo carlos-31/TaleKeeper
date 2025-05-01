@@ -13,7 +13,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
+import com.carlosreads.talekeeper.R;
 import com.carlosreads.talekeeper.databinding.FragmentDiscoverBinding;
 import com.carlosreads.talekeeper.databinding.FragmentHomeBinding;
 import com.carlosreads.talekeeper.viewmodels.DiscoverViewModel;
@@ -38,7 +41,18 @@ public class DiscoverFragment extends Fragment {
                 Toast.makeText(requireContext(), binding.search.getText() , Toast.LENGTH_SHORT).show();
             }
         });
-        
+
+        binding.fantasyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("content", "Fantasy");
+                NavController navController = Navigation.findNavController(requireActivity(),
+                        R.id.nav_host_fragment_activity_main);
+                navController.navigate(R.id.action_to_book_list, bundle);
+            }
+        });
+
 
         return root;
     }

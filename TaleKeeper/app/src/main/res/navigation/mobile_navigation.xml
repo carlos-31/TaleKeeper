@@ -31,12 +31,22 @@
         android:label="@string/library"
         tools:layout="@layout/fragment_library" />
 
+    <fragment
+        android:id="@+id/bookList"
+        android:name="com.carlosreads.talekeeper.views.BookListFragment"
+        tools:layout="@layout/fragment_library" />
+
 
     <action
         android:id="@+id/action_to_library"
         app:destination="@+id/library"
         app:popUpTo="@id/navigation_home"
         app:popUpToInclusive="true"
+        />
+
+    <action
+        android:id="@+id/action_to_book_list"
+        app:destination="@+id/bookList"
         />
 
 </navigation>
