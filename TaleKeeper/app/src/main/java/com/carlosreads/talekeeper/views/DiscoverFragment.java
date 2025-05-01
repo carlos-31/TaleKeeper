@@ -38,6 +38,7 @@ public class DiscoverFragment extends Fragment {
                 Toast.makeText(requireContext(), binding.search.getText() , Toast.LENGTH_SHORT).show();
             }
         });
+        
 
         return root;
     }
