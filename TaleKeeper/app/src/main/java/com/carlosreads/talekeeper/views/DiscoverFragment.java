@@ -21,6 +21,9 @@ import com.carlosreads.talekeeper.databinding.FragmentDiscoverBinding;
 import com.carlosreads.talekeeper.databinding.FragmentHomeBinding;
 import com.carlosreads.talekeeper.viewmodels.DiscoverViewModel;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class DiscoverFragment extends Fragment {
     private DiscoverViewModel viewModel;
     private FragmentDiscoverBinding binding;
@@ -42,19 +45,42 @@ public class DiscoverFragment extends Fragment {
             }
         });
 
-        binding.fantasyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("content", "Fantasy");
-                NavController navController = Navigation.findNavController(requireActivity(),
-                        R.id.nav_host_fragment_activity_main);
-                navController.navigate(R.id.action_to_book_list, bundle);
-            }
-        });
+        setClickListeners();
+
+//        binding.fantasyBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Bundle bundle = new Bundle();
+//                bundle.putString("content", "Fantasy");
+//                NavController navController = Navigation.findNavController(requireActivity(),
+//                        R.id.nav_host_fragment_activity_main);
+//                navController.navigate(R.id.action_to_book_list, bundle);
+//            }
+//        });
 
 
         return root;
+    }
+
+    private void setClickListeners() {
+        Map<View, String> genreButtons = new HashMap<>();
+        genreButtons.put(binding.fantasyBtn, "Fantasy");
+        genreButtons.put(binding.scifiBtn, "Sci-Fi");
+        genreButtons.put(binding.mysteryBtn, "Mystery");
+        genreButtons.put(binding.horrorBtn, "Horror");
+        genreButtons.put(binding.speculativeBtn, "Speculative");
+        genreButtons.put(binding.anthologyBtn, "Anthology");
+
+        NavController navController = Navigation.findNavController(requireActivity(),
+                R.id.nav_host_fragment_activity_main);
+
+        for (Map.Entry<View, String> entry : genreButtons.entrySet()) {
+            entry.getKey().setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putString("content", entry.getValue());
+                navController.navigate(R.id.action_to_book_list, bundle);
+            });
+        }
     }
 
     @Override
