@@ -9,21 +9,20 @@ import com.carlosreads.talekeeper.repositories.BookRepository;
 
 import java.util.List;
 
-public class LibraryViewModel extends ViewModel {
+public class BookListViewModel extends ViewModel {
     private final BookRepository bookRepository;
     private final MutableLiveData<List<Book>> bookLiveData = new MutableLiveData<>();
 
-    public LibraryViewModel() {
+    public BookListViewModel() {
         bookRepository = new BookRepository();
-        loadBooks();
     }
 
     public LiveData<List<Book>> getBooks() {
         return bookLiveData;
     }
 
-    private void loadBooks() {
-        bookRepository.getAllBooks(bookLiveData);
+    public void loadBooks(String genre) {
+        bookRepository.getBooksByGenre(bookLiveData, genre);
     }
 
 

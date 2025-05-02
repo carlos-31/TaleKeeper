@@ -1,36 +1,40 @@
 package com.carlosreads.talekeeper.views;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.carlosreads.talekeeper.R;
 import com.carlosreads.talekeeper.adapters.BookAdapter;
 import com.carlosreads.talekeeper.databinding.FragmentLibraryBinding;
+import com.carlosreads.talekeeper.viewmodels.BookListViewModel;
 import com.carlosreads.talekeeper.viewmodels.LibraryViewModel;
 
 import java.util.ArrayList;
 
-public class LibraryFragment extends Fragment {
-    private LibraryViewModel libraryViewModel;
+public class BookListFragment extends Fragment {
+    private BookListViewModel viewModel;
     private FragmentLibraryBinding binding;
     private BookAdapter bookAdapter;
+    private String content;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        libraryViewModel =
-                new ViewModelProvider(this).get(LibraryViewModel.class);
+        viewModel =
+                new ViewModelProvider(this).get(BookListViewModel.class);
 
         binding = FragmentLibraryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -39,25 +43,32 @@ public class LibraryFragment extends Fragment {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerView.setAdapter(bookAdapter);
 
-        libraryViewModel.getBooks().observe(getViewLifecycleOwner(),
+        //gets the content send through the bundle (the genre)
+        Bundle args = getArguments();
+        if (args != null) {
+            content = args.getString("content", "null");
+        }
+
+        viewModel.loadBooks(content);
+        viewModel.getBooks().observe(getViewLifecycleOwner(),
                 books -> bookAdapter.setBooks(books));
 
-        // removes back arrow from toolbar
+        //removes the back arrow from the toolbar, and sets the title to the genre sent in the bundle
         AppCompatActivity activity = (AppCompatActivity) requireActivity();
         if (activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            activity.getSupportActionBar().setTitle(content);
         }
 
-        // if user presses back key, this takes them home instead of closing the app
+        //manually handle back button press to ensure correct behavior
         requireActivity().getOnBackPressedDispatcher().addCallback(
                 getViewLifecycleOwner(),
                 new OnBackPressedCallback(true) {
                     @Override
                     public void handleOnBackPressed() {
                         NavController navController = NavHostFragment
-                                .findNavController(LibraryFragment.this);
-                        navController.navigate(R.id.navigation_home);
-
+                                .findNavController(BookListFragment.this);
+                        navController.navigate(R.id.navigation_discover);
                     }
                 });
 

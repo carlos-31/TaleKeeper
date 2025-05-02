@@ -15,6 +15,19 @@
     <string name="email">Email</string>
     <string name="confirm_password">Confirm password</string>
     <string name="sign_up">Sign up</string>
+    <string name="book_cover">The book\'s cover</string>
+    <string name="spotlight_subtitle">Our favourite book changes every day. Come back tomorrow for a new recommendation!</string>
+    <string name="spotlight_title">Today\'s favourite book:</string>
+    <string name="Library_card_home_title">Check out our entire catalog!</string>
+    <string name="genres_card_title">Browse our genres</string>
+    <string name="fantasy">Fantasy</string>
+    <string name="sci_fi">Sci-Fi</string>
+    <string name="mystery">Mystery</string>
+    <string name="horror">Horror</string>
+    <string name="speculative">Speculative</string>
+    <string name="anthology">Anthology</string>
+    <string name="Search_bar_hint">What are you looking for?</string>
+    <string name="search">Search</string>
     <string name="not_logged_in_msg">This area is for users only.\n Please log in or create an account</string>
     <string name="not_logged_in_title">Seems like youre not logged in...</string>
 </resources>

@@ -38,7 +38,7 @@
                         android:id="@+id/libraryTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Check out our entire catalog!"
+                        android:text="@string/Library_card_home_title"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="?android:textColorPrimary"
@@ -86,7 +86,7 @@
                         android:id="@+id/spotlightTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Today's favourite book:"
+                        android:text="@string/spotlight_title"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="?android:textColorPrimary"
@@ -118,7 +118,7 @@
                                 android:layout_height="wrap_content"
                                 android:scaleType="centerCrop"
                                 android:layout_marginBottom="16dp"
-                                android:contentDescription="Book cover's image"/>
+                                android:contentDescription="@string/book_cover"/>
 
                             <TextView
                                 android:id="@+id/title"
@@ -156,7 +156,7 @@
                         android:id="@+id/spotlightSubtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Our favourite book changes every day. Come back tomorrow for a new recommendation!"
+                        android:text="@string/spotlight_subtitle"
                         android:textSize="18sp"
                         android:textColor="?android:textColorPrimary"
                         android:paddingBottom="24dp"
