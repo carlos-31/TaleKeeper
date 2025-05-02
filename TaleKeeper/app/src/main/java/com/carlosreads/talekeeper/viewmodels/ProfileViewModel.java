@@ -18,15 +18,20 @@ public class ProfileViewModel extends ViewModel {
     public ProfileViewModel(){
         userRepository = new UserRepository();
         bookRepository = new BookRepository();
+        userLiveData = new MutableLiveData<>();
         loggedIn = new MutableLiveData<>();
         checkLogin();
     }
 
     private void checkLogin() {
-        userRepository.checkLogin(loggedIn);
+        userRepository.checkLogin(loggedIn, userLiveData);
     }
 
     public MutableLiveData<Boolean> getLoggedIn() {
         return loggedIn;
+    }
+
+    public MutableLiveData<User> getUserLiveData() {
+        return userLiveData;
     }
 }
