@@ -10,6 +10,7 @@
             type="com.carlosreads.talekeeper.viewmodels.DiscoverViewModel" />
     </data>
 
+    <!--search bar area-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,9 +21,9 @@
             android:id="@+id/searchInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="?attr/actionBarSize"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
             app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="50dp"
             app:boxCornerRadiusBottomStart="50dp"
@@ -36,7 +37,7 @@
                 android:id="@+id/search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="What are you looking for?"
+                android:hint="@string/Search_bar_hint"
                 android:inputType="text"
                 android:paddingVertical="12dp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -46,12 +47,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:contentDescription="Search"
+            android:contentDescription="@string/search"
             android:src="@drawable/ic_search"
-            app:layout_constraintTop_toTopOf="@id/searchInputLayout"
             app:layout_constraintBottom_toBottomOf="@id/searchInputLayout"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/searchInputLayout" />
 
+        <!--genres card-->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/genreCard"
             android:layout_width="0dp"
@@ -75,7 +77,7 @@
                     android:id="@+id/genreTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Browse our genres"
+                    android:text="@string/genres_card_title"
                     android:textColor="?android:textColorPrimary"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -83,6 +85,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <!--using flow so the buttons fit well regardless of screens width-->
                 <androidx.constraintlayout.helper.widget.Flow
                     android:id="@+id/genreFlow"
                     android:layout_width="0dp"
@@ -98,13 +101,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/genreTitle" />
 
+                <!--genres buttons-->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/fantasyBtn"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
-                    android:text="Fantasy"/>
+                    android:text="@string/fantasy" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/scifiBtn"
@@ -112,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
-                    android:text="Sci-Fi"/>
+                    android:text="@string/sci_fi" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/mysteryBtn"
@@ -120,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
-                    android:text="Mystery"/>
+                    android:text="@string/mystery" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/horrorBtn"
@@ -128,7 +132,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
-                    android:text="Horror"/>
+                    android:text="@string/horror" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/speculativeBtn"
@@ -136,7 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
-                    android:text="Speculative"/>
+                    android:text="@string/speculative" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/anthologyBtn"
@@ -144,7 +148,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
-                    android:text="Anthology"/>
+                    android:text="@string/anthology" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>

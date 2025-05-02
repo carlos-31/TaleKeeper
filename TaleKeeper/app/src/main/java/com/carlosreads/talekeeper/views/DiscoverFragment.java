@@ -1,13 +1,9 @@
 package com.carlosreads.talekeeper.views;
 
-import static android.content.ContentValues.TAG;
-
 import android.os.Bundle;
-import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,7 +14,6 @@ import androidx.navigation.Navigation;
 
 import com.carlosreads.talekeeper.R;
 import com.carlosreads.talekeeper.databinding.FragmentDiscoverBinding;
-import com.carlosreads.talekeeper.databinding.FragmentHomeBinding;
 import com.carlosreads.talekeeper.viewmodels.DiscoverViewModel;
 
 import java.util.HashMap;
@@ -41,28 +36,17 @@ public class DiscoverFragment extends Fragment {
         binding.searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(requireContext(), binding.search.getText() , Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), binding.search.getText(), Toast.LENGTH_SHORT).show();
             }
         });
 
         setClickListeners();
 
-//        binding.fantasyBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Bundle bundle = new Bundle();
-//                bundle.putString("content", "Fantasy");
-//                NavController navController = Navigation.findNavController(requireActivity(),
-//                        R.id.nav_host_fragment_activity_main);
-//                navController.navigate(R.id.action_to_book_list, bundle);
-//            }
-//        });
-
-
         return root;
     }
 
     private void setClickListeners() {
+        //creating a hashmap so i can just use a for loop to set the listeners to all the buttons
         Map<View, String> genreButtons = new HashMap<>();
         genreButtons.put(binding.fantasyBtn, "Fantasy");
         genreButtons.put(binding.scifiBtn, "Sci-Fi");
@@ -74,6 +58,8 @@ public class DiscoverFragment extends Fragment {
         NavController navController = Navigation.findNavController(requireActivity(),
                 R.id.nav_host_fragment_activity_main);
 
+        //iterates through the entries in the hashmap, gets the key (button)
+        // and sets the content in the bundle to the string corresponding to that button
         for (Map.Entry<View, String> entry : genreButtons.entrySet()) {
             entry.getKey().setOnClickListener(v -> {
                 Bundle bundle = new Bundle();

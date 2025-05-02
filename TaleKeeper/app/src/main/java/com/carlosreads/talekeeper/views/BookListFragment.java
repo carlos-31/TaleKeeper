@@ -43,6 +43,7 @@ public class BookListFragment extends Fragment {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerView.setAdapter(bookAdapter);
 
+        //gets the content send through the bundle (the genre)
         Bundle args = getArguments();
         if (args != null) {
             content = args.getString("content", "null");
@@ -52,14 +53,14 @@ public class BookListFragment extends Fragment {
         viewModel.getBooks().observe(getViewLifecycleOwner(),
                 books -> bookAdapter.setBooks(books));
 
+        //removes the back arrow from the toolbar, and sets the title to the genre sent in the bundle
         AppCompatActivity activity = (AppCompatActivity) requireActivity();
         if (activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             activity.getSupportActionBar().setTitle(content);
         }
 
-
-
+        //manually handle back button press to ensure correct behavior
         requireActivity().getOnBackPressedDispatcher().addCallback(
                 getViewLifecycleOwner(),
                 new OnBackPressedCallback(true) {
