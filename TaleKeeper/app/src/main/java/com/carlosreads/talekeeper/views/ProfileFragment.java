@@ -29,6 +29,15 @@ public class ProfileFragment extends Fragment {
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(getViewLifecycleOwner());
 
+        viewModel.getLoggedIn().observe(getViewLifecycleOwner(), loggedIn -> {
+            if (loggedIn != null) {
+                if (loggedIn)
+                    binding.LoggedInLayout.setVisibility(View.VISIBLE);
+                else
+                    binding.notLoggedInLayout.setVisibility(View.VISIBLE);
+            }
+        });
+
 
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override

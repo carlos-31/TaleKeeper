@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.carlosreads.talekeeper.models.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -76,4 +77,12 @@ public class UserRepository {
         return loginStatus;
     }
 
+
+    public void checkLogin(MutableLiveData<Boolean> loggedIn) {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null)
+            loggedIn.setValue(true);
+        else
+            loggedIn.setValue(false);
+    }
 }
