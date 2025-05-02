@@ -98,4 +98,25 @@ public class BookRepository {
         });
     }
 
+    public void getBooksByGenre(MutableLiveData<List<Book>> bookLiveData, String genre){
+        bookRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                List<Book> books = new ArrayList<>();
+                for (DataSnapshot child : snapshot.getChildren()) {
+                    Book book = child.getValue(Book.class);
+                    if (book.getGenre().toLowerCase().contains(genre.toLowerCase()))
+                        books.add(book);
+                }
+                bookLiveData.setValue(books);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.e(TAG, "Error getting all books (repo)");
+                bookLiveData.setValue(null);
+            }
+        });
+    }
+
 }
