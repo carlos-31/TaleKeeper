@@ -29,15 +29,57 @@ public class ProfileFragment extends Fragment {
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(getViewLifecycleOwner());
 
+        setClickListeners();
+
         viewModel.getLoggedIn().observe(getViewLifecycleOwner(), loggedIn -> {
             if (loggedIn != null) {
-                if (loggedIn)
+                if (loggedIn){
                     binding.LoggedInLayout.setVisibility(View.VISIBLE);
-                else
-                    binding.notLoggedInLayout.setVisibility(View.VISIBLE);
+                    binding.notLoggedInLayout.setVisibility(View.GONE);}
+                else{
+                    binding.LoggedInLayout.setVisibility(View.GONE);
+                    binding.notLoggedInLayout.setVisibility(View.VISIBLE);}
             }
         });
 
+        return root;
+    }
+
+    private void setClickListeners() {
+        binding.settingsFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.logoutUser();
+            }
+        });
+
+        binding.favouritesCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        binding.readCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        binding.tbrCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,8 +96,6 @@ public class ProfileFragment extends Fragment {
                 startActivity(loginIntent);
             }
         });
-
-        return root;
     }
 
     @Override

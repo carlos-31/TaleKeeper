@@ -13,63 +13,94 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
         android:paddingTop="?attr/actionBarSize"
         android:paddingBottom="?attr/actionBarSize"
-        tools:context=".views.ProfileFragment"
-        android:layout_marginBottom="20dp">
+        tools:context=".views.ProfileFragment">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/settingsFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:contentDescription="settings"
+            android:src="@drawable/ic_settings"
+            app:backgroundTint="?attr/colorPrimary"
+            app:elevation="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@android:color/white" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/LoggedInLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="20dp"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/welcomeTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
                 android:text='@{"Welcome back " + viewModel.userLiveData.getName() +"!"}'
-                android:textSize="20sp"
+                android:textSize="34sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginBottom="24dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/favouritesCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
-                app:cardElevation="6dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
                 app:cardCornerRadius="12dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="?attr/colorOutline"
-                app:layout_constraintTop_toBottomOf="@id/welcomeTitle"
+                app:cardElevation="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/welcomeTitle"
+                app:strokeColor="?attr/colorOutline"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="20dp"
-                    android:gravity="center_vertical">
+                    android:padding="20dp">
 
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
+                        android:contentDescription="@string/favourites"
                         android:src="@drawable/ic_library"
-                        app:tint="?attr/colorPrimary"
-                        android:contentDescription="@string/favourites" />
+                        app:tint="?attr/colorPrimary" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/favourites"
-                        android:textSize="20sp"
-                        android:textColor="?android:textColorPrimary"
+                        android:orientation="vertical"
                         android:paddingStart="16dp"
-                        android:paddingEnd="16dp" />
+                        android:paddingEnd="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/favourites"
+                            android:textColor="?android:textColorPrimary"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="The books you loved"
+                            android:textColor="?android:textColorSecondary"
+                            android:textSize="14sp" />
+                    </LinearLayout>
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -78,37 +109,52 @@
                 android:id="@+id/readCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
-                app:cardElevation="6dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
                 app:cardCornerRadius="12dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="?attr/colorOutline"
-                app:layout_constraintTop_toBottomOf="@id/favouritesCard"
+                app:cardElevation="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/favouritesCard"
+                app:strokeColor="?attr/colorOutline"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="20dp"
-                    android:gravity="center_vertical">
+                    android:padding="20dp">
 
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
+                        android:contentDescription="@string/favourites"
                         android:src="@drawable/ic_library"
-                        app:tint="?attr/colorPrimary"
-                        android:contentDescription="@string/favourites" />
+                        app:tint="?attr/colorPrimary" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/favourites"
-                        android:textSize="20sp"
-                        android:textColor="?android:textColorPrimary"
+                        android:orientation="vertical"
                         android:paddingStart="16dp"
-                        android:paddingEnd="16dp" />
+                        android:paddingEnd="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/favourites"
+                            android:textColor="?android:textColorPrimary"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="The books you've read already"
+                            android:textColor="?android:textColorSecondary"
+                            android:textSize="14sp" />
+                    </LinearLayout>
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -117,40 +163,74 @@
                 android:id="@+id/tbrCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
-                app:cardElevation="6dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
                 app:cardCornerRadius="12dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="?attr/colorOutline"
-                app:layout_constraintTop_toBottomOf="@id/readCard"
+                app:cardElevation="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/readCard"
+                app:strokeColor="?attr/colorOutline"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="20dp"
-                    android:gravity="center_vertical">
+                    android:padding="20dp">
 
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
+                        android:contentDescription="@string/favourites"
                         android:src="@drawable/ic_library"
-                        app:tint="?attr/colorPrimary"
-                        android:contentDescription="@string/favourites" />
+                        app:tint="?attr/colorPrimary" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/favourites"
-                        android:textSize="20sp"
-                        android:textColor="?android:textColorPrimary"
+                        android:orientation="vertical"
                         android:paddingStart="16dp"
-                        android:paddingEnd="16dp" />
+                        android:paddingEnd="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/favourites"
+                            android:textColor="?android:textColorPrimary"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Those you want to read soon"
+                            android:textColor="?android:textColorSecondary"
+                            android:textSize="14sp" />
+                    </LinearLayout>
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/logoutBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Log out"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:layout_constraintTop_toBottomOf="@id/tbrCard"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="16sp"/>
+
+
+
+
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -206,9 +286,9 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="horizontal"
-                        android:weightSum="2"
                         android:paddingStart="15dp"
-                        android:paddingEnd="15dp">
+                        android:paddingEnd="15dp"
+                        android:weightSum="2">
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/loginBtn"

@@ -34,4 +34,9 @@ public class ProfileViewModel extends ViewModel {
     public MutableLiveData<User> getUserLiveData() {
         return userLiveData;
     }
+
+    public void logoutUser(){
+        userRepository.logoutUser();
+        checkLogin();
+    }
 }

@@ -111,4 +111,8 @@ public class UserRepository {
             }
         });
     }
+
+    public void logoutUser(){
+        mAuth.signOut();
+    }
 }
