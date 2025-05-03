@@ -1,5 +1,6 @@
 package com.carlosreads.talekeeper.views;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,6 +15,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -40,6 +42,12 @@ public class BookDetailFragment extends Fragment {
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(getViewLifecycleOwner());
 
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        if (activity.getSupportActionBar() != null) {
+            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            activity.getSupportActionBar().setTitle("A great book");
+        }
+
         if (getArguments() != null) {
             String isbn = getArguments().getString("isbn13");
             viewModel.loadBook(isbn);
@@ -55,6 +63,33 @@ public class BookDetailFragment extends Fragment {
                 }
             });
         }
+
+        binding.bookStatusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String selectedStatus = parentView.getItemAtPosition(position).toString();
+
+                if (position == parentView.getCount() - 1 || position == 0) {
+                    binding.bookStatusSpinner.setSelection(0);
+
+                } else
+                    viewModel.updateBookStatus(selectedStatus);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
+            }
+        });
+
+        binding.favBtn.setImageResource(R.drawable.ic_home_black_24dp);
+
+        binding.backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requireActivity().getOnBackPressedDispatcher().onBackPressed();
+            }
+        });
 
 
         return root;
