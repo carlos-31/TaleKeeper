@@ -10,7 +10,7 @@ public class Book {
     private String cover_url;
     private String synopsis;
     private String publisher;
-    private int page_count;
+    private int num_pages;
     private int pub_year;
 
     public Book() {
@@ -24,7 +24,7 @@ public class Book {
         this.cover_url = cover_url;
         this.synopsis = synopsis;
         this.publisher = publisher;
-        this.page_count = page_count;
+        this.num_pages = page_count;
         this.pub_year = pub_year;
     }
 
@@ -56,8 +56,8 @@ public class Book {
         return publisher;
     }
 
-    public int getPage_count() {
-        return page_count;
+    public int getNum_pages() {
+        return num_pages;
     }
 
     public int getPub_year() {

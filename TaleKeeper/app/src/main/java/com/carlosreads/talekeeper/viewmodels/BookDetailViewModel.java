@@ -10,7 +10,7 @@ public class BookDetailViewModel extends ViewModel {
     private BookRepository bookRepository;
     private MutableLiveData<Book> bookLiveData = new MutableLiveData<>();
 
-    public BookDetailViewModel(){
+    public BookDetailViewModel() {
         bookRepository = new BookRepository();
     }
 
@@ -18,7 +18,7 @@ public class BookDetailViewModel extends ViewModel {
         return bookLiveData;
     }
 
-    public void getBook(String isbn){
+    public void loadBook(String isbn) {
         bookRepository.getBookByIsbn(isbn, bookLiveData);
     }
 }

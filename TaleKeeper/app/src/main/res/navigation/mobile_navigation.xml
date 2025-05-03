@@ -36,6 +36,12 @@
         android:name="com.carlosreads.talekeeper.views.BookListFragment"
         tools:layout="@layout/fragment_library" />
 
+    <fragment
+        android:id="@+id/bookDetail"
+        android:name="com.carlosreads.talekeeper.views.BookDetailFragment"
+        tools:layout="@layout/fragment_book_detail" >
+    </fragment>
+
 
     <action
         android:id="@+id/action_to_library"

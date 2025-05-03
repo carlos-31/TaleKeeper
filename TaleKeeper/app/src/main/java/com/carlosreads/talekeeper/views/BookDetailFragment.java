@@ -40,6 +40,21 @@ public class BookDetailFragment extends Fragment {
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(getViewLifecycleOwner());
 
+        if (getArguments() != null) {
+            String isbn = getArguments().getString("isbn13");
+            viewModel.loadBook(isbn);
+            viewModel.getBookLiveData().observe(getViewLifecycleOwner(), new Observer<Book>() {
+                @Override
+                public void onChanged(Book book) {
+                    int width = 570;
+                    Glide.with(getContext())
+                            .load(book.getCover_url())
+                            .override(width, (int) (width * 1.6))
+                            .fitCenter()
+                            .into(binding.bookCover);
+                }
+            });
+        }
 
 
         return root;

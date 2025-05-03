@@ -1,13 +1,159 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".views.BookDetailFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.carlosreads.talekeeper.viewmodels.BookDetailViewModel" />
+    </data>
+
+    <android.widget.ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:padding="16dp">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:paddingTop="?attr/actionBarSize"
+            android:paddingBottom="?attr/actionBarSize">
+
+            <ImageView
+                android:id="@+id/bookCover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:contentDescription="@string/book_cover"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/bookTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text='@{viewModel.bookLiveData.title}'
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bookCover" />
+
+            <TextView
+                android:id="@+id/bookAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text='@{viewModel.bookLiveData.author}'
+                android:textColor="?attr/colorSecondary"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bookTitle" />
+
+            <LinearLayout
+                android:id="@+id/userBtns"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bookAuthor">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/readBtn"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:iconTint="?attr/colorPrimary"
+                    android:text="Mark as Read"
+                    app:icon="@drawable/ic_discover" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/tbrBtn"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:iconTint="?attr/colorPrimary"
+                    android:text="To Be Read"
+                    app:icon="@drawable/ic_discover" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/favBtn"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:iconTint="?attr/colorPrimary"
+                    android:text="Favourite"
+                    app:icon="@drawable/ic_discover" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/bookSynopsis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text='@{viewModel.bookLiveData.synopsis}'
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/userBtns" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/statsChipGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bookSynopsis"
+                app:singleLine="false">
+
+                <com.google.android.material.chip.Chip
+                    style="@style/Widget.MaterialComponents.Chip.Entry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="false"
+                    android:clickable="false"
+                    android:text='@{"Published in " + viewModel.bookLiveData.pub_year}'
+                    android:textColor="?android:textColorPrimary"
+                    app:chipBackgroundColor="?attr/colorSecondaryContainer"
+                    app:closeIcon="@null" />
+
+                <com.google.android.material.chip.Chip
+                    style="@style/Widget.MaterialComponents.Chip.Entry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="false"
+                    android:clickable="false"
+                    android:text='@{viewModel.bookLiveData.num_pages + " pages"}'
+                    android:textColor="?android:textColorPrimary"
+                    app:chipBackgroundColor="?attr/colorSecondaryContainer"
+                    app:closeIcon="@null" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/genreChip"
+                    style="@style/Widget.MaterialComponents.Chip.Entry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="false"
+                    android:clickable="false"
+                    android:text='@{viewModel.bookLiveData.genre}'
+                    android:textColor="?android:textColorPrimary"
+                    app:chipBackgroundColor="?attr/colorSecondaryContainer"
+                    app:closeIcon="@null" />
+            </com.google.android.material.chip.ChipGroup>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </android.widget.ScrollView>
+</layout>

@@ -22,6 +22,8 @@ import com.carlosreads.talekeeper.databinding.FragmentHomeBinding;
 import com.carlosreads.talekeeper.models.Book;
 import com.carlosreads.talekeeper.viewmodels.HomeViewModel;
 
+import java.util.Map;
+
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private HomeViewModel homeViewModel;
@@ -67,6 +69,12 @@ public class HomeFragment extends Fragment {
         binding.spotlight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                NavController navController = Navigation.findNavController(requireActivity(),
+                        R.id.nav_host_fragment_activity_main);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("isbn13", currentBook.getIsbn13());
+                        navController.navigate(R.id.bookDetail, bundle);
+
                 Toast.makeText(requireContext(), "ISBN: " + currentBook.getIsbn13(), Toast.LENGTH_SHORT).show();
                 //this sends you to the detail for the book, will be implemented later
             }
