@@ -18,6 +18,7 @@
         android:paddingBottom="?attr/actionBarSize"
         tools:context=".views.ProfileFragment">
 
+        <!--settings floating action btn-->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/settingsFab"
             android:layout_width="wrap_content"
@@ -31,6 +32,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:tint="@android:color/white" />
 
+        <!--layout for profile when the user is logged in-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/LoggedInLayout"
             android:layout_width="match_parent"
@@ -51,6 +53,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!--cards for the user's lists-->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/favouritesCard"
                 android:layout_width="match_parent"
@@ -215,26 +218,21 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/logoutBtn"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text="Log out"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                app:layout_constraintTop_toBottomOf="@id/tbrCard"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:textColor="?attr/colorPrimary"
-                android:textSize="16sp"/>
-
-
-
-
-
-
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tbrCard" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <!--layout for when the user isn't logged in-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/notLoggedInLayout"
             android:layout_width="match_parent"

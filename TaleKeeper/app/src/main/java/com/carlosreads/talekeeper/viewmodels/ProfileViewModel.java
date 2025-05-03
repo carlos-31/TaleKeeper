@@ -1,10 +1,8 @@
 package com.carlosreads.talekeeper.viewmodels;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.carlosreads.talekeeper.models.Book;
 import com.carlosreads.talekeeper.models.User;
 import com.carlosreads.talekeeper.repositories.BookRepository;
 import com.carlosreads.talekeeper.repositories.UserRepository;
@@ -15,7 +13,7 @@ public class ProfileViewModel extends ViewModel {
     private MutableLiveData<User> userLiveData;
     private MutableLiveData<Boolean> loggedIn;
 
-    public ProfileViewModel(){
+    public ProfileViewModel() {
         userRepository = new UserRepository();
         bookRepository = new BookRepository();
         userLiveData = new MutableLiveData<>();
@@ -24,6 +22,7 @@ public class ProfileViewModel extends ViewModel {
     }
 
     private void checkLogin() {
+        //checks if logged in, and if so, gets the users data
         userRepository.checkLogin(loggedIn, userLiveData);
     }
 
@@ -35,7 +34,8 @@ public class ProfileViewModel extends ViewModel {
         return userLiveData;
     }
 
-    public void logoutUser(){
+    public void logoutUser() {
+        //logs out the user, and calls checkLogin so fragment shows correct layout
         userRepository.logoutUser();
         checkLogin();
     }

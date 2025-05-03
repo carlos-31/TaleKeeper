@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.carlosreads.talekeeper.models.Book;
 import com.carlosreads.talekeeper.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,9 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class UserRepository {
     private final FirebaseAuth mAuth;
@@ -48,16 +45,16 @@ public class UserRepository {
 
                         // if successful, saves the user's info into the table "user_info"
                         usersInfoRef.child(userId)
-                                    .setValue(userMap)
-                                    .addOnCompleteListener(databaseTask -> {
-                                        if (databaseTask.isSuccessful()) {
-                                            Log.d(TAG, "user registered");
-                                            registrationStatus.setValue(true);
-                                        } else {
-                                            Log.e(TAG, "user register failed: " + databaseTask.getException() );
-                                            registrationStatus.setValue(false);
-                                        }
-                                    });
+                                .setValue(userMap)
+                                .addOnCompleteListener(databaseTask -> {
+                                    if (databaseTask.isSuccessful()) {
+                                        Log.d(TAG, "user registered");
+                                        registrationStatus.setValue(true);
+                                    } else {
+                                        Log.e(TAG, "user register failed: " + databaseTask.getException());
+                                        registrationStatus.setValue(false);
+                                    }
+                                });
                     } else {
                         Log.e(TAG, "error registering user: " + task.getException());
                         registrationStatus.setValue(false);
@@ -76,7 +73,7 @@ public class UserRepository {
                     if (task.isSuccessful()) {
                         //if login successful sets value true to handle log in
                         loginStatus.setValue(true);
-                        Log.d(TAG,"login: " + mAuth.getCurrentUser());
+                        Log.d(TAG, "login: " + mAuth.getCurrentUser());
                     } else {
                         loginStatus.setValue(false);
                     }
@@ -86,16 +83,17 @@ public class UserRepository {
 
 
     public void checkLogin(MutableLiveData<Boolean> loggedIn, MutableLiveData<User> userLiveData) {
+        //checks if theres a user logged in
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
             loggedIn.setValue(true);
             getUserInfo(user, userLiveData);
-        }
-        else
+        } else
             loggedIn.setValue(false);
     }
 
     private void getUserInfo(FirebaseUser user, MutableLiveData<User> userLiveData) {
+        //gets the user's data from the table "user_info"
         usersInfoRef.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -112,7 +110,7 @@ public class UserRepository {
         });
     }
 
-    public void logoutUser(){
+    public void logoutUser() {
         mAuth.signOut();
     }
 }

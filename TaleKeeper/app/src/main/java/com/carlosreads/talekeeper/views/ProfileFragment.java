@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -31,14 +30,17 @@ public class ProfileFragment extends Fragment {
 
         setClickListeners();
 
+//        shows the correct layout depending on user logged in status
         viewModel.getLoggedIn().observe(getViewLifecycleOwner(), loggedIn -> {
             if (loggedIn != null) {
-                if (loggedIn){
+                if (loggedIn) {
+                    //toggles both to ensure it only shows what should be visible
                     binding.LoggedInLayout.setVisibility(View.VISIBLE);
-                    binding.notLoggedInLayout.setVisibility(View.GONE);}
-                else{
+                    binding.notLoggedInLayout.setVisibility(View.GONE);
+                } else {
                     binding.LoggedInLayout.setVisibility(View.GONE);
-                    binding.notLoggedInLayout.setVisibility(View.VISIBLE);}
+                    binding.notLoggedInLayout.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -46,6 +48,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setClickListeners() {
+        //sets the listeners for all the buttons on the screen
         binding.settingsFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
