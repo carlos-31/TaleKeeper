@@ -33,4 +33,10 @@
     <string name="favourites">Favourites</string>
     <string name="tbr_title">To be read</string>
     <string name="read">Read</string>
+    <string-array name="book_status_options">
+        <item>Add Book</item>
+        <item>To Be Read</item>
+        <item>Read</item>
+        <item>Remove Book</item>
+    </string-array>
 </resources>
