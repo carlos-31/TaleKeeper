@@ -1,6 +1,7 @@
 package com.carlosreads.talekeeper.viewmodels;
 
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 import com.carlosreads.talekeeper.models.Book;
@@ -39,5 +40,23 @@ public class BookDetailViewModel extends ViewModel {
 
     public MutableLiveData<Boolean> getIsFavouriteLiveData(){
         return isFavouriteLiveData;
+    }
+
+    public void toggleFavourite(String bookIsbn) {
+        boolean currentState = isFavouriteLiveData.getValue() != null
+                                && isFavouriteLiveData.getValue();
+        MutableLiveData <Boolean> result = new MutableLiveData<>();
+        if (currentState)
+            userRepository.removeFromFavourites(bookIsbn, result);
+        else
+            userRepository.addToFavourites(bookIsbn, result);
+        result.observeForever(new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean updateResult) {
+                if (updateResult != null && updateResult)
+                    isFavouriteLiveData.setValue(!currentState);
+                result.removeObserver(observer -> {});
+            }
+        });
     }
 }

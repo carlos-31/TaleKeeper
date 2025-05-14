@@ -29,6 +29,7 @@ import com.carlosreads.talekeeper.viewmodels.HomeViewModel;
 public class BookDetailFragment extends Fragment {
     private FragmentBookDetailBinding binding;
     private BookDetailViewModel viewModel;
+    private String bookIsbn;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -49,10 +50,23 @@ public class BookDetailFragment extends Fragment {
         }
 
         if (getArguments() != null) {
-            String isbn = getArguments().getString("isbn13");
-            viewModel.loadBook(isbn);
+            bookIsbn = getArguments().getString("isbn13");
+            viewModel.loadBook(bookIsbn);
             observeViewModel();
         }
+
+        setUpListeners();
+
+        return root;
+    }
+
+    private void setUpListeners() {
+        binding.favBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.toggleFavourite(bookIsbn);
+            }
+        });
 
         binding.bookStatusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -79,9 +93,6 @@ public class BookDetailFragment extends Fragment {
                 requireActivity().getOnBackPressedDispatcher().onBackPressed();
             }
         });
-
-
-        return root;
     }
 
     private void observeViewModel() {

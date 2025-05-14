@@ -9,6 +9,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.carlosreads.talekeeper.models.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -114,7 +116,7 @@ public class UserRepository {
         mAuth.signOut();
     }
 
-    private String getCurrentUserID(){
+    private String getCurrentUserID() {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null)
             return user.getUid();
@@ -122,23 +124,54 @@ public class UserRepository {
             return null;
     }
 
-    public void isBookFavourite(String isbn13, MutableLiveData<Boolean> isFavouriteLiveData){
+    public void isBookFavourite(String isbn13, MutableLiveData<Boolean> isFavouriteLiveData) {
         String userId = getCurrentUserID();
-        if (userId == null || isbn13 == null){
+        if (userId == null || isbn13 == null) {
             isFavouriteLiveData.setValue(null);
             return;
         }
-        usersInfoRef.child(userId).child("lists").child("favourites").child(isbn13).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                isFavouriteLiveData.setValue(snapshot.exists());
-            }
+        usersInfoRef.child(userId).child("lists").child("favourites")
+                .child(isbn13).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        isFavouriteLiveData.setValue(snapshot.exists());
+                    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                isFavouriteLiveData.setValue(false);
-            }
-        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        isFavouriteLiveData.setValue(false);
+                    }
+                });
 
+    }
+
+    public void removeFromFavourites(String isbn, MutableLiveData<Boolean> resultLiveData) {
+        String userId = getCurrentUserID();
+        if (userId == null || isbn == null) {
+            resultLiveData.setValue(null);
+            return;
+        }
+        usersInfoRef.child(userId).child("lists").child("favourites").child(isbn)
+                .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        resultLiveData.setValue(task.isSuccessful());
+                    }
+                });
+    }
+
+    public void addToFavourites(String isbn, MutableLiveData<Boolean> resultLiveData) {
+        String userId = getCurrentUserID();
+        if (userId == null || isbn == null) {
+            resultLiveData.setValue(null);
+            return;
+        }
+        usersInfoRef.child(userId).child("lists").child("favourites").child(isbn)
+                .setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        resultLiveData.setValue(task.isSuccessful());
+                    }
+                });
     }
 }
