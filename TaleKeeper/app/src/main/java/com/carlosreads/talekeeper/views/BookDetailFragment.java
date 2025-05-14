@@ -51,17 +51,7 @@ public class BookDetailFragment extends Fragment {
         if (getArguments() != null) {
             String isbn = getArguments().getString("isbn13");
             viewModel.loadBook(isbn);
-            viewModel.getBookLiveData().observe(getViewLifecycleOwner(), new Observer<Book>() {
-                @Override
-                public void onChanged(Book book) {
-                    int width = 570;
-                    Glide.with(getContext())
-                            .load(book.getCover_url())
-                            .override(width, (int) (width * 1.6))
-                            .fitCenter()
-                            .into(binding.bookCover);
-                }
-            });
+            observeViewModel();
         }
 
         binding.bookStatusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -82,7 +72,6 @@ public class BookDetailFragment extends Fragment {
             }
         });
 
-        binding.favBtn.setImageResource(R.drawable.ic_home_black_24dp);
 
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +82,29 @@ public class BookDetailFragment extends Fragment {
 
 
         return root;
+    }
+
+    private void observeViewModel() {
+        viewModel.getBookLiveData().observe(getViewLifecycleOwner(), new Observer<Book>() {
+            @Override
+            public void onChanged(Book book) {
+                int width = 570;
+                Glide.with(getContext())
+                        .load(book.getCover_url())
+                        .override(width, (int) (width * 1.6))
+                        .fitCenter()
+                        .into(binding.bookCover);
+            }
+        });
+
+        viewModel.getIsFavouriteLiveData().observe(getViewLifecycleOwner(), isFav -> {
+            if (isFav != null){
+                if (isFav)
+                    binding.favBtn.setImageResource(R.drawable.ic_profile);
+                else
+                    binding.favBtn.setImageResource(R.drawable.ic_discover);
+            }
+        });
     }
 
 }
