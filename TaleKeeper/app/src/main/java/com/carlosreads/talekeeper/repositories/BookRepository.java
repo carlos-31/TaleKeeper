@@ -105,7 +105,7 @@ public class BookRepository {
                 List<Book> books = new ArrayList<>();
                 for (DataSnapshot child : snapshot.getChildren()) {
                     Book book = child.getValue(Book.class);
-                    if (book.getGenre().toLowerCase().contains(genre.toLowerCase()))
+                    if (book.getGenres().toLowerCase().contains(genre.toLowerCase()))
                         books.add(book);
                 }
                 bookLiveData.setValue(books);

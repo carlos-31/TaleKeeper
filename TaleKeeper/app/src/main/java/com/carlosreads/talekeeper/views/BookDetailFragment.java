@@ -29,6 +29,7 @@ import com.carlosreads.talekeeper.viewmodels.HomeViewModel;
 public class BookDetailFragment extends Fragment {
     private FragmentBookDetailBinding binding;
     private BookDetailViewModel viewModel;
+    private String bookIsbn;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -49,20 +50,23 @@ public class BookDetailFragment extends Fragment {
         }
 
         if (getArguments() != null) {
-            String isbn = getArguments().getString("isbn13");
-            viewModel.loadBook(isbn);
-            viewModel.getBookLiveData().observe(getViewLifecycleOwner(), new Observer<Book>() {
-                @Override
-                public void onChanged(Book book) {
-                    int width = 570;
-                    Glide.with(getContext())
-                            .load(book.getCover_url())
-                            .override(width, (int) (width * 1.6))
-                            .fitCenter()
-                            .into(binding.bookCover);
-                }
-            });
+            bookIsbn = getArguments().getString("isbn13");
+            viewModel.loadBook(bookIsbn);
+            observeViewModel();
         }
+
+        setUpListeners();
+
+        return root;
+    }
+
+    private void setUpListeners() {
+        binding.favBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.toggleFavourite(bookIsbn);
+            }
+        });
 
         binding.bookStatusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -82,7 +86,6 @@ public class BookDetailFragment extends Fragment {
             }
         });
 
-        binding.favBtn.setImageResource(R.drawable.ic_home_black_24dp);
 
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,9 +93,29 @@ public class BookDetailFragment extends Fragment {
                 requireActivity().getOnBackPressedDispatcher().onBackPressed();
             }
         });
+    }
 
+    private void observeViewModel() {
+        viewModel.getBookLiveData().observe(getViewLifecycleOwner(), new Observer<Book>() {
+            @Override
+            public void onChanged(Book book) {
+                int width = 570;
+                Glide.with(getContext())
+                        .load(book.getCover_url())
+                        .override(width, (int) (width * 1.6))
+                        .fitCenter()
+                        .into(binding.bookCover);
+            }
+        });
 
-        return root;
+        viewModel.getIsFavouriteLiveData().observe(getViewLifecycleOwner(), isFav -> {
+            if (isFav != null){
+                if (isFav)
+                    binding.favBtn.setImageResource(R.drawable.ic_profile);
+                else
+                    binding.favBtn.setImageResource(R.drawable.ic_discover);
+            }
+        });
     }
 
 }

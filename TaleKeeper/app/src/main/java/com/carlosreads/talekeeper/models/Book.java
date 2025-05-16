@@ -6,25 +6,25 @@ public class Book {
     private String isbn13;
     private String title;
     private String author;
-    private String genre;
+    private String genres;
     private String cover_url;
     private String synopsis;
     private String publisher;
-    private int num_pages;
+    private int page_count;
     private int pub_year;
 
     public Book() {
     }
 
-    public Book(String isbn13, String title, String author, String genre, String cover_url, String synopsis, String publisher, int page_count, int pub_year) {
+    public Book(String isbn13, String title, String author, String genres, String cover_url, String synopsis, String publisher, int page_count, int pub_year) {
         this.isbn13 = isbn13;
         this.title = title;
         this.author = author;
-        this.genre = genre;
+        this.genres = genres;
         this.cover_url = cover_url;
         this.synopsis = synopsis;
         this.publisher = publisher;
-        this.num_pages = page_count;
+        this.page_count = page_count;
         this.pub_year = pub_year;
     }
 
@@ -40,8 +40,8 @@ public class Book {
         return author;
     }
 
-    public String getGenre() {
-        return genre;
+    public String getGenres() {
+        return genres;
     }
 
     public String getCover_url() {
@@ -56,8 +56,8 @@ public class Book {
         return publisher;
     }
 
-    public int getNum_pages() {
-        return num_pages;
+    public int getPage_count() {
+        return page_count;
     }
 
     public int getPub_year() {
