@@ -235,4 +235,23 @@ public class UserRepository {
         usersInfoRef.child(userId).child("lists").child(list).child(isbn)
                 .setValue(true);
     }
+
+    public void getFavouritesCount(MutableLiveData<Integer> favouritesCount) {
+        String userId = getCurrentUserID();
+        if (userId == null) {
+            return;
+        }
+        usersInfoRef.child(userId).child("lists").child("favourites")
+                .addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                favouritesCount.setValue((int) snapshot.getChildrenCount());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                favouritesCount.setValue(null);
+            }
+        });
+    }
 }

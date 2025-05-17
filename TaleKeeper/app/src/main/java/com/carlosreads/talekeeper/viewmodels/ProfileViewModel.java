@@ -12,6 +12,10 @@ public class ProfileViewModel extends ViewModel {
     private BookRepository bookRepository;
     private MutableLiveData<User> userLiveData;
     private MutableLiveData<Boolean> loggedIn;
+    private MutableLiveData<Integer> favouritesCount = new MutableLiveData<>(0);
+    private MutableLiveData<Integer> readCount = new MutableLiveData<>(0);
+    private MutableLiveData<Integer> readingCount = new MutableLiveData<>(0);
+    private MutableLiveData<Integer> tbrCount = new MutableLiveData<>(0);
 
     public ProfileViewModel() {
         userRepository = new UserRepository();
@@ -19,11 +23,7 @@ public class ProfileViewModel extends ViewModel {
         userLiveData = new MutableLiveData<>();
         loggedIn = new MutableLiveData<>();
         checkLogin();
-    }
-
-    private void checkLogin() {
-        //checks if logged in, and if so, gets the users data
-        userRepository.checkLogin(loggedIn, userLiveData);
+        fetchListsCounts();
     }
 
     public MutableLiveData<Boolean> getLoggedIn() {
@@ -33,6 +33,33 @@ public class ProfileViewModel extends ViewModel {
     public MutableLiveData<User> getUserLiveData() {
         return userLiveData;
     }
+
+    public MutableLiveData<Integer> getFavouritesCount() {
+        return favouritesCount;
+    }
+
+    public MutableLiveData<Integer> getReadCount() {
+        return readCount;
+    }
+
+    public MutableLiveData<Integer> getReadingCount() {
+        return readingCount;
+    }
+
+    public MutableLiveData<Integer> getTbrCount() {
+        return tbrCount;
+    }
+
+    private void fetchListsCounts() {
+        userRepository.getFavouritesCount(favouritesCount);
+    }
+
+    private void checkLogin() {
+        //checks if logged in, and if so, gets the users data
+        userRepository.checkLogin(loggedIn, userLiveData);
+    }
+
+
 
     public void logoutUser() {
         //logs out the user, and calls checkLogin so fragment shows correct layout

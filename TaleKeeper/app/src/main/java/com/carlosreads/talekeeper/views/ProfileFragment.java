@@ -1,7 +1,11 @@
 package com.carlosreads.talekeeper.views;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.carlosreads.talekeeper.R;
 import com.carlosreads.talekeeper.databinding.FragmentProfileBinding;
 import com.carlosreads.talekeeper.viewmodels.ProfileViewModel;
 
@@ -29,6 +34,7 @@ public class ProfileFragment extends Fragment {
         binding.setLifecycleOwner(getViewLifecycleOwner());
 
         setClickListeners();
+        setObserverCounts();
 
 //        shows the correct layout depending on user logged in status
         viewModel.getLoggedIn().observe(getViewLifecycleOwner(), loggedIn -> {
@@ -45,6 +51,14 @@ public class ProfileFragment extends Fragment {
         });
 
         return root;
+    }
+
+    private void setObserverCounts() {
+        viewModel.getFavouritesCount().observe(getViewLifecycleOwner(), count -> {
+            Log.d(TAG, "book count: " + count.toString());
+            String countText = getResources().getQuantityString(R.plurals.favourite_books, count, count);
+            binding.favCount.setText(countText);
+        });
     }
 
     private void setClickListeners() {
