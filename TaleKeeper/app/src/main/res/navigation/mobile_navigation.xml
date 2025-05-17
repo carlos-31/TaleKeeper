@@ -23,7 +23,11 @@
         android:id="@+id/navigation_profile"
         android:name="com.carlosreads.talekeeper.views.ProfileFragment"
         android:label="@string/profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profile_to_List"
+            app:destination="@id/bookList" />
+    </fragment>
 
     <fragment
         android:id="@+id/library"

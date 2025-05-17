@@ -43,34 +43,46 @@ public class BookListFragment extends Fragment {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerView.setAdapter(bookAdapter);
 
-        //gets the content send through the bundle (the genre)
-        Bundle args = getArguments();
-        if (args != null) {
-            content = args.getString("content", "null");
+
+        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+        //removes the back arrow from the toolbar, and sets the title to the genre sent in the bundle
+        if (activity.getSupportActionBar() != null) {
+            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
 
-        viewModel.loadBooks(content);
+        Bundle args = getArguments();
+        //gets the key of what will be shown
+        if (args != null) {
+            if (args.containsKey("content")) {
+                content = args.getString("content", "null");
+                viewModel.loadBooksByGenre(content);
+                if (activity.getSupportActionBar() != null) {
+                    activity.getSupportActionBar().setTitle(content);
+                }
+            } else if (args.containsKey("listType")) {
+                viewModel.loadBooksByList(args.getString("listType").toLowerCase());
+                if (activity.getSupportActionBar() != null) {
+                    activity.getSupportActionBar().setTitle(args.getString("listType"));
+                }
+            }
+        }
+
         viewModel.getBooks().observe(getViewLifecycleOwner(),
                 books -> bookAdapter.setBooks(books));
 
-        //removes the back arrow from the toolbar, and sets the title to the genre sent in the bundle
-        AppCompatActivity activity = (AppCompatActivity) requireActivity();
-        if (activity.getSupportActionBar() != null) {
-            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            activity.getSupportActionBar().setTitle(content);
-        }
+
 
         //manually handle back button press to ensure correct behavior
-        requireActivity().getOnBackPressedDispatcher().addCallback(
-                getViewLifecycleOwner(),
-                new OnBackPressedCallback(true) {
-                    @Override
-                    public void handleOnBackPressed() {
-                        NavController navController = NavHostFragment
-                                .findNavController(BookListFragment.this);
-                        navController.navigate(R.id.navigation_discover);
-                    }
-                });
+//        requireActivity().getOnBackPressedDispatcher().addCallback(
+//                getViewLifecycleOwner(),
+//                new OnBackPressedCallback(true) {
+//                    @Override
+//                    public void handleOnBackPressed() {
+//                        NavController navController = NavHostFragment
+//                                .findNavController(BookListFragment.this);
+//                        navController.navigate(R.id.navigation_discover);
+//                    }
+//                });
 
         return root;
     }

@@ -19,7 +19,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class UserRepository {
     private final FirebaseAuth mAuth;
@@ -243,15 +245,47 @@ public class UserRepository {
         }
         usersInfoRef.child(userId).child("lists").child("favourites")
                 .addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                favouritesCount.setValue((int) snapshot.getChildrenCount());
-            }
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        favouritesCount.setValue((int) snapshot.getChildrenCount());
+                    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                favouritesCount.setValue(null);
-            }
-        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        favouritesCount.setValue(null);
+                    }
+                });
+    }
+
+    public LiveData<List<String>> getIsbnList(String listNode) {
+        MutableLiveData<List<String>> isbnLiveData = new MutableLiveData<>();
+        String userId = getCurrentUserID();
+        if (userId == null) {
+            isbnLiveData.setValue(new ArrayList<>());
+            return isbnLiveData;
+        }
+        //gets the books stored in the list sent by listNode
+        usersInfoRef.child(userId).child("lists").child(listNode)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        List<String> isbns = new ArrayList<>();
+                        for (DataSnapshot child : snapshot.getChildren()) {
+                            String isbn = child.getKey();
+                            if (isbn != null) {
+                                //adds the key (isbn) to the list
+                                isbns.add(isbn);
+                            }
+                        }
+                        isbnLiveData.setValue(isbns);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        //sets an empty list in case of an error
+                        isbnLiveData.setValue(new ArrayList<>());
+                    }
+                });
+        return isbnLiveData;
     }
 }

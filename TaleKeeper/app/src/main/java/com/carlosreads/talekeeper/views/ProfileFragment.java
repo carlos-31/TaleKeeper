@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.carlosreads.talekeeper.R;
 import com.carlosreads.talekeeper.databinding.FragmentProfileBinding;
@@ -80,7 +82,10 @@ public class ProfileFragment extends Fragment {
         binding.favouritesCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                NavController navController = Navigation.findNavController(requireView()); // Or requireActivity().findViewById(R.id.nav_host_fragment) if in an Activity
+                Bundle bundle = new Bundle();
+                bundle.putString("listType", "Favourites"); // Ensure "favourites" matches the node in your Firebase
+                navController.navigate(R.id.action_profile_to_List, bundle); // Replace with your actual navigation action ID
             }
         });
 
