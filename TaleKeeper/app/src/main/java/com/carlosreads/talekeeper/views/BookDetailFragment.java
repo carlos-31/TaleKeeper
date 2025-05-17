@@ -9,22 +9,17 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.carlosreads.talekeeper.R;
 import com.carlosreads.talekeeper.databinding.FragmentBookDetailBinding;
-import com.carlosreads.talekeeper.databinding.FragmentHomeBinding;
 import com.carlosreads.talekeeper.models.Book;
 import com.carlosreads.talekeeper.viewmodels.BookDetailViewModel;
-import com.carlosreads.talekeeper.viewmodels.HomeViewModel;
 
 public class BookDetailFragment extends Fragment {
     private FragmentBookDetailBinding binding;
@@ -51,6 +46,7 @@ public class BookDetailFragment extends Fragment {
         }
 
         if (getArguments() != null) {
+            //gets ibsn of the book sent through the bundle
             bookIsbn = getArguments().getString("isbn13");
             viewModel.loadBook(bookIsbn);
             observeViewModel();
@@ -103,6 +99,14 @@ public class BookDetailFragment extends Fragment {
     }
 
     private void observeViewModel() {
+        //observe if the user is logged in, to show or hide the buttons for favourite and the spinner
+        viewModel.getUserLoggedIn().observe(getViewLifecycleOwner(), user -> {
+            if (user != null && user)
+                binding.userBtnBox.setVisibility(View.VISIBLE);
+            else
+                binding.userBtnBox.setVisibility(View.GONE);
+        });
+
         viewModel.getBookLiveData().observe(getViewLifecycleOwner(), new Observer<Book>() {
             @Override
             public void onChanged(Book book) {
@@ -116,7 +120,8 @@ public class BookDetailFragment extends Fragment {
         });
 
         viewModel.getIsFavouriteLiveData().observe(getViewLifecycleOwner(), isFav -> {
-            if (isFav != null){
+            //sets the correct icon for the book if it's in teh favourites list or not
+            if (isFav != null) {
                 if (isFav)
                     binding.favBtn.setImageResource(R.drawable.ic_fav);
                 else
@@ -125,19 +130,22 @@ public class BookDetailFragment extends Fragment {
         });
 
         viewModel.getBookStatus().observe(getViewLifecycleOwner(), listStatus -> {
-            if (listStatus != null){
+            if (listStatus != null) {
                 String[] bookStatusOptions = getResources().getStringArray(R.array.book_status_options);
                 int spinnerPosition = -1;
+                // Goes through the array of the options for the spinner
                 for (int i = 0; i < bookStatusOptions.length; i++) {
                     if (bookStatusOptions[i].equalsIgnoreCase(listStatus)) {
+                        //when it finds the option recieved from the ViewModel, save its position
                         spinnerPosition = i;
                         break;
                     }
                 }
                 if (spinnerPosition != -1) {
+                    //sets the correct option in the spinner to match the status of the book
                     binding.bookStatusSpinner.setSelection(spinnerPosition);
                 } else {
-                    binding.bookStatusSpinner.setSelection(0); // Default to "Add Book" if status not found
+                    binding.bookStatusSpinner.setSelection(0); // Default to "Add Book"
                 }
             }
         });

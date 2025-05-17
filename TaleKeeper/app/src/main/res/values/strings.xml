@@ -29,10 +29,10 @@
     <string name="Search_bar_hint">What are you looking for?</string>
     <string name="search">Search</string>
     <string-array name="book_status_options">
-        <item>Add Book</item>
-        <item>To Be Read</item>
+        <item>Add book</item>
+        <item>To be read</item>
         <item>Reading</item>
         <item>Read</item>
-        <item>Remove Book</item>
+        <item>Remove book</item>
     </string-array>
 </resources>

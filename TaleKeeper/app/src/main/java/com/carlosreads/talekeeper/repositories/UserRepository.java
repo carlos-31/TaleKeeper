@@ -117,6 +117,7 @@ public class UserRepository {
     }
 
     private String getCurrentUserID() {
+        // checks if theres an user logged in, and returns that user if there is one
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null)
             return user.getUid();
@@ -130,6 +131,7 @@ public class UserRepository {
             isFavouriteLiveData.setValue(null);
             return;
         }
+        // checks if the book is marked as a favourite
         usersInfoRef.child(userId).child("lists").child("favourites")
                 .child(isbn13).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -151,6 +153,7 @@ public class UserRepository {
             resultLiveData.setValue(null);
             return;
         }
+        // removes the book from favourites
         usersInfoRef.child(userId).child("lists").child("favourites").child(isbn)
                 .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -166,6 +169,7 @@ public class UserRepository {
             resultLiveData.setValue(null);
             return;
         }
+        //adds the book to the user's favourites list
         usersInfoRef.child(userId).child("lists").child("favourites").child(isbn)
                 .setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -175,19 +179,22 @@ public class UserRepository {
                 });
     }
 
-    public void getBookListStatus(String isbn, MutableLiveData<String> listStatusLiveData){
+    public void getBookListStatus(String isbn, MutableLiveData<String> listStatusLiveData) {
         String userId = getCurrentUserID();
         if (userId == null || isbn == null) {
             listStatusLiveData.setValue("Add book"); //default to "Add book"
             return;
         }
+        //checks which list the book is in, if any
         usersInfoRef.child(userId).child("lists").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //gets all the data from each list
                 DataSnapshot readList = snapshot.child("read");
                 DataSnapshot readingList = snapshot.child("reading");
                 DataSnapshot tbrList = snapshot.child("tbr");
 
+                //checks each list for the book, if its found it sets the status to that list
                 if (readList.hasChild(isbn))
                     listStatusLiveData.setValue("Read");
                 else if (tbrList.hasChild(isbn))
@@ -195,43 +202,37 @@ public class UserRepository {
                 else if (readingList.hasChild(isbn))
                     listStatusLiveData.setValue("Reading");
                 else
+                    // if it isn't found, defaults to "Add book"
                     listStatusLiveData.setValue("Add book");
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                listStatusLiveData.setValue("Add book");
+                listStatusLiveData.setValue("Add book"); //defaults to "Add book"
             }
         });
     }
 
-    public void removeBookFromAllLists (String isbn){
+    public void removeBookFromAllLists(String isbn) {
         String userId = getCurrentUserID();
         if (userId == null || isbn == null) {
             return;
         }
         DatabaseReference usersLists = usersInfoRef.child(userId).child("lists");
 
+        //deletes said book from all lists
         usersLists.child("read").child(isbn).removeValue();
         usersLists.child("reading").child(isbn).removeValue();
         usersLists.child("tbr").child(isbn).removeValue();
     }
 
-    public void addBookToList(String isbn, String list, MutableLiveData<Boolean> resultLiveData){
+    public void addBookToList(String isbn, String list) {
         String userId = getCurrentUserID();
         if (userId == null || isbn == null) {
-            resultLiveData.setValue(false);
             return;
         }
+        // adds the book into the list sent
         usersInfoRef.child(userId).child("lists").child(list).child(isbn)
-                .setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful())
-                            resultLiveData.setValue(true);
-                        else
-                            resultLiveData.setValue(false);
-                    }
-                });
+                .setValue(true);
     }
 }
