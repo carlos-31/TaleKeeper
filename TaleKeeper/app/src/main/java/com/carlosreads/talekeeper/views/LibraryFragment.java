@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -77,8 +75,6 @@ public class LibraryFragment extends Fragment implements BookAdapter.OnItemClick
         Bundle bundle = new Bundle();
         bundle.putString("isbn13", book.getIsbn13());
         navController.navigate(R.id.bookDetail, bundle);
-
-        Toast.makeText(requireContext(), "ISBN: " + book.getIsbn13(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
