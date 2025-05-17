@@ -18,6 +18,13 @@ import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
     private List<Book> books;
+    //interface to handle clicking on books
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        //method when the item is clicked
+        void onItemClick(Book book);
+    }
 
     public BookAdapter(List<Book> books) {
         this.books = books;
@@ -26,6 +33,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public void setBooks(List<Book> books) {
         this.books = books;
         notifyDataSetChanged();
+    }
+
+    // set the click listener from the Fragment
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -55,7 +67,15 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), book.getTitle(), Toast.LENGTH_SHORT).show();
+                //gets the current position of the item
+                int adapterPosition = holder.getAdapterPosition();
+                if (listener != null && adapterPosition != RecyclerView.NO_POSITION) {
+                    //gets the book in the position clicked
+                    Book clickedBook = books.get(adapterPosition);
+                    //notifies the listener
+                    listener.onItemClick(clickedBook);
+                }
+
             }
         });
 
