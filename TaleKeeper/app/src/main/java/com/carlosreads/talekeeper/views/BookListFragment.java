@@ -59,7 +59,11 @@ public class BookListFragment extends Fragment implements BookAdapter.OnItemClic
             } else if (args.containsKey("listType")) {
                 viewModel.loadBooksByList(args.getString("listType").toLowerCase());
                 if (activity.getSupportActionBar() != null) {
-                    activity.getSupportActionBar().setTitle(args.getString("listType"));
+                    if (args.getString("listType").equalsIgnoreCase("tbr"))
+                        //ensure that it uses "tbr" for the node in the database, be displays "To be read"
+                        activity.getSupportActionBar().setTitle("To be read");
+                    else
+                        activity.getSupportActionBar().setTitle(args.getString("listType"));
                 }
             }
         }

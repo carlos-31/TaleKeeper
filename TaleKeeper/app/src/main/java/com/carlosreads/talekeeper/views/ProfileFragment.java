@@ -3,7 +3,6 @@ package com.carlosreads.talekeeper.views;
 import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,7 +37,7 @@ public class ProfileFragment extends Fragment {
         setClickListeners();
         setObserverCounts();
 
-//        shows the correct layout depending on user logged in status
+        // shows the correct layout depending on user logged in status
         viewModel.getLoggedIn().observe(getViewLifecycleOwner(), loggedIn -> {
             if (loggedIn != null) {
                 if (loggedIn) {
@@ -82,24 +81,40 @@ public class ProfileFragment extends Fragment {
         binding.favouritesCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController = Navigation.findNavController(requireView()); // Or requireActivity().findViewById(R.id.nav_host_fragment) if in an Activity
+                NavController navController = Navigation.findNavController(requireView());
                 Bundle bundle = new Bundle();
-                bundle.putString("listType", "Favourites"); // Ensure "favourites" matches the node in your Firebase
-                navController.navigate(R.id.action_profile_to_List, bundle); // Replace with your actual navigation action ID
+                bundle.putString("listType", "Favourites");
+                navController.navigate(R.id.action_profile_to_List, bundle);
             }
         });
 
         binding.readCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                NavController navController = Navigation.findNavController(requireView());
+                Bundle bundle = new Bundle();
+                bundle.putString("listType", "Read");
+                navController.navigate(R.id.action_profile_to_List, bundle);
+            }
+        });
 
+        binding.readingCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(requireView());
+                Bundle bundle = new Bundle();
+                bundle.putString("listType", "Reading");
+                navController.navigate(R.id.action_profile_to_List, bundle);
             }
         });
 
         binding.tbrCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                NavController navController = Navigation.findNavController(requireView());
+                Bundle bundle = new Bundle();
+                bundle.putString("listType", "tbr");
+                navController.navigate(R.id.action_profile_to_List, bundle);
             }
         });
 
