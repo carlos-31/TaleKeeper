@@ -174,4 +174,64 @@ public class UserRepository {
                     }
                 });
     }
+
+    public void getBookListStatus(String isbn, MutableLiveData<String> listStatusLiveData){
+        String userId = getCurrentUserID();
+        if (userId == null || isbn == null) {
+            listStatusLiveData.setValue("Add book"); //default to "Add book"
+            return;
+        }
+        usersInfoRef.child(userId).child("lists").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                DataSnapshot readList = snapshot.child("read");
+                DataSnapshot readingList = snapshot.child("reading");
+                DataSnapshot tbrList = snapshot.child("tbr");
+
+                if (readList.hasChild(isbn))
+                    listStatusLiveData.setValue("Read");
+                else if (tbrList.hasChild(isbn))
+                    listStatusLiveData.setValue("To be read");
+                else if (readingList.hasChild(isbn))
+                    listStatusLiveData.setValue("Reading");
+                else
+                    listStatusLiveData.setValue("Add book");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                listStatusLiveData.setValue("Add book");
+            }
+        });
+    }
+
+    public void removeBookFromAllLists (String isbn){
+        String userId = getCurrentUserID();
+        if (userId == null || isbn == null) {
+            return;
+        }
+        DatabaseReference usersLists = usersInfoRef.child(userId).child("lists");
+
+        usersLists.child("read").child(isbn).removeValue();
+        usersLists.child("reading").child(isbn).removeValue();
+        usersLists.child("tbr").child(isbn).removeValue();
+    }
+
+    public void addBookToList(String isbn, String list, MutableLiveData<Boolean> resultLiveData){
+        String userId = getCurrentUserID();
+        if (userId == null || isbn == null) {
+            resultLiveData.setValue(false);
+            return;
+        }
+        usersInfoRef.child(userId).child("lists").child(list).child(isbn)
+                .setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful())
+                            resultLiveData.setValue(true);
+                        else
+                            resultLiveData.setValue(false);
+                    }
+                });
+    }
 }

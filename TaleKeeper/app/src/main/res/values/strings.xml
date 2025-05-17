@@ -31,6 +31,7 @@
     <string-array name="book_status_options">
         <item>Add Book</item>
         <item>To Be Read</item>
+        <item>Reading</item>
         <item>Read</item>
         <item>Remove Book</item>
     </string-array>

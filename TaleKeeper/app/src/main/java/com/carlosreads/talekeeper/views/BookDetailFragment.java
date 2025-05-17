@@ -111,9 +111,9 @@ public class BookDetailFragment extends Fragment {
         viewModel.getIsFavouriteLiveData().observe(getViewLifecycleOwner(), isFav -> {
             if (isFav != null){
                 if (isFav)
-                    binding.favBtn.setImageResource(R.drawable.ic_profile);
+                    binding.favBtn.setImageResource(R.drawable.ic_fav);
                 else
-                    binding.favBtn.setImageResource(R.drawable.ic_discover);
+                    binding.favBtn.setImageResource(R.drawable.ic_fav_outline);
             }
         });
     }

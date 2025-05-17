@@ -14,6 +14,7 @@ public class BookDetailViewModel extends ViewModel {
     private MutableLiveData<Book> bookLiveData = new MutableLiveData<>();
     private MutableLiveData<String> bookStatus = new MutableLiveData<>();
     private MutableLiveData<Boolean> isFavouriteLiveData = new MutableLiveData<>(false);
+    private MutableLiveData<Boolean> listModificationLiveData = new MutableLiveData<>(null);
 
     public BookDetailViewModel() {
         bookRepository = new BookRepository();
@@ -25,13 +26,31 @@ public class BookDetailViewModel extends ViewModel {
         return bookLiveData;
     }
 
+    public MutableLiveData<Boolean> getListModificationLiveData() {
+        return listModificationLiveData;
+    }
+
     public void loadBook(String isbn) {
         bookRepository.getBookByIsbn(isbn, bookLiveData);
         userRepository.isBookFavourite(isbn, isFavouriteLiveData);
+        userRepository.getBookListStatus(isbn, bookStatus);
     }
 
-    public void updateBookStatus (String status){
-        bookStatus.setValue(status);
+    public void updateBookStatus (String newList){
+        String isbn = bookLiveData.getValue() != null ?
+                bookLiveData.getValue().getIsbn13() : null;
+        if (isbn == null) return;
+        bookStatus.setValue(newList);
+
+        userRepository.removeBookFromAllLists(isbn);
+
+        if (newList.equals("To Be Read")) {
+            userRepository.addBookToList(isbn, "tbr", listModificationLiveData);
+        } else if (newList.equals("Reading")) {
+            userRepository.addBookToList(isbn, "reading", listModificationLiveData);
+        } else if (newList.equals("Read")) {
+            userRepository.addBookToList(isbn, "read", listModificationLiveData);
+        }
     }
 
     public MutableLiveData<String> getBookStatus() {
@@ -55,7 +74,7 @@ public class BookDetailViewModel extends ViewModel {
             public void onChanged(Boolean updateResult) {
                 if (updateResult != null && updateResult)
                     isFavouriteLiveData.setValue(!currentState);
-                result.removeObserver(observer -> {});
+                result.removeObserver(this);
             }
         });
     }
