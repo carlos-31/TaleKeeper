@@ -6,7 +6,7 @@ public class Book {
     private String isbn13;
     private String title;
     private String author;
-    private String genre;
+    private String genres;
     private String cover_url;
     private String synopsis;
     private String publisher;
@@ -16,11 +16,11 @@ public class Book {
     public Book() {
     }
 
-    public Book(String isbn13, String title, String author, String genre, String cover_url, String synopsis, String publisher, int page_count, int pub_year) {
+    public Book(String isbn13, String title, String author, String genres, String cover_url, String synopsis, String publisher, int page_count, int pub_year) {
         this.isbn13 = isbn13;
         this.title = title;
         this.author = author;
-        this.genre = genre;
+        this.genres = genres;
         this.cover_url = cover_url;
         this.synopsis = synopsis;
         this.publisher = publisher;
@@ -40,8 +40,8 @@ public class Book {
         return author;
     }
 
-    public String getGenre() {
-        return genre;
+    public String getGenres() {
+        return genres;
     }
 
     public String getCover_url() {
