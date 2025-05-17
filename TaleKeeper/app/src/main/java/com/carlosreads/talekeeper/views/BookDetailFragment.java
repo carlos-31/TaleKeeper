@@ -30,6 +30,7 @@ public class BookDetailFragment extends Fragment {
     private FragmentBookDetailBinding binding;
     private BookDetailViewModel viewModel;
     private String bookIsbn;
+    private boolean isInitialSpinnerLoad = true;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -73,16 +74,22 @@ public class BookDetailFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String selectedStatus = parentView.getItemAtPosition(position).toString();
 
-                if (position == parentView.getCount() - 1 || position == 0) {
-                    binding.bookStatusSpinner.setSelection(0);
+                // Only proceed if it's not the initial load
+                if (!isInitialSpinnerLoad) {
+                    if (position == parentView.getCount() - 1 || position == 0) {
+                        binding.bookStatusSpinner.setSelection(0);
+                        viewModel.updateBookStatus("remove");
 
-                } else
-                    viewModel.updateBookStatus(selectedStatus);
+                    } else
+                        viewModel.updateBookStatus(selectedStatus);
+                } else {
+                    isInitialSpinnerLoad = false; // Reset the flag after the first selection
+                }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-
+                // Do nothing
             }
         });
 
@@ -114,6 +121,24 @@ public class BookDetailFragment extends Fragment {
                     binding.favBtn.setImageResource(R.drawable.ic_fav);
                 else
                     binding.favBtn.setImageResource(R.drawable.ic_fav_outline);
+            }
+        });
+
+        viewModel.getBookStatus().observe(getViewLifecycleOwner(), listStatus -> {
+            if (listStatus != null){
+                String[] bookStatusOptions = getResources().getStringArray(R.array.book_status_options);
+                int spinnerPosition = -1;
+                for (int i = 0; i < bookStatusOptions.length; i++) {
+                    if (bookStatusOptions[i].equalsIgnoreCase(listStatus)) {
+                        spinnerPosition = i;
+                        break;
+                    }
+                }
+                if (spinnerPosition != -1) {
+                    binding.bookStatusSpinner.setSelection(spinnerPosition);
+                } else {
+                    binding.bookStatusSpinner.setSelection(0); // Default to "Add Book" if status not found
+                }
             }
         });
     }

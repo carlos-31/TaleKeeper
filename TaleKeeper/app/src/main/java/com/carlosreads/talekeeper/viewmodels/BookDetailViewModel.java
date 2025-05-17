@@ -19,15 +19,21 @@ public class BookDetailViewModel extends ViewModel {
     public BookDetailViewModel() {
         bookRepository = new BookRepository();
         userRepository = new UserRepository();
-        bookStatus.setValue("Add Book");
+        bookStatus.setValue("Add book");
     }
 
     public MutableLiveData<Book> getBookLiveData() {
         return bookLiveData;
     }
 
-    public MutableLiveData<Boolean> getListModificationLiveData() {
-        return listModificationLiveData;
+    public MutableLiveData<Boolean> getListModificationLiveData() { return listModificationLiveData; }
+
+    public MutableLiveData<String> getBookStatus() {
+        return bookStatus;
+    }
+
+    public MutableLiveData<Boolean> getIsFavouriteLiveData(){
+        return isFavouriteLiveData;
     }
 
     public void loadBook(String isbn) {
@@ -44,21 +50,17 @@ public class BookDetailViewModel extends ViewModel {
 
         userRepository.removeBookFromAllLists(isbn);
 
-        if (newList.equals("To Be Read")) {
-            userRepository.addBookToList(isbn, "tbr", listModificationLiveData);
-        } else if (newList.equals("Reading")) {
-            userRepository.addBookToList(isbn, "reading", listModificationLiveData);
-        } else if (newList.equals("Read")) {
-            userRepository.addBookToList(isbn, "read", listModificationLiveData);
+        switch (newList) {
+            case "To Be Read":
+                userRepository.addBookToList(isbn, "tbr", listModificationLiveData);
+                break;
+            case "Reading":
+                userRepository.addBookToList(isbn, "reading", listModificationLiveData);
+                break;
+            case "Read":
+                userRepository.addBookToList(isbn, "read", listModificationLiveData);
+                break;
         }
-    }
-
-    public MutableLiveData<String> getBookStatus() {
-        return bookStatus;
-    }
-
-    public MutableLiveData<Boolean> getIsFavouriteLiveData(){
-        return isFavouriteLiveData;
     }
 
     public void toggleFavourite(String bookIsbn) {
