@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.carlosreads.talekeeper.R;
 import com.carlosreads.talekeeper.adapters.BookAdapter;
+import com.carlosreads.talekeeper.databinding.FragmentBookListBinding;
 import com.carlosreads.talekeeper.databinding.FragmentLibraryBinding;
 import com.carlosreads.talekeeper.models.Book;
 import com.carlosreads.talekeeper.viewmodels.BookListViewModel;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 
 public class BookListFragment extends Fragment implements BookAdapter.OnItemClickListener {
     private BookListViewModel viewModel;
-    private FragmentLibraryBinding binding;
+    private FragmentBookListBinding binding;
     private BookAdapter bookAdapter;
     private String content;
 
@@ -32,7 +33,7 @@ public class BookListFragment extends Fragment implements BookAdapter.OnItemClic
         viewModel =
                 new ViewModelProvider(this).get(BookListViewModel.class);
 
-        binding = FragmentLibraryBinding.inflate(inflater, container, false);
+        binding = FragmentBookListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         bookAdapter = new BookAdapter(new ArrayList<>());
@@ -68,8 +69,13 @@ public class BookListFragment extends Fragment implements BookAdapter.OnItemClic
             }
         }
 
-        viewModel.getBooks().observe(getViewLifecycleOwner(),
-                books -> bookAdapter.setBooks(books));
+        viewModel.getBooks().observe(getViewLifecycleOwner(), books -> {
+                if (books.isEmpty())
+                    binding.emptyListCard.setVisibility(View.VISIBLE);
+                else
+                    binding.emptyListCard.setVisibility(View.GONE);
+                bookAdapter.setBooks(books);
+                });
 
 
         //manually handle back button press to ensure correct behavior

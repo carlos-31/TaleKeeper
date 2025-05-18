@@ -44,6 +44,8 @@
     <string name="no_read_books">No books marked as read</string>
     <string name="no_reading_books">Your reading list is empty</string>
     <string name="no_tbr">No books in your TBR</string>
+    <string name="no_books_found_here">No books found here!</string>
+    <string name="try_a_different_category_or_try_again_later">Try a different category or try again later</string>
 
 
 </resources>
