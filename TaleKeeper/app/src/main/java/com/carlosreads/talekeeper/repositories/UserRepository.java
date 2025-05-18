@@ -307,4 +307,23 @@ public class UserRepository {
                     }
                 });
     }
+
+    public void getReadingCount(MutableLiveData<Integer> readingCount) {
+        String userId = getCurrentUserID();
+        if (userId == null) {
+            return;
+        }
+        usersInfoRef.child(userId).child("lists").child("reading")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        readingCount.setValue((int) snapshot.getChildrenCount());
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        readingCount.setValue(null);
+                    }
+                });
+    }
 }

@@ -10,4 +10,10 @@
         <item quantity="other">You\'ve read %d books</item>
     </plurals>
 
+    <plurals name="reading_books">
+        <item quantity="one">You\'re reading one book</item>
+        <item quantity="other">You\'re reading %d books</item>
+    </plurals>
+
+
 </resources>
