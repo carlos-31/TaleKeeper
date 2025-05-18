@@ -43,5 +43,7 @@
     <string name="no_favs">No books marked as favourites</string>
     <string name="no_read_books">No books marked as read</string>
     <string name="no_reading_books">Your reading list is empty</string>
+    <string name="no_tbr">No books in your TBR</string>
+
 
 </resources>

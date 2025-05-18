@@ -80,6 +80,14 @@ public class ProfileFragment extends Fragment {
                 countText = getResources().getQuantityString(R.plurals.reading_books, count, count);
             binding.readingCount.setText(countText);
         });
+        viewModel.getTbrCount().observe(getViewLifecycleOwner(), count -> {
+            String countText;
+            if (count == 0)
+                countText = getString(R.string.no_tbr);
+            else
+                countText = getResources().getQuantityString(R.plurals.tbr_books, count, count);
+            binding.tbrCount.setText(countText);
+        });
     }
 
     private void setClickListeners() {

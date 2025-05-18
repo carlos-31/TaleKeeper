@@ -11,9 +11,13 @@
     </plurals>
 
     <plurals name="reading_books">
-        <item quantity="one">You\'re reading one book</item>
-        <item quantity="other">You\'re reading %d books</item>
+        <item quantity="one">Currently reading one book</item>
+        <item quantity="other">Currently reading %d books</item>
     </plurals>
 
+    <plurals name="tbr_books">
+        <item quantity="one">Just one book in your TBR</item>
+        <item quantity="other">%d books in your TBR</item>
+    </plurals>
 
 </resources>

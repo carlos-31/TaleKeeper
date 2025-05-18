@@ -265,9 +265,9 @@
                                 android:textSize="20sp" />
 
                             <TextView
+                                android:id="@+id/tbrCount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Those you want to read soon"
                                 android:textColor="?android:textColorSecondary"
                                 android:textSize="14sp" />
                         </LinearLayout>

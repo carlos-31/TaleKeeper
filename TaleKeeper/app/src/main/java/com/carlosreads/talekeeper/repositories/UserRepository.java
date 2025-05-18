@@ -326,4 +326,23 @@ public class UserRepository {
                     }
                 });
     }
+
+    public void getTbrCount(MutableLiveData<Integer> tbrCount) {
+        String userId = getCurrentUserID();
+        if (userId == null) {
+            return;
+        }
+        usersInfoRef.child(userId).child("lists").child("tbr")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        tbrCount.setValue((int) snapshot.getChildrenCount());
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        tbrCount.setValue(null);
+                    }
+                });
+    }
 }

@@ -54,7 +54,7 @@ public class ProfileViewModel extends ViewModel {
         userRepository.getFavouritesCount(favouritesCount);
         userRepository.getReadCount(readCount);
         userRepository.getReadingCount(readingCount);
-
+        userRepository.getTbrCount(tbrCount);
     }
 
     private void checkLogin() {
