@@ -57,7 +57,11 @@ public class ProfileFragment extends Fragment {
     private void setObserverCounts() {
         viewModel.getFavouritesCount().observe(getViewLifecycleOwner(), count -> {
             Log.d(TAG, "book count: " + count.toString());
-            String countText = getResources().getQuantityString(R.plurals.favourite_books, count, count);
+            String countText;
+            if (count == 0)
+                countText = getString(R.string.no_favs);
+            else
+                countText = getResources().getQuantityString(R.plurals.favourite_books, count, count);
             binding.favCount.setText(countText);
         });
     }

@@ -40,4 +40,5 @@
     <string name="favourites">Favourites</string>
     <string name="tbr_title">To be read</string>
     <string name="read">Read</string>
+    <string name="no_favs">No books marked as favourites</string>
 </resources>
