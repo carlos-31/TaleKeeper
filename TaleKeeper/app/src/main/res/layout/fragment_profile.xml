@@ -158,9 +158,9 @@
                                 android:textSize="20sp" />
 
                             <TextView
+                                android:id="@+id/readCount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Those you've read already"
                                 android:textColor="?android:textColorSecondary"
                                 android:textSize="14sp" />
                         </LinearLayout>

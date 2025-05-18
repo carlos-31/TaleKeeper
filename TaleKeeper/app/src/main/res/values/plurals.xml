@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="favourite_books">
-        <item quantity="zero">No books are marked as favourites :(</item>
         <item quantity="one">You have one favourite book</item>
         <item quantity="other">You have %d favourites</item>
+    </plurals>
+
+    <plurals name="read_books">
+        <item quantity="one">You\'ve read one book</item>
+        <item quantity="other">You\'ve read %d books</item>
     </plurals>
 
 </resources>

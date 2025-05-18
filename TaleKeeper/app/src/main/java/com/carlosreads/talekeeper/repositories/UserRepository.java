@@ -288,4 +288,23 @@ public class UserRepository {
                 });
         return isbnLiveData;
     }
+
+    public void getReadCount(MutableLiveData<Integer> readCount) {
+        String userId = getCurrentUserID();
+        if (userId == null) {
+            return;
+        }
+        usersInfoRef.child(userId).child("lists").child("read")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        readCount.setValue((int) snapshot.getChildrenCount());
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        readCount.setValue(null);
+                    }
+                });
+    }
 }

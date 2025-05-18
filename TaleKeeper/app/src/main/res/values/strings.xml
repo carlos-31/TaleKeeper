@@ -41,4 +41,5 @@
     <string name="tbr_title">To be read</string>
     <string name="read">Read</string>
     <string name="no_favs">No books marked as favourites</string>
+    <string name="no_read_books">No books marked as read</string>
 </resources>
