@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="favourite_books">
+        <item quantity="one">You have one favourite book</item>
+        <item quantity="other">You have %d favourites</item>
+    </plurals>
+
+    <plurals name="read_books">
+        <item quantity="one">You\'ve read one book</item>
+        <item quantity="other">You\'ve read %d books</item>
+    </plurals>
+
+    <plurals name="reading_books">
+        <item quantity="one">Currently reading one book</item>
+        <item quantity="other">Currently reading %d books</item>
+    </plurals>
+
+    <plurals name="tbr_books">
+        <item quantity="one">Just one book in your TBR</item>
+        <item quantity="other">%d books in your TBR</item>
+    </plurals>
+
+</resources>

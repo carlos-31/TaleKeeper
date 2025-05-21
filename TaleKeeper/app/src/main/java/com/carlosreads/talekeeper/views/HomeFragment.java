@@ -1,28 +1,24 @@
 package com.carlosreads.talekeeper.views;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
 import com.carlosreads.talekeeper.R;
 import com.carlosreads.talekeeper.databinding.FragmentHomeBinding;
 import com.carlosreads.talekeeper.models.Book;
 import com.carlosreads.talekeeper.viewmodels.HomeViewModel;
-
-import java.util.Map;
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
@@ -60,7 +56,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(requireContext(), "library", Toast.LENGTH_SHORT).show();
                 NavController navController = Navigation.findNavController(requireActivity(),
-                                                            R.id.nav_host_fragment_activity_main);
+                        R.id.nav_host_fragment_activity_main);
                 navController.navigate(R.id.action_to_library);
 
             }
@@ -71,12 +67,9 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(requireActivity(),
                         R.id.nav_host_fragment_activity_main);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("isbn13", currentBook.getIsbn13());
-                        navController.navigate(R.id.bookDetail, bundle);
-
-                Toast.makeText(requireContext(), "ISBN: " + currentBook.getIsbn13(), Toast.LENGTH_SHORT).show();
-                //this sends you to the detail for the book, will be implemented later
+                Bundle bundle = new Bundle();
+                bundle.putString("isbn13", currentBook.getIsbn13());
+                navController.navigate(R.id.bookDetail, bundle);
             }
         });
 

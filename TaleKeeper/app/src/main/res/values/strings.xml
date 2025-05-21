@@ -16,7 +16,7 @@
     <string name="confirm_password">Confirm password</string>
     <string name="sign_up">Sign up</string>
     <string name="book_cover">The book\'s cover</string>
-    <string name="spotlight_subtitle">Our favourite book changes every day. Come back tomorrow for a new recommendation!</string>
+    <string name="spotlight_subtitle">This changes every day. Come back tomorrow for a new recommendation!</string>
     <string name="spotlight_title">Today\'s favourite book:</string>
     <string name="Library_card_home_title">Check out our entire catalog!</string>
     <string name="genres_card_title">Browse our genres</string>
@@ -35,4 +35,17 @@
         <item>Read</item>
         <item>Remove book</item>
     </string-array>
+    <string name="not_logged_in_msg">This area is for users only.\n Please log in or create an account</string>
+    <string name="not_logged_in_title">Seems like you\'re not logged in…</string>
+    <string name="favourites">Favourites</string>
+    <string name="tbr_title">To be read</string>
+    <string name="read">Read</string>
+    <string name="no_favs">No books marked as favourites</string>
+    <string name="no_read_books">No books marked as read</string>
+    <string name="no_reading_books">Your reading list is empty</string>
+    <string name="no_tbr">No books in your TBR</string>
+    <string name="no_books_found_here">No books found here!</string>
+    <string name="try_a_different_category_or_try_again_later">Try a different category or try again later</string>
+
+
 </resources>

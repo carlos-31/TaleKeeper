@@ -3,7 +3,6 @@ package com.carlosreads.talekeeper.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -18,6 +17,13 @@ import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
     private List<Book> books;
+    //interface to handle clicking on books
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        //method when the item is clicked
+        void onItemClick(Book book);
+    }
 
     public BookAdapter(List<Book> books) {
         this.books = books;
@@ -26,6 +32,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public void setBooks(List<Book> books) {
         this.books = books;
         notifyDataSetChanged();
+    }
+
+    // set the click listener from the Fragment
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -46,16 +57,24 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         //img and click listener
         int width = 200;
         Glide.with(holder.itemView.getContext())
-                        .load(book.getCover_url())
-                        .override(width,(int) (width * 1.6))
-                        .centerCrop()
-                        .into(holder.binding.bookCover);
+                .load(book.getCover_url())
+                .override(width, (int) (width * 1.6))
+                .centerCrop()
+                .into(holder.binding.bookCover);
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), book.getTitle(), Toast.LENGTH_SHORT).show();
+                //gets the current position of the item
+                int adapterPosition = holder.getAdapterPosition();
+                if (listener != null && adapterPosition != RecyclerView.NO_POSITION) {
+                    //gets the book in the position clicked
+                    Book clickedBook = books.get(adapterPosition);
+                    //notifies the listener
+                    listener.onItemClick(clickedBook);
+                }
+
             }
         });
 
