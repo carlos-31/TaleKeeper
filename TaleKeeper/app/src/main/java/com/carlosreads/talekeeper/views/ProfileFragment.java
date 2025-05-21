@@ -59,6 +59,7 @@ public class ProfileFragment extends Fragment {
             Log.d(TAG, "book count: " + count.toString());
             String countText;
             if (count == 0)
+                //displays correct string for 0 books
                 countText = getString(R.string.no_favs);
             else
                 countText = getResources().getQuantityString(R.plurals.favourite_books, count, count);

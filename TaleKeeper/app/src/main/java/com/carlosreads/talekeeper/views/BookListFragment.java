@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.carlosreads.talekeeper.R;
 import com.carlosreads.talekeeper.adapters.BookAdapter;
 import com.carlosreads.talekeeper.databinding.FragmentBookListBinding;
-import com.carlosreads.talekeeper.databinding.FragmentLibraryBinding;
 import com.carlosreads.talekeeper.models.Book;
 import com.carlosreads.talekeeper.viewmodels.BookListViewModel;
 
@@ -61,7 +60,7 @@ public class BookListFragment extends Fragment implements BookAdapter.OnItemClic
                 viewModel.loadBooksByList(args.getString("listType").toLowerCase());
                 if (activity.getSupportActionBar() != null) {
                     if (args.getString("listType").equalsIgnoreCase("tbr"))
-                        //ensure that it uses "tbr" for the node in the database, be displays "To be read"
+                        //ensure that it uses "tbr" for the node in the database, but displays "To be read"
                         activity.getSupportActionBar().setTitle("To be read");
                     else
                         activity.getSupportActionBar().setTitle(args.getString("listType"));
@@ -70,25 +69,12 @@ public class BookListFragment extends Fragment implements BookAdapter.OnItemClic
         }
 
         viewModel.getBooks().observe(getViewLifecycleOwner(), books -> {
-                if (books.isEmpty())
-                    binding.emptyListCard.setVisibility(View.VISIBLE);
-                else
-                    binding.emptyListCard.setVisibility(View.GONE);
-                bookAdapter.setBooks(books);
-                });
-
-
-        //manually handle back button press to ensure correct behavior
-//        requireActivity().getOnBackPressedDispatcher().addCallback(
-//                getViewLifecycleOwner(),
-//                new OnBackPressedCallback(true) {
-//                    @Override
-//                    public void handleOnBackPressed() {
-//                        NavController navController = NavHostFragment
-//                                .findNavController(BookListFragment.this);
-//                        navController.navigate(R.id.navigation_discover);
-//                    }
-//                });
+            if (books.isEmpty())
+                binding.emptyListCard.setVisibility(View.VISIBLE);
+            else
+                binding.emptyListCard.setVisibility(View.GONE);
+            bookAdapter.setBooks(books);
+        });
 
         return root;
     }

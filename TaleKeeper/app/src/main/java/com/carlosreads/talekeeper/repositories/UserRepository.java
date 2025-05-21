@@ -247,6 +247,7 @@ public class UserRepository {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        //gets the book count for the list, saving it in the mutableLiveData
                         favouritesCount.setValue((int) snapshot.getChildrenCount());
                     }
 

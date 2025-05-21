@@ -51,6 +51,7 @@ public class ProfileViewModel extends ViewModel {
     }
 
     private void fetchListsCounts() {
+        // gets the book count for each list
         userRepository.getFavouritesCount(favouritesCount);
         userRepository.getReadCount(readCount);
         userRepository.getReadingCount(readingCount);
@@ -61,8 +62,6 @@ public class ProfileViewModel extends ViewModel {
         //checks if logged in, and if so, gets the users data
         userRepository.checkLogin(loggedIn, userLiveData);
     }
-
-
 
     public void logoutUser() {
         //logs out the user, and calls checkLogin so fragment shows correct layout
