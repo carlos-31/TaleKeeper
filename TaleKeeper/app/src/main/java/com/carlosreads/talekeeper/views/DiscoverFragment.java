@@ -1,10 +1,11 @@
 package com.carlosreads.talekeeper.views;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -54,10 +55,10 @@ public class DiscoverFragment extends Fragment implements BookAdapter.OnItemClic
         viewModel.getSearchLiveData().observe(getViewLifecycleOwner(), books -> {
             bookAdapter.setBooks(books);
 
-            if (books.isEmpty()){
+            if (books.isEmpty()) {
                 binding.resutsRecyclerVIew.setVisibility(View.GONE);
                 binding.noResultsCard.setVisibility(View.VISIBLE);
-            } else{
+            } else {
                 binding.resutsRecyclerVIew.setVisibility(View.VISIBLE);
                 binding.noResultsCard.setVisibility(View.GONE);
             }
@@ -92,7 +93,6 @@ public class DiscoverFragment extends Fragment implements BookAdapter.OnItemClic
             @Override
             public void onClick(View v) {
                 viewModel.search(Objects.requireNonNull(binding.search.getText()).toString().trim());
-                Toast.makeText(requireContext(), binding.search.getText(), Toast.LENGTH_SHORT).show();
             }
         });
     }
