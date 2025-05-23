@@ -14,9 +14,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="20dp"
-        android:paddingTop="?attr/actionBarSize"
-        android:paddingBottom="?attr/actionBarSize"
         tools:context=".views.ProfileFragment">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

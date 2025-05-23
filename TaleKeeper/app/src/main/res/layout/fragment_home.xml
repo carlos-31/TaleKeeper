@@ -12,8 +12,6 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="?attr/actionBarSize"
-            android:paddingBottom="?attr/actionBarSize"
             tools:context=".views.HomeFragment">
 
             <ScrollView
@@ -159,7 +157,6 @@
                         android:text="@string/spotlight_subtitle"
                         android:textSize="18sp"
                         android:textColor="?android:textColorPrimary"
-                        android:paddingBottom="24dp"
                         android:layout_gravity="center"
                         android:textAlignment="center"
                         />

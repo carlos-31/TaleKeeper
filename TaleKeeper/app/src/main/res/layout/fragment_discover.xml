@@ -22,7 +22,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="?attr/actionBarSize"
             android:layout_marginEnd="8dp"
             app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="50dp"
@@ -54,7 +53,7 @@
             app:layout_constraintTop_toTopOf="@id/searchInputLayout" />
 
         <androidx.core.widget.NestedScrollView
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:fillViewport="true"
