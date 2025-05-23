@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -93,6 +94,23 @@ public class DiscoverFragment extends Fragment implements BookAdapter.OnItemClic
             @Override
             public void onClick(View v) {
                 viewModel.search(Objects.requireNonNull(binding.search.getText()).toString().trim());
+
+                Activity activity = getActivity();
+                if (activity != null) {
+                    //gets the InputMethodManager system service which handles inputs like the keyboard
+                    InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    View view = activity.getCurrentFocus();
+
+                    //hides the keyboard from the screen
+                    if (view != null) {
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+                        // clears focus from the search bar
+                        binding.search.clearFocus();
+                    }
+
+                }
+
             }
         });
     }
