@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.carlosreads.talekeeper.viewmodels.LoginViewModel" />
@@ -14,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".views.LoginActivity">
-
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/homeBtn"
@@ -54,7 +54,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-
                     <!--                login card-->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/loginCard"
@@ -83,7 +82,6 @@
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
 
-
                             <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -95,7 +93,6 @@
                                     android:layout_height="wrap_content"
                                     android:inputType="text" />
                             </com.google.android.material.textfield.TextInputLayout>
-
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
@@ -110,7 +107,6 @@
                                     android:inputType="textPassword" />
                             </com.google.android.material.textfield.TextInputLayout>
 
-
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/loginBtn"
                                 android:layout_width="wrap_content"
@@ -120,7 +116,6 @@
                                 android:text="@string/log_in" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
-
 
                     <TextView
                         android:id="@+id/signupText"
@@ -133,10 +128,7 @@
                         android:textSize="18sp" />
 
                 </LinearLayout>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

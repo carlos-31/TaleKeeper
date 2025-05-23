@@ -56,14 +56,13 @@
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:text="@string/no_books_found_here"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/try_a_different_category_or_try_again_later"/>
+                android:text="@string/try_a_different_category_or_try_again_later" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
-
 </FrameLayout>

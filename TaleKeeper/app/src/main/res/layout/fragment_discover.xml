@@ -24,8 +24,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
             app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="50dp"
             app:boxCornerRadiusBottomStart="50dp"
@@ -116,14 +116,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
                                 android:gravity="center"
-                                android:text="woops, no books for you"
+                                android:text="We couldn't find that one"
                                 android:textSize="18sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="sad :(" />
+                                android:text="It seems like we don't have that book in out database yet. Would you like to request it?" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
                 </FrameLayout>
