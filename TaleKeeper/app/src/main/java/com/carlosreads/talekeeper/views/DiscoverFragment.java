@@ -75,6 +75,8 @@ public class DiscoverFragment extends Fragment implements BookAdapter.OnItemClic
         genreButtons.put(binding.horrorBtn, "Horror");
         genreButtons.put(binding.speculativeBtn, "Speculative");
         genreButtons.put(binding.anthologyBtn, "Anthology");
+        genreButtons.put(binding.fictionBtn, "General Fiction");
+        genreButtons.put(binding.nonFictionBtn, "Nonfiction");
 
         NavController navController = Navigation.findNavController(requireActivity(),
                 R.id.nav_host_fragment_activity_main);
@@ -93,24 +95,29 @@ public class DiscoverFragment extends Fragment implements BookAdapter.OnItemClic
         binding.searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewModel.search(Objects.requireNonNull(binding.search.getText()).toString().trim());
+                String searchQuery = Objects.requireNonNull(binding.search.getText()).toString();
+                if (!searchQuery.isEmpty()) {
+                    viewModel.search(searchQuery.trim());
 
-                Activity activity = getActivity();
-                if (activity != null) {
-                    //gets the InputMethodManager system service which handles inputs like the keyboard
-                    InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-                    View view = activity.getCurrentFocus();
+                    Activity activity = getActivity();
+                    if (activity != null) {
+                        //gets the InputMethodManager system service which handles inputs like the keyboard
+                        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        View view = activity.getCurrentFocus();
 
-                    //hides the keyboard from the screen
-                    if (view != null) {
-                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        //hides the keyboard from the screen
+                        if (view != null) {
+                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
-                        // clears focus from the search bar
-                        binding.search.clearFocus();
+                            // clears focus from the search bar
+                            binding.search.clearFocus();
+                        }
+
                     }
-
+                } else {
+                    binding.resutsRecyclerVIew.setVisibility(View.GONE);
+                    binding.noResultsCard.setVisibility(View.GONE);
                 }
-
             }
         });
     }

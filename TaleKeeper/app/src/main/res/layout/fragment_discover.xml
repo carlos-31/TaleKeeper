@@ -14,7 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="24dp"
+        android:layout_marginTop="24dp"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
         tools:context=".views.DiscoverFragment">
@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginTop="5dp"
             app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="50dp"
             app:boxCornerRadiusBottomStart="50dp"
@@ -165,7 +166,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            app:constraint_referenced_ids="fantasyBtn,scifiBtn,mysteryBtn,horrorBtn,speculativeBtn,anthologyBtn"
+                            app:constraint_referenced_ids="fantasyBtn,scifiBtn,mysteryBtn,horrorBtn,speculativeBtn,anthologyBtn,fictionBtn,nonFictionBtn"
                             app:flow_horizontalAlign="center"
                             app:flow_horizontalGap="8dp"
                             app:flow_maxElementsWrap="3"
@@ -223,6 +224,22 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="6dp"
                             android:text="@string/anthology" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/fictionBtn"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="@string/fiction" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/nonFictionBtn"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="@string/nonfiction" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>

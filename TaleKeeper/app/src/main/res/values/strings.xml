@@ -46,6 +46,8 @@
     <string name="no_tbr">No books in your TBR</string>
     <string name="no_books_found_here">No books found here!</string>
     <string name="try_a_different_category_or_try_again_later">Try a different category or try again later</string>
+    <string name="fiction">Fiction</string>
+    <string name="nonfiction">Nonfiction</string>
 
 
 </resources>
