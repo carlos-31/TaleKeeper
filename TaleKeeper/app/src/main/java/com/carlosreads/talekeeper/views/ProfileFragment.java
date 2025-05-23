@@ -103,6 +103,7 @@ public class ProfileFragment extends Fragment {
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                binding.notLoggedInLayout.setVisibility(View.GONE);
                 viewModel.logoutUser();
             }
         });
