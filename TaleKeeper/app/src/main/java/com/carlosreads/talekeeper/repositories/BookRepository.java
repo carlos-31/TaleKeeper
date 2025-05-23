@@ -115,7 +115,7 @@ public class BookRepository {
     }
 
     public void searchBooks(String query, MutableLiveData<List<Book>> resultsLiveData) {
-        bookRef.addValueEventListener(new ValueEventListener() {
+        bookRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<Book> books = new ArrayList<>();
