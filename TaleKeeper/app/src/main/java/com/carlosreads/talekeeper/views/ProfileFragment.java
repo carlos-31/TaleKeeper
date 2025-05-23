@@ -56,38 +56,48 @@ public class ProfileFragment extends Fragment {
 
     private void setObserverCounts() {
         viewModel.getFavouritesCount().observe(getViewLifecycleOwner(), count -> {
-            Log.d(TAG, "book count: " + count.toString());
             String countText;
-            if (count == 0)
-                //displays correct string for 0 books
-                countText = getString(R.string.no_favs);
-            else
-                countText = getResources().getQuantityString(R.plurals.favourite_books, count, count);
-            binding.favCount.setText(countText);
+            if (count != null) {
+                if (count == 0)
+                    //displays correct string for 0 books
+                    countText = getString(R.string.no_favs);
+                else
+                    countText = getResources().getQuantityString(R.plurals.favourite_books, count, count);
+                binding.favCount.setText(countText);
+            }
+
         });
         viewModel.getReadCount().observe(getViewLifecycleOwner(), count -> {
             String countText;
-            if (count == 0)
-                countText = getString(R.string.no_read_books);
-            else
-                countText = getResources().getQuantityString(R.plurals.read_books, count, count);
-            binding.readCount.setText(countText);
+            if (count != null) {
+                if (count == 0)
+                    countText = getString(R.string.no_read_books);
+                else
+                    countText = getResources().getQuantityString(R.plurals.read_books, count, count);
+                binding.readCount.setText(countText);
+            }
         });
         viewModel.getReadingCount().observe(getViewLifecycleOwner(), count -> {
             String countText;
-            if (count == 0)
-                countText = getString(R.string.no_reading_books);
-            else
-                countText = getResources().getQuantityString(R.plurals.reading_books, count, count);
-            binding.readingCount.setText(countText);
+            if (count != null) {
+                if (count == 0)
+                    countText = getString(R.string.no_reading_books);
+                else
+                    countText = getResources().getQuantityString(R.plurals.reading_books, count, count);
+                binding.readingCount.setText(countText);
+            }
+
         });
         viewModel.getTbrCount().observe(getViewLifecycleOwner(), count -> {
             String countText;
-            if (count == 0)
-                countText = getString(R.string.no_tbr);
-            else
-                countText = getResources().getQuantityString(R.plurals.tbr_books, count, count);
-            binding.tbrCount.setText(countText);
+            if (count != null) {
+                if (count == 0)
+                    countText = getString(R.string.no_tbr);
+                else
+                    countText = getResources().getQuantityString(R.plurals.tbr_books, count, count);
+                binding.tbrCount.setText(countText);
+            }
+
         });
     }
 
