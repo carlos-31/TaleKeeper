@@ -14,7 +14,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="24dp"
+        android:layout_marginTop="24dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
         tools:context=".views.DiscoverFragment">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -22,8 +24,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="?attr/actionBarSize"
             android:layout_marginEnd="8dp"
+            android:layout_marginTop="5dp"
             app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="50dp"
             app:boxCornerRadiusBottomStart="50dp"
@@ -53,104 +55,195 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/searchInputLayout" />
 
-        <!--genres card-->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/genreCard"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="32dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="8dp"
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/searchInputLayout"
-            app:strokeColor="?attr/colorOutline"
-            app:strokeWidth="1dp">
+            app:layout_constraintTop_toBottomOf="@+id/searchInputLayout">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/scrollableContentLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="20dp">
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/genreTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/genres_card_title"
-                    android:textColor="?android:textColorPrimary"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!--using flow so the buttons fit well regardless of screens width-->
-                <androidx.constraintlayout.helper.widget.Flow
-                    android:id="@+id/genreFlow"
+                <FrameLayout
+                    android:id="@+id/searchResults"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:constraint_referenced_ids="fantasyBtn,scifiBtn,mysteryBtn,horrorBtn,speculativeBtn,anthologyBtn"
-                    app:flow_horizontalAlign="center"
-                    app:flow_horizontalGap="8dp"
-                    app:flow_maxElementsWrap="3"
-                    app:flow_verticalGap="8dp"
-                    app:flow_wrapMode="chain"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/genreTitle" />
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <!--genres buttons-->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/fantasyBtn"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/resutsRecyclerVIew"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        android:visibility="gone" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/noResultsCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:visibility="gone"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="6dp"
+                        app:strokeColor="?attr/colorOutline"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:padding="24dp">
+
+                            <ImageView
+                                android:layout_width="72dp"
+                                android:layout_height="72dp"
+                                android:layout_marginBottom="16dp"
+                                android:contentDescription="@string/no_books_found_here"
+                                android:src="@drawable/ic_bookmark"
+                                app:tint="?attr/colorOnSurfaceVariant" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                android:gravity="center"
+                                android:text="woops, no books for you"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="sad :(" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </FrameLayout>
+
+                <!--genres card-->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/genreCard"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:text="@string/fantasy" />
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="32dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/searchResults"
+                    app:strokeColor="?attr/colorOutline"
+                    app:strokeWidth="1dp">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/scifiBtn"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:text="@string/sci_fi" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/mysteryBtn"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:text="@string/mystery" />
+                        <TextView
+                            android:id="@+id/genreTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/genres_card_title"
+                            android:textColor="?android:textColorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/horrorBtn"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:text="@string/horror" />
+                        <!--using flow so the buttons fit well regardless of screens width-->
+                        <androidx.constraintlayout.helper.widget.Flow
+                            android:id="@+id/genreFlow"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            app:constraint_referenced_ids="fantasyBtn,scifiBtn,mysteryBtn,horrorBtn,speculativeBtn,anthologyBtn,fictionBtn,nonFictionBtn"
+                            app:flow_horizontalAlign="center"
+                            app:flow_horizontalGap="8dp"
+                            app:flow_maxElementsWrap="3"
+                            app:flow_verticalGap="8dp"
+                            app:flow_wrapMode="chain"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/genreTitle" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/speculativeBtn"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:text="@string/speculative" />
+                        <!--genres buttons-->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/fantasyBtn"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="@string/fantasy" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/anthologyBtn"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:text="@string/anthology" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/scifiBtn"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="@string/sci_fi" />
 
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/mysteryBtn"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="@string/mystery" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/horrorBtn"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="@string/horror" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/speculativeBtn"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="@string/speculative" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/anthologyBtn"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="@string/anthology" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/fictionBtn"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="@string/fiction" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/nonFictionBtn"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="@string/nonfiction" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

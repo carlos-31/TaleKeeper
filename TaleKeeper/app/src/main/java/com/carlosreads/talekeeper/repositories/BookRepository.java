@@ -114,4 +114,29 @@ public class BookRepository {
         });
     }
 
+    public void searchBooks(String query, MutableLiveData<List<Book>> resultsLiveData) {
+        bookRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Book> books = new ArrayList<>();
+                if (query == null) {
+                    resultsLiveData.setValue(new ArrayList<>());
+                    return;
+                }
+
+                for (DataSnapshot child : snapshot.getChildren()){
+                    Book book = child.getValue(Book.class);
+                    if (book.getTitle().toLowerCase().contains(query.toLowerCase()))
+                        books.add(book);
+                }
+                resultsLiveData.setValue(books);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                resultsLiveData.setValue(new ArrayList<>());
+            }
+        });
+    }
+
 }
