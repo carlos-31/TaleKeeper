@@ -69,6 +69,7 @@ public class BookDetailFragment extends Fragment {
                 String selectedStatus = parentView.getItemAtPosition(position).toString();
 
                 // Only proceed if it's not the initial load
+                    //so loading the fragment doesn't make a call to the viewmodel & repo
                 if (!isInitialSpinnerLoad) {
                     if (position == parentView.getCount() - 1 || position == 0) {
                         binding.bookStatusSpinner.setSelection(0);
@@ -134,7 +135,7 @@ public class BookDetailFragment extends Fragment {
                 // Goes through the array of the options for the spinner
                 for (int i = 0; i < bookStatusOptions.length; i++) {
                     if (bookStatusOptions[i].equalsIgnoreCase(listStatus)) {
-                        //when it finds the option recieved from the ViewModel, save its position
+                        //when it finds the option received from the ViewModel, save its position
                         spinnerPosition = i;
                         break;
                     }
@@ -148,5 +149,4 @@ public class BookDetailFragment extends Fragment {
             }
         });
     }
-
 }
