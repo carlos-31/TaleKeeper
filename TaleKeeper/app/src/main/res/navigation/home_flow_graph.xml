@@ -15,8 +15,8 @@
             android:id="@+id/action_home_to_library_in_home"
             app:destination="@id/library_in_home" />
         <action
-            android:id="@+id/action_home_to_global_bookDetail"
-            app:destination="@id/bookDetail_global" />
+            android:id="@+id/action_home_to_home_bookDetail"
+            app:destination="@id/bookDetail_in_home" />
     </fragment>
 
 
@@ -26,9 +26,14 @@
         android:label="@string/library"
         tools:layout="@layout/fragment_library">
         <action
-            android:id="@+id/action_library_to_global_bookDetail"
-            app:destination="@id/bookDetail_global" />
+            android:id="@+id/action_library_to_home_bookDetail"
+            app:destination="@id/bookDetail_in_home" />
     </fragment>
+
+    <fragment
+        android:id="@+id/bookDetail_in_home"
+        android:name="com.carlosreads.talekeeper.views.BookDetailFragment"
+        tools:layout="@layout/fragment_book_detail" />
 
 
 </navigation>

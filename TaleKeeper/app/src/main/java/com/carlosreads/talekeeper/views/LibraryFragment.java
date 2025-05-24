@@ -52,17 +52,17 @@ public class LibraryFragment extends Fragment implements BookAdapter.OnItemClick
         }
 
         // if user presses back key, this takes them home instead of closing the app
-        requireActivity().getOnBackPressedDispatcher().addCallback(
-                getViewLifecycleOwner(),
-                new OnBackPressedCallback(true) {
-                    @Override
-                    public void handleOnBackPressed() {
-                        NavController navController = NavHostFragment
-                                .findNavController(LibraryFragment.this);
-                        navController.navigate(R.id.navigation_home);
-
-                    }
-                });
+//        requireActivity().getOnBackPressedDispatcher().addCallback(
+//                getViewLifecycleOwner(),
+//                new OnBackPressedCallback(true) {
+//                    @Override
+//                    public void handleOnBackPressed() {
+//                        NavController navController = NavHostFragment
+//                                .findNavController(LibraryFragment.this);
+//                        navController.navigate(R.id.navigation_home);
+//
+//                    }
+//                });
 
         return root;
     }
@@ -74,7 +74,7 @@ public class LibraryFragment extends Fragment implements BookAdapter.OnItemClick
                 R.id.nav_host_fragment_activity_main);
         Bundle bundle = new Bundle();
         bundle.putString("isbn13", book.getIsbn13());
-        navController.navigate(R.id.action_library_to_global_bookDetail, bundle);
+        navController.navigate(R.id.action_library_to_home_bookDetail, bundle);
     }
 
     @Override

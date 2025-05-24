@@ -14,8 +14,8 @@
             android:id="@+id/action_discover_to_bookList_in_discover"
             app:destination="@id/bookList_in_discover" />
         <action
-            android:id="@+id/action_discover_to_global_bookDetail"
-            app:destination="@id/bookDetail_global" />
+            android:id="@+id/action_discover_to_discover_bookDetail"
+            app:destination="@id/bookDetail_in_discover" />
     </fragment>
 
     <fragment
@@ -24,8 +24,14 @@
         android:label="Book List"
         tools:layout="@layout/fragment_book_list">
         <action
-            android:id="@+id/action_bookList_in_discover_to_global_bookDetail"
-            app:destination="@id/bookDetail_global" />
+            android:id="@+id/action_bookList_in_discover_to_discover_bookDetail"
+            app:destination="@id/bookDetail_in_discover" />
     </fragment>
+
+
+    <fragment
+        android:id="@+id/bookDetail_in_discover"
+        android:name="com.carlosreads.talekeeper.views.BookDetailFragment"
+        tools:layout="@layout/fragment_book_detail" />
 
 </navigation>

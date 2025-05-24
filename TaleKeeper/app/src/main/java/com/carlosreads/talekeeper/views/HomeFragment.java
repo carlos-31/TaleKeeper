@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
                 NavController navController = NavHostFragment.findNavController(HomeFragment.this);
                 Bundle bundle = new Bundle();
                 bundle.putString("isbn13", currentBook.getIsbn13());
-                navController.navigate(R.id.action_home_to_global_bookDetail, bundle);
+                navController.navigate(R.id.action_home_to_home_bookDetail, bundle);
             }
         });
 

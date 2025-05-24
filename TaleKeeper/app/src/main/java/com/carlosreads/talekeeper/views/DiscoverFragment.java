@@ -137,6 +137,6 @@ public class DiscoverFragment extends Fragment implements BookAdapter.OnItemClic
         NavController navController = NavHostFragment.findNavController(this);
         Bundle bundle = new Bundle();
         bundle.putString("isbn13", book.getIsbn13());
-        navController.navigate(R.id.action_discover_to_global_bookDetail, bundle);
+        navController.navigate(R.id.action_discover_to_discover_bookDetail, bundle);
     }
 }
