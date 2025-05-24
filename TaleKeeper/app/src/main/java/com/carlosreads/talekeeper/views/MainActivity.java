@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
         // defining with the IDs of the destinations which are top-level
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.home_flow, R.id.discover_flow, R.id.navigation_profile)
+                R.id.home_flow, R.id.discover_flow, R.id.profile_flow)
                 .build();
 
         // navController handles the navigation between fragments
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 if (currentFragmentId != R.id.navigation_discover) {
                     navController.popBackStack(R.id.navigation_discover, false);
                 }
-            } else if (reselectedMenuItemId == R.id.navigation_profile) {
+            } else if (reselectedMenuItemId == R.id.profile_flow) {
                 // Start destination of profile_flow is R.id.navigation_profile
                 if (currentFragmentId != R.id.navigation_profile) {
                     navController.popBackStack(R.id.navigation_profile, false);

@@ -9,11 +9,7 @@
 
     <include app:graph="@navigation/discover_flow_graph" />
 
-    <fragment
-        android:id="@+id/bookDetail_global"
-        android:name="com.carlosreads.talekeeper.views.BookDetailFragment"
-        android:label="A great book"
-        tools:layout="@layout/fragment_book_detail" />
+    <include app:graph="@navigation/profile_nav_graph" />
 
 
     <!--    <fragment-->
@@ -42,15 +38,15 @@
     <!--            app:destination="@id/bookDetail" />-->
     <!--    </fragment>-->
 
-    <fragment
-        android:id="@+id/navigation_profile"
-        android:name="com.carlosreads.talekeeper.views.ProfileFragment"
-        android:label="@string/profile"
-        tools:layout="@layout/fragment_profile">
-        <action
-            android:id="@+id/action_profile_to_bookList"
-            app:destination="@id/bookDetail_global" />
-    </fragment>
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_profile"-->
+<!--        android:name="com.carlosreads.talekeeper.views.ProfileFragment"-->
+<!--        android:label="@string/profile"-->
+<!--        tools:layout="@layout/fragment_profile">-->
+<!--        <action-->
+<!--            android:id="@+id/action_profile_to_bookList"-->
+<!--            app:destination="@id/bookDetail_global" />-->
+<!--    </fragment>-->
 
     <!--    <fragment-->
     <!--        android:id="@+id/library"-->

@@ -85,7 +85,7 @@ public class BookListFragment extends Fragment implements BookAdapter.OnItemClic
                 R.id.nav_host_fragment_activity_main);
         Bundle bundle = new Bundle();
         bundle.putString("isbn13", book.getIsbn13());
-        navController.navigate(R.id.bookDetail_global, bundle);
+        navController.navigate(R.id.action_bookList_in_discover_to_discover_bookDetail, bundle);
     }
 
     @Override
