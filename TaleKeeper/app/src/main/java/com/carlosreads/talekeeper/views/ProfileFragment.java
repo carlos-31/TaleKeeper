@@ -124,7 +124,7 @@ public class ProfileFragment extends Fragment {
                 NavController navController = Navigation.findNavController(requireView());
                 Bundle bundle = new Bundle();
                 bundle.putString("listType", "Favourites");
-                navController.navigate(R.id.action_profile_to_List, bundle);
+                navController.navigate(R.id.action_profile_to_bookList, bundle);
             }
         });
 
@@ -134,7 +134,7 @@ public class ProfileFragment extends Fragment {
                 NavController navController = Navigation.findNavController(requireView());
                 Bundle bundle = new Bundle();
                 bundle.putString("listType", "Read");
-                navController.navigate(R.id.action_profile_to_List, bundle);
+                navController.navigate(R.id.action_profile_to_bookList, bundle);
             }
         });
 
@@ -144,7 +144,7 @@ public class ProfileFragment extends Fragment {
                 NavController navController = Navigation.findNavController(requireView());
                 Bundle bundle = new Bundle();
                 bundle.putString("listType", "Reading");
-                navController.navigate(R.id.action_profile_to_List, bundle);
+                navController.navigate(R.id.action_profile_to_bookList, bundle);
             }
         });
 
@@ -154,7 +154,7 @@ public class ProfileFragment extends Fragment {
                 NavController navController = Navigation.findNavController(requireView());
                 Bundle bundle = new Bundle();
                 bundle.putString("listType", "tbr");
-                navController.navigate(R.id.action_profile_to_List, bundle);
+                navController.navigate(R.id.action_profile_to_bookList, bundle);
             }
         });
 

@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.bumptech.glide.Glide;
 import com.carlosreads.talekeeper.R;
@@ -55,9 +56,10 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(requireContext(), "library", Toast.LENGTH_SHORT).show();
-                NavController navController = Navigation.findNavController(requireActivity(),
-                        R.id.nav_host_fragment_activity_main);
-                navController.navigate(R.id.action_to_library);
+//                NavController navController = Navigation.findNavController(requireActivity(),
+//                        R.id.nav_host_fragment_activity_main);
+                NavController navController = NavHostFragment.findNavController(HomeFragment.this);
+                navController.navigate(R.id.action_home_to_library_in_home);
 
             }
         });
@@ -65,11 +67,12 @@ public class HomeFragment extends Fragment {
         binding.spotlight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController = Navigation.findNavController(requireActivity(),
-                        R.id.nav_host_fragment_activity_main);
+//                NavController navController = Navigation.findNavController(requireActivity(),
+//                        R.id.nav_host_fragment_activity_main);
+                NavController navController = NavHostFragment.findNavController(HomeFragment.this);
                 Bundle bundle = new Bundle();
                 bundle.putString("isbn13", currentBook.getIsbn13());
-                navController.navigate(R.id.bookDetail, bundle);
+                navController.navigate(R.id.action_home_to_global_bookDetail, bundle);
             }
         });
 
