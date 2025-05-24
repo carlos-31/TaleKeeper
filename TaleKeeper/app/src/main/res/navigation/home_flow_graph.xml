@@ -5,20 +5,18 @@
     android:id="@+id/home_flow"
     app:startDestination="@id/navigation_home">
 
-
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.carlosreads.talekeeper.views.HomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_home_to_library_in_home"
+            android:id="@+id/action_home_to_library"
             app:destination="@id/library_in_home" />
         <action
             android:id="@+id/action_home_to_home_bookDetail"
             app:destination="@id/bookDetail_in_home" />
     </fragment>
-
 
     <fragment
         android:id="@+id/library_in_home"
@@ -34,6 +32,5 @@
         android:id="@+id/bookDetail_in_home"
         android:name="com.carlosreads.talekeeper.views.BookDetailFragment"
         tools:layout="@layout/fragment_book_detail" />
-
 
 </navigation>

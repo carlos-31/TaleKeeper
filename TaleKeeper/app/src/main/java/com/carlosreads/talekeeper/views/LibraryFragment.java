@@ -5,14 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.carlosreads.talekeeper.R;
@@ -50,19 +48,6 @@ public class LibraryFragment extends Fragment implements BookAdapter.OnItemClick
         if (activity.getSupportActionBar() != null) {
             activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
-
-        // if user presses back key, this takes them home instead of closing the app
-//        requireActivity().getOnBackPressedDispatcher().addCallback(
-//                getViewLifecycleOwner(),
-//                new OnBackPressedCallback(true) {
-//                    @Override
-//                    public void handleOnBackPressed() {
-//                        NavController navController = NavHostFragment
-//                                .findNavController(LibraryFragment.this);
-//                        navController.navigate(R.id.navigation_home);
-//
-//                    }
-//                });
 
         return root;
     }

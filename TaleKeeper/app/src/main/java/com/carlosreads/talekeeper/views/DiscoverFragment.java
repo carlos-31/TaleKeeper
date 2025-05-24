@@ -79,9 +79,6 @@ public class DiscoverFragment extends Fragment implements BookAdapter.OnItemClic
         genreButtons.put(binding.fictionBtn, "General Fiction");
         genreButtons.put(binding.nonFictionBtn, "Nonfiction");
 
-//        NavController navController = Navigation.findNavController(requireActivity(),
-//                R.id.nav_host_fragment_activity_main);
-
         //iterates through the entries in the hashmap, gets the key (button)
         // and sets the content in the bundle to the string corresponding to that button
         for (Map.Entry<View, String> entry : genreButtons.entrySet()) {
@@ -92,7 +89,6 @@ public class DiscoverFragment extends Fragment implements BookAdapter.OnItemClic
                 navController.navigate(R.id.action_discover_to_bookList_in_discover, bundle);
             });
         }
-
 
         binding.searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,11 +106,9 @@ public class DiscoverFragment extends Fragment implements BookAdapter.OnItemClic
                         //hides the keyboard from the screen
                         if (view != null) {
                             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-
                             // clears focus from the search bar
                             binding.search.clearFocus();
                         }
-
                     }
                 } else {
                     binding.resutsRecyclerVIew.setVisibility(View.GONE);
@@ -132,8 +126,6 @@ public class DiscoverFragment extends Fragment implements BookAdapter.OnItemClic
 
     @Override
     public void onItemClick(Book book) {
-//        NavController navController = Navigation.findNavController(requireActivity(),
-//                R.id.nav_host_fragment_activity_main);
         NavController navController = NavHostFragment.findNavController(this);
         Bundle bundle = new Bundle();
         bundle.putString("isbn13", book.getIsbn13());

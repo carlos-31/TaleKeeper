@@ -29,8 +29,7 @@ public class BookListFragment extends Fragment implements BookAdapter.OnItemClic
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        viewModel =
-                new ViewModelProvider(this).get(BookListViewModel.class);
+        viewModel = new ViewModelProvider(this).get(BookListViewModel.class);
 
         binding = FragmentBookListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -39,7 +38,6 @@ public class BookListFragment extends Fragment implements BookAdapter.OnItemClic
         bookAdapter.setOnItemClickListener(this);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerView.setAdapter(bookAdapter);
-
 
         AppCompatActivity activity = (AppCompatActivity) requireActivity();
         //removes the back arrow from the toolbar, and sets the title to the genre sent in the bundle
