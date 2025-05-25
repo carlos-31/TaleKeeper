@@ -1,10 +1,7 @@
 package com.carlosreads.talekeeper.views;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -64,7 +61,7 @@ public class SignupActivity extends AppCompatActivity {
                     Toast.makeText(SignupActivity.this,
                             "Please fill out your information", Toast.LENGTH_SHORT).show();
                 else
-                    viewModel.validateAndRegister(name, email,password, password2);
+                    viewModel.validateAndRegister(name, email, password, password2);
             }
         });
 
@@ -77,7 +74,7 @@ public class SignupActivity extends AppCompatActivity {
                         Toast.makeText(SignupActivity.this,
                                 "user registered successfully", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(SignupActivity.this,
-                                                    LoginActivity.class));
+                                LoginActivity.class));
                     } else {
                         Toast.makeText(SignupActivity.this,
                                 "something went wrong :(", Toast.LENGTH_SHORT).show();

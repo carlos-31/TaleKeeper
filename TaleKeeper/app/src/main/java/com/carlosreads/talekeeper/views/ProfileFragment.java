@@ -1,10 +1,7 @@
 package com.carlosreads.talekeeper.views;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,7 +99,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setClickListeners() {
-        //sets the listeners for all the buttons on the screen
+        //sets up the listeners for all interactable items on screen
         binding.settingsFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +110,6 @@ public class ProfileFragment extends Fragment {
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.notLoggedInLayout.setVisibility(View.GONE);
                 viewModel.logoutUser();
             }
         });
@@ -124,7 +120,7 @@ public class ProfileFragment extends Fragment {
                 NavController navController = Navigation.findNavController(requireView());
                 Bundle bundle = new Bundle();
                 bundle.putString("listType", "Favourites");
-                navController.navigate(R.id.action_profile_to_List, bundle);
+                navController.navigate(R.id.action_profile_to_profile_booklist, bundle);
             }
         });
 
@@ -134,7 +130,7 @@ public class ProfileFragment extends Fragment {
                 NavController navController = Navigation.findNavController(requireView());
                 Bundle bundle = new Bundle();
                 bundle.putString("listType", "Read");
-                navController.navigate(R.id.action_profile_to_List, bundle);
+                navController.navigate(R.id.action_profile_to_profile_booklist, bundle);
             }
         });
 
@@ -144,7 +140,7 @@ public class ProfileFragment extends Fragment {
                 NavController navController = Navigation.findNavController(requireView());
                 Bundle bundle = new Bundle();
                 bundle.putString("listType", "Reading");
-                navController.navigate(R.id.action_profile_to_List, bundle);
+                navController.navigate(R.id.action_profile_to_profile_booklist, bundle);
             }
         });
 
@@ -154,7 +150,7 @@ public class ProfileFragment extends Fragment {
                 NavController navController = Navigation.findNavController(requireView());
                 Bundle bundle = new Bundle();
                 bundle.putString("listType", "tbr");
-                navController.navigate(R.id.action_profile_to_List, bundle);
+                navController.navigate(R.id.action_profile_to_profile_booklist, bundle);
             }
         });
 

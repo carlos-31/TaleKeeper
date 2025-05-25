@@ -42,7 +42,7 @@ public class BookRepository {
                     }
                 }
 
-                // uses todays date as a seed to shuffle the list of books
+                // uses today's date as a seed to shuffle the list of books
                 // making it so the output is the same, but changes every day
                 String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
                 Collections.shuffle(books, new java.util.Random(date.hashCode()));
@@ -124,7 +124,7 @@ public class BookRepository {
                     return;
                 }
 
-                for (DataSnapshot child : snapshot.getChildren()){
+                for (DataSnapshot child : snapshot.getChildren()) {
                     Book book = child.getValue(Book.class);
                     if (book.getTitle().toLowerCase().contains(query.toLowerCase()))
                         books.add(book);
