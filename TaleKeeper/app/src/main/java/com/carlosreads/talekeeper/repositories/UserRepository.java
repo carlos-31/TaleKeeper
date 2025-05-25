@@ -11,6 +11,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.carlosreads.talekeeper.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -345,5 +347,25 @@ public class UserRepository {
                         tbrCount.setValue(null);
                     }
                 });
+    }
+
+    public void changePassword(String currentPass, String newPass1, MutableLiveData<String> toastMessage) {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null)
+            return;
+
+        AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), currentPass);
+
+        user.reauthenticate(credential).addOnCompleteListener(auth -> {
+            if (auth.isSuccessful()){
+                user.updatePassword(newPass1).addOnCompleteListener( task -> {
+                    if (task.isSuccessful())
+                        toastMessage.setValue("Password changed successfully");
+                    else
+                        toastMessage.setValue("Rerror changing password. Please try again later");
+                });
+            } else
+                toastMessage.setValue("Current password is incorrect");
+        });
     }
 }

@@ -77,7 +77,9 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(requireView());
-                navController.navigate(R.id.action_settings_to_user_actions_in_profile);
+                Bundle bundle = new Bundle();
+                bundle.putString("action", "passwordChange");
+                navController.navigate(R.id.action_settings_to_user_actions_in_profile, bundle);
             }
         });
     }
