@@ -8,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,8 +76,13 @@ public class UserActionsFragment extends Fragment {
         viewModel.getToastMessage().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                if (s != null)
+                if (s != null){
                     Toast.makeText(requireContext(), s, Toast.LENGTH_SHORT).show();
+                    if (s.equalsIgnoreCase("bye")){
+                        NavController navController = Navigation.findNavController(requireView());
+                        navController.navigate(R.id.navigation_profile);
+                    }
+                    }
             }
         });
     }
@@ -96,11 +103,20 @@ public class UserActionsFragment extends Fragment {
                 binding.confirmDeletionBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        viewModel.deleteAccount();
                         Toast.makeText(requireContext(), "why u leavingggg :(", Toast.LENGTH_SHORT).show();
                     }
                 });
                 break;
             case "bookRequest":
+                binding.requestBookBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        viewModel.requestBook(binding.bookTitleInput.getText().toString().trim(),
+                                              binding.bookAuthorInput.getText().toString().trim(),
+                                              binding.bookIsbnInput.getText().toString().trim());
+                    }
+                });
             default:
 
         }

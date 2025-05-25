@@ -368,4 +368,27 @@ public class UserRepository {
                 toastMessage.setValue("Current password is incorrect");
         });
     }
+
+    public void deleteAccount(MutableLiveData<String> toastMessage) {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null)
+            return;
+
+        usersInfoRef.child(user.getUid()).removeValue().addOnCompleteListener( task -> {
+            if (task.isSuccessful()){
+                user.delete().addOnCompleteListener( delete -> {
+                    if (delete.isSuccessful()) {
+                        toastMessage.setValue("bye");
+                        logoutUser();
+                    }
+                    else
+                        toastMessage.setValue(" user Error deleting the account. Try again later");
+                });
+            } else
+                toastMessage.setValue(" data Error deleting the account. Try again later");
+        });
+    }
+
+    public void requestBook(String title, String author, String isbn, MutableLiveData<String> toastMessage) {
+    }
 }

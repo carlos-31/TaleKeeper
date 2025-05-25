@@ -19,6 +19,7 @@ public class UserActionsViewModel extends ViewModel {
     }
 
     public void changePassword(String currentPass, String newPass1, String newPass2) {
+        toastMessage.setValue(null);
         if (currentPass.isEmpty() || newPass1.isEmpty() || newPass2.isEmpty()) {
             toastMessage.setValue("Some information is missing");
         } else if (!newPass1.equals(newPass2)) {
@@ -26,5 +27,15 @@ public class UserActionsViewModel extends ViewModel {
         } else {
             userRepository.changePassword(currentPass, newPass1, toastMessage);
         }
+    }
+
+    public void deleteAccount() {
+        toastMessage.setValue(null);
+        userRepository.deleteAccount(toastMessage);
+    }
+
+    public void requestBook(String title, String author, String isbn) {
+        toastMessage.setValue(null);
+        userRepository.requestBook(title, author, isbn, toastMessage);
     }
 }
