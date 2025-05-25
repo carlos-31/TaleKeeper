@@ -14,7 +14,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
+import com.carlosreads.talekeeper.R;
 import com.carlosreads.talekeeper.databinding.FragmentSettingsBinding;
 import com.carlosreads.talekeeper.viewmodels.SettingsViewModel;
 
@@ -67,6 +70,14 @@ public class SettingsFragment extends Fragment {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
                 prefs.edit().putBoolean("darkMode", isChecked).apply();
+            }
+        });
+
+        binding.changePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(requireView());
+                navController.navigate(R.id.action_settings_to_user_actions_in_profile);
             }
         });
     }
