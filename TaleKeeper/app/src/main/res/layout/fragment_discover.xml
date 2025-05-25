@@ -124,6 +124,14 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="It seems like we don't have that book in out database yet. Would you like to request it?" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/bookRequestBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="24dp"
+                                android:text="Request a book" />
+
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
                 </FrameLayout>

@@ -21,9 +21,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class UserRepository {
     private final FirebaseAuth mAuth;
@@ -357,8 +361,8 @@ public class UserRepository {
         AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), currentPass);
 
         user.reauthenticate(credential).addOnCompleteListener(auth -> {
-            if (auth.isSuccessful()){
-                user.updatePassword(newPass1).addOnCompleteListener( task -> {
+            if (auth.isSuccessful()) {
+                user.updatePassword(newPass1).addOnCompleteListener(task -> {
                     if (task.isSuccessful())
                         toastMessage.setValue("Password changed successfully");
                     else
@@ -374,21 +378,43 @@ public class UserRepository {
         if (user == null)
             return;
 
-        usersInfoRef.child(user.getUid()).removeValue().addOnCompleteListener( task -> {
-            if (task.isSuccessful()){
-                user.delete().addOnCompleteListener( delete -> {
+        usersInfoRef.child(user.getUid()).removeValue().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                user.delete().addOnCompleteListener(delete -> {
                     if (delete.isSuccessful()) {
-                        toastMessage.setValue("bye");
+                        toastMessage.setValue("Account was successfully deleted");
                         logoutUser();
-                    }
-                    else
-                        toastMessage.setValue(" user Error deleting the account. Try again later");
+                    } else
+                        toastMessage.setValue("Error deleting the account. Try again later or contact us.");
                 });
             } else
-                toastMessage.setValue(" data Error deleting the account. Try again later");
+                toastMessage.setValue("Error deleting the account. Try again later or contact us.");
         });
     }
 
     public void requestBook(String title, String author, String isbn, MutableLiveData<String> toastMessage) {
+        String userId = getCurrentUserID();
+        if (userId == null) {
+            toastMessage.setValue("You must be logged in for this");
+            return;
+        }
+        String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("title", title);
+        data.put("author", author);
+        data.put("isbn13", (isbn != null && !isbn.trim().isEmpty() ? isbn : "N/A"));
+        data.put("req_date", date);
+        data.put("req_by_user", userId);
+
+        FirebaseDatabase.getInstance().getReference("requested_books")
+                .push().setValue(data).addOnCompleteListener( task -> {
+                    if (task.isSuccessful())
+                        toastMessage.setValue("Request sent. Thanks!");
+                    else
+                        toastMessage.setValue("Something went wrong. Try again later");
+
+        });
+
     }
 }

@@ -36,6 +36,9 @@ public class UserActionsViewModel extends ViewModel {
 
     public void requestBook(String title, String author, String isbn) {
         toastMessage.setValue(null);
-        userRepository.requestBook(title, author, isbn, toastMessage);
+        if (!title.isEmpty() && !author.isEmpty())
+            userRepository.requestBook(title, author, isbn, toastMessage);
+        else
+            toastMessage.setValue("Please fill out the required fields");
     }
 }

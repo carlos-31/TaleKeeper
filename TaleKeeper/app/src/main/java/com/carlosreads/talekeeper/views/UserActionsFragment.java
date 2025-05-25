@@ -56,7 +56,7 @@ public class UserActionsFragment extends Fragment {
         binding.bookRequestLayout.setVisibility(View.GONE);
     }
 
-    private void setUpUI(){
+    private void setUpUI() {
         switch (actionString) {
             case "passwordChange":
                 binding.passwordChangeLayout.setVisibility(View.VISIBLE);
@@ -68,7 +68,9 @@ public class UserActionsFragment extends Fragment {
                 binding.bookRequestLayout.setVisibility(View.VISIBLE);
                 break;
             default:
-
+                Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                NavController navController = Navigation.findNavController(requireView());
+                navController.navigate(R.id.navigation_home);
         }
 
         setUpListeners(actionString);
@@ -76,13 +78,13 @@ public class UserActionsFragment extends Fragment {
         viewModel.getToastMessage().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                if (s != null){
+                if (s != null) {
                     Toast.makeText(requireContext(), s, Toast.LENGTH_SHORT).show();
-                    if (s.equalsIgnoreCase("bye")){
+                    if (s.equalsIgnoreCase("Account was successfully deleted")) {
                         NavController navController = Navigation.findNavController(requireView());
                         navController.navigate(R.id.navigation_profile);
                     }
-                    }
+                }
             }
         });
     }
@@ -94,8 +96,8 @@ public class UserActionsFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         viewModel.changePassword(binding.currentPassword.getText().toString().trim(),
-                                                 binding.newPassword.getText().toString().trim(),
-                                                 binding.confirmNewPassword.getText().toString().trim());
+                                binding.newPassword.getText().toString().trim(),
+                                binding.confirmNewPassword.getText().toString().trim());
                     }
                 });
                 break;
@@ -113,12 +115,10 @@ public class UserActionsFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         viewModel.requestBook(binding.bookTitleInput.getText().toString().trim(),
-                                              binding.bookAuthorInput.getText().toString().trim(),
-                                              binding.bookIsbnInput.getText().toString().trim());
+                                binding.bookAuthorInput.getText().toString().trim(),
+                                binding.bookIsbnInput.getText().toString().trim());
                     }
                 });
-            default:
-
         }
     }
 

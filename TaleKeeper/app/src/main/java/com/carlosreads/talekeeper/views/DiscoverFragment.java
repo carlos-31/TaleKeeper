@@ -116,6 +116,16 @@ public class DiscoverFragment extends Fragment implements BookAdapter.OnItemClic
                 }
             }
         });
+
+        binding.bookRequestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(requireView());
+                Bundle bundle = new Bundle();
+                bundle.putString("action", "bookRequest");
+                navController.navigate(R.id.action_discover_to_user_actions_in_discover, bundle);
+            }
+        });
     }
 
     @Override
