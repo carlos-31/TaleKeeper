@@ -82,6 +82,16 @@ public class SettingsFragment extends Fragment {
                 navController.navigate(R.id.action_settings_to_user_actions_in_profile, bundle);
             }
         });
+
+        binding.deleteAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(requireView());
+                Bundle bundle = new Bundle();
+                bundle.putString("action", "deleteAccount");
+                navController.navigate(R.id.action_settings_to_user_actions_in_profile, bundle);
+            }
+        });
     }
 
 

@@ -50,18 +50,26 @@ public class UserActionsFragment extends Fragment {
 
     private void emptyUI() {
         binding.passwordChangeLayout.setVisibility(View.GONE);
+        binding.accountDeletionLayout.setVisibility(View.GONE);
+        binding.bookRequestLayout.setVisibility(View.GONE);
     }
 
     private void setUpUI(){
         switch (actionString) {
             case "passwordChange":
                 binding.passwordChangeLayout.setVisibility(View.VISIBLE);
-                setUpListeners(actionString);
-            case "accountDeletion":
+                break;
+            case "deleteAccount":
+                binding.accountDeletionLayout.setVisibility(View.VISIBLE);
+                break;
             case "bookRequest":
+                binding.bookRequestLayout.setVisibility(View.VISIBLE);
+                break;
             default:
 
         }
+
+        setUpListeners(actionString);
 
         viewModel.getToastMessage().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -81,15 +89,17 @@ public class UserActionsFragment extends Fragment {
                         viewModel.changePassword(binding.currentPassword.getText().toString().trim(),
                                                  binding.newPassword.getText().toString().trim(),
                                                  binding.confirmNewPassword.getText().toString().trim());
-//                        if (binding.currentPassword.getText().toString().trim().isEmpty()
-//                         || binding.newPassword.getText().toString().trim().isEmpty()
-//                         || binding.confirmNewPassword.getText().toString().trim().isEmpty())
-//                            Toast.makeText(requireContext(), "All fields must be filled in", Toast.LENGTH_SHORT).show();
-//                        else
-//                            viewModel.
                     }
                 });
-            case "accountDeletion":
+                break;
+            case "deleteAccount":
+                binding.confirmDeletionBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(requireContext(), "why u leavingggg :(", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                break;
             case "bookRequest":
             default:
 
