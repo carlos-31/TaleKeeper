@@ -20,6 +20,7 @@ public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
     private ProfileViewModel viewModel;
+    private boolean loggedInStatus;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -39,9 +40,11 @@ public class ProfileFragment extends Fragment {
             if (loggedIn != null) {
                 if (loggedIn) {
                     //toggles both to ensure it only shows what should be visible
+                    loggedInStatus = true;
                     binding.LoggedInLayout.setVisibility(View.VISIBLE);
                     binding.notLoggedInLayout.setVisibility(View.GONE);
                 } else {
+                    loggedInStatus = false;
                     binding.LoggedInLayout.setVisibility(View.GONE);
                     binding.notLoggedInLayout.setVisibility(View.VISIBLE);
                 }
@@ -103,7 +106,10 @@ public class ProfileFragment extends Fragment {
         binding.settingsFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                NavController navController = Navigation.findNavController(requireView());
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("userStatus", loggedInStatus);
+                navController.navigate(R.id.action_profile_to_settings, bundle);
             }
         });
 
