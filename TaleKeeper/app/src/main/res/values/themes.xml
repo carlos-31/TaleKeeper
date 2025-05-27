@@ -1,7 +1,10 @@
 <resources>
+
     <style name="Theme.TaleKeeper" parent="Theme.Material3.Light.NoActionBar">
+        <item name="textColorMuted">@color/app_new_text_muted</item>
+        <item name="customShadowColor">@color/app_new_shadow</item>
+
         <item name="colorPrimary">@color/md_theme_primary</item>
-        <item name="toolbarColor">@color/md_theme_toolbar</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
         <item name="colorOnPrimaryContainer">@color/md_theme_onPrimaryContainer</item>
