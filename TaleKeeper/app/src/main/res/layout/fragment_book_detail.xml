@@ -89,7 +89,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="24dp"
                         android:contentDescription="@string/fav_btn_desc"
-                        app:elevation="6dp" />
+                        app:elevation="6dp"
+                        android:backgroundTint="?attr/buttonsType1"/>
 
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="wrap_content"
@@ -148,7 +149,7 @@
                         android:clickable="false"
                         android:text='@{"Published in " + viewModel.bookLiveData.pub_year}'
                         android:textColor="?android:textColorPrimary"
-                        app:chipBackgroundColor="?attr/colorSecondaryContainer"
+                        app:chipBackgroundColor="?attr/chipColour"
                         app:closeIcon="@null" />
 
                     <com.google.android.material.chip.Chip
@@ -159,7 +160,7 @@
                         android:clickable="false"
                         android:text='@{viewModel.bookLiveData.page_count + " pages"}'
                         android:textColor="?android:textColorPrimary"
-                        app:chipBackgroundColor="?attr/colorSecondaryContainer"
+                        app:chipBackgroundColor="?attr/chipColour"
                         app:closeIcon="@null" />
 
                     <com.google.android.material.chip.Chip
@@ -171,7 +172,7 @@
                         android:clickable="false"
                         android:text="@{viewModel.bookLiveData.genres}"
                         android:textColor="?android:textColorPrimary"
-                        app:chipBackgroundColor="?attr/colorSecondaryContainer"
+                        app:chipBackgroundColor="?attr/chipColour"
                         app:closeIcon="@null" />
 
                     <com.google.android.material.chip.Chip
@@ -183,7 +184,7 @@
                         android:clickable="false"
                         android:text="@{viewModel.bookLiveData.publisher}"
                         android:textColor="?android:textColorPrimary"
-                        app:chipBackgroundColor="?attr/colorSecondaryContainer"
+                        app:chipBackgroundColor="?attr/chipColour"
                         app:closeIcon="@null" />
                 </com.google.android.material.chip.ChipGroup>
             </androidx.constraintlayout.widget.ConstraintLayout>
