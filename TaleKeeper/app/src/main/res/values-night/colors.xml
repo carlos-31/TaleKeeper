@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="appNav_colour">#212721</color>
-    <color name="btnType1_colour">#33A27F</color>
+    <color name="btnType1_colour">#005525</color>
     <color name="chip_colour">#2E3B2E</color>
 
     <color name="app_new_text_muted">#a7c7a7</color>
