@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="toolbarColor" format="color" />
-    <attr name="textColorMuted" format="color" />
-    <attr name="customShadowColor" format="color" />
+    <attr name="navBar" format="color" />
+    <attr name="buttonsType1" format="color" />
+    <attr name="chipColour" format="color" />
 </resources>

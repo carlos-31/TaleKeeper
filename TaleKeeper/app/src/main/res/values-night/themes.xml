@@ -1,8 +1,12 @@
 <resources>
 
     <style name="Theme.TaleKeeper" parent="Theme.Material3.Dark.NoActionBar">
-        <item name="textColorMuted">@color/app_new_text_muted</item>
-        <item name="customShadowColor">@color/app_new_shadow</item>
+        <!--        <item name="textColorMuted">@color/app_new_text_muted</item>-->
+        <!--        <item name="customShadowColor">@color/app_new_shadow</item>-->
+
+        <item name="navBar">@color/appNav_colour</item>
+        <item name="buttonsType1">@color/btnType1_colour</item>
+        <item name="chipColour">@color/chip_colour</item>
 
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
