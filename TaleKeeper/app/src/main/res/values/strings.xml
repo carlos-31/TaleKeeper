@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">TaleKeeper</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="app_name" translatable="false">TaleKeeper</string>
+    <string name="title_activity_main" translatable="false">MainActivity</string>
     <string name="library">Library</string>
     <string name="discover">Discover</string>
     <string name="profile">Profile</string>
@@ -48,6 +48,30 @@
     <string name="reading_list_icon">Reading list icon</string>
     <string name="reading">Reading</string>
     <string name="log_out">Log out</string>
+    <string name="change_your_password">Change your password</string>
+    <string name="current_password">Current password</string>
+    <string name="new_password">New password</string>
+    <string name="confirm_new_password">Confirm new password</string>
+    <string name="change_password">Change Password</string>
+    <string name="delete_your_account">Delete Your Account</string>
+    <string name="this_action_is_irreversible_and_will_permanently_delete_your_acount_along_with_all_associated_data_are_you_sure_you_want_to_continue">This action is irreversible and will permanently delete your acount along with all associated data. Are you sure you want to continue?</string>
+    <string name="confirm_deletion">Confirm Deletion</string>
+    <string name="cancel">Cancel</string>
+    <string name="request_a_new_book">Request a new book</string>
+    <string name="book_title">Book title</string>
+    <string name="author">Author</string>
+    <string name="isbn_13_optional">ISBN-13 (optional)</string>
+    <string name="submit_request">Submit Request</string>
+    <string name="spanish">Spanish</string>
+    <string name="english">English</string>
+    <string name="language">Language</string>
+    <string name="appearance">Appearance</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="account_management">Account Management</string>
+    <string name="we_couldn_t_find_that_one">We couldn\'t find that one</string>
+    <string name="book_request_subtitle">It seems like we don\'t have that book in out database yet. Would you like to request it?</string>
+    <string name="request_a_book">Request a book</string>
 
 
     <string-array name="book_status_options">
