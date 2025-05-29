@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">TaleKeeper</string>
-    <string name="title_activity_main" translatable="false">MainActivity</string>
+    <string name="title_activity_main">MainActivity</string>
     <string name="library">Library</string>
     <string name="discover">Discover</string>
     <string name="profile">Profile</string>
@@ -72,6 +72,7 @@
     <string name="we_couldn_t_find_that_one">We couldn\'t find that one</string>
     <string name="book_request_subtitle">It seems like we don\'t have that book in out database yet. Would you like to request it?</string>
     <string name="request_a_book">Request a book</string>
+    <string name="welcome_msg">Welcome back, %1$s!</string>
 
 
     <string-array name="book_status_options">
