@@ -44,10 +44,10 @@ public class LibraryFragment extends Fragment implements BookAdapter.OnItemClick
                 books -> bookAdapter.setBooks(books));
 
         // removes back arrow from toolbar
-        AppCompatActivity activity = (AppCompatActivity) requireActivity();
-        if (activity.getSupportActionBar() != null) {
-            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        }
+//        AppCompatActivity activity = (AppCompatActivity) requireActivity();
+//        if (activity.getSupportActionBar() != null) {
+//            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//        }
 
         return root;
     }
