@@ -41,9 +41,9 @@ public class BookListFragment extends Fragment implements BookAdapter.OnItemClic
 
         AppCompatActivity activity = (AppCompatActivity) requireActivity();
         //removes the back arrow from the toolbar, and sets the title to the genre sent in the bundle
-        if (activity.getSupportActionBar() != null) {
-            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        }
+//        if (activity.getSupportActionBar() != null) {
+//            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//        }
 
         Bundle args = getArguments();
         //gets the key of what will be shown

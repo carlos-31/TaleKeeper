@@ -37,12 +37,6 @@ public class BookDetailFragment extends Fragment {
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(getViewLifecycleOwner());
 
-        AppCompatActivity activity = (AppCompatActivity) requireActivity();
-        if (activity.getSupportActionBar() != null) {
-            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            activity.getSupportActionBar().setTitle("A great book");
-        }
-
         if (getArguments() != null) {
             //gets ibsn of the book sent through the bundle
             bookIsbn = getArguments().getString("isbn13");
@@ -89,12 +83,12 @@ public class BookDetailFragment extends Fragment {
         });
 
 
-        binding.backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requireActivity().getOnBackPressedDispatcher().onBackPressed();
-            }
-        });
+//        binding.backBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                requireActivity().getOnBackPressedDispatcher().onBackPressed();
+//            }
+//        });
     }
 
     private void observeViewModel() {

@@ -8,28 +8,29 @@
             type="com.carlosreads.talekeeper.viewmodels.BookDetailViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/backBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:contentDescription="@string/back_button"
-            android:src="@drawable/ic_back"
-            app:elevation="6dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/backBtn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="12dp"-->
+<!--            android:contentDescription="@string/back_button"-->
+<!--            android:src="@drawable/ic_back"-->
+<!--            app:elevation="6dp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
         <android.widget.ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingStart="18dp"
             android:paddingTop="16dp"
-            android:paddingEnd="18dp"
-            app:layout_constraintTop_toBottomOf="@id/backBtn">
+            android:paddingEnd="18dp">
+<!--            app:layout_constraintTop_toBottomOf="@id/backBtn"-->
+<!--            >-->
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -189,5 +190,5 @@
                 </com.google.android.material.chip.ChipGroup>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </android.widget.ScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 </layout>
