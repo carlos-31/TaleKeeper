@@ -8,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.os.LocaleListCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -77,6 +79,25 @@ public class SettingsFragment extends Fragment {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
                 prefs.edit().putBoolean("darkMode", isChecked).apply();
+            }
+        });
+
+        binding.langRadioBtnGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                String language;
+                if (checkedId == R.id.englishRadioBtn)
+                    language = "en";
+                else
+                    language = "es";
+
+                if (!currentLang.equalsIgnoreCase(language)) {
+                    currentLang = language;
+                    prefs.edit().putString("language", language).apply();
+
+                    LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(language);
+                    AppCompatDelegate.setApplicationLocales(appLocale);
+                }
             }
         });
 
