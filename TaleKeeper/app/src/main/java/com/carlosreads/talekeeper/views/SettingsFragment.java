@@ -27,6 +27,7 @@ public class SettingsFragment extends Fragment {
     private SettingsViewModel mViewModel;
     private FragmentSettingsBinding binding;
     private boolean loggedIn;
+    private String currentLang;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -56,6 +57,12 @@ public class SettingsFragment extends Fragment {
         SharedPreferences prefs = requireActivity().getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
         boolean isDarkMode = prefs.getBoolean("darkMode", false);
         binding.themeSwitch.setChecked(isDarkMode);
+
+        currentLang = prefs.getString("language", "en");
+        if (currentLang.equalsIgnoreCase("en"))
+            binding.englishRadioBtn.setChecked(true);
+        else
+            binding.spanishRadioBtn.setChecked(true);
 
         setUpListeners(prefs);
     }
