@@ -39,8 +39,7 @@ public class BookDetailFragment extends Fragment {
 
         AppCompatActivity activity = (AppCompatActivity) requireActivity();
         if (activity.getSupportActionBar() != null) {
-            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            activity.getSupportActionBar().setTitle("A great book");
+            activity.getSupportActionBar().setTitle(""); // ensure title on toolbar remains empty
         }
 
         if (getArguments() != null) {
@@ -85,14 +84,6 @@ public class BookDetailFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // Do nothing
-            }
-        });
-
-
-        binding.backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requireActivity().getOnBackPressedDispatcher().onBackPressed();
             }
         });
     }
