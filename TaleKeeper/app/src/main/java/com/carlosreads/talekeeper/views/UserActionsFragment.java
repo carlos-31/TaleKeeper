@@ -109,6 +109,13 @@ public class UserActionsFragment extends Fragment {
                         Toast.makeText(requireContext(), "why u leavingggg :(", Toast.LENGTH_SHORT).show();
                     }
                 });
+                binding.cancelDeleteBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        NavController navController = Navigation.findNavController(requireView());
+                        navController.navigateUp();
+                    }
+                });
                 break;
             case "bookRequest":
                 binding.requestBookBtn.setOnClickListener(new View.OnClickListener() {
