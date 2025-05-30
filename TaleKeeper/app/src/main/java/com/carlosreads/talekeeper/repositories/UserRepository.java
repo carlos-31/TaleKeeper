@@ -11,9 +11,11 @@ import androidx.lifecycle.MutableLiveData;
 import com.carlosreads.talekeeper.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
@@ -47,49 +49,54 @@ public class UserRepository {
 
     public void loginUser(String email, String password, MutableLiveData<String> messageLiveData) {
         messageLiveData.setValue(null);
+        //logs the user in with the provided credentials
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         messageLiveData.setValue("Login successful!");
                     } else {
-                        String errorMessage = "Login failed. Please try again later.";
+                        //handles errors to inform the user
+                        String errorMessage = "Login failed. Please try again later."; //default error
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException)
+                            // if the error was the credentials
                             errorMessage = "Incorrect password. Please try again.";
                         messageLiveData.setValue(errorMessage);
                     }
                 });
     }
 
-    public LiveData<Boolean> registerUser(User user, String password) {
-        MutableLiveData<Boolean> registrationStatus = new MutableLiveData<>();
-
-        // create the new user
+    public void registerUser(User user, String password, MutableLiveData<String> messageLiveData) {
+        messageLiveData.setValue(null);
         mAuth.createUserWithEmailAndPassword(user.getEmail(), password)
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
+                    if (task.isSuccessful() && mAuth.getCurrentUser() != null) {
                         String userId = mAuth.getCurrentUser().getUid();
                         HashMap<String, Object> userMap = new HashMap<>();
                         userMap.put("name", user.getName());
                         userMap.put("email", user.getEmail());
 
-                        // if successful, saves the user's info into the table "user_info"
                         usersInfoRef.child(userId)
                                 .setValue(userMap)
                                 .addOnCompleteListener(databaseTask -> {
-                                    if (databaseTask.isSuccessful()) {
-                                        Log.d(TAG, "user registered");
-                                        registrationStatus.setValue(true);
-                                    } else {
-                                        Log.e(TAG, "user register failed: " + databaseTask.getException());
-                                        registrationStatus.setValue(false);
-                                    }
+                                    if (databaseTask.isSuccessful())
+                                        messageLiveData.setValue("Registration successful!");
+                                    else
+                                        messageLiveData.setValue("Registration error. Please contact us for help");
                                 });
                     } else {
-                        Log.e(TAG, "error registering user: " + task.getException());
-                        registrationStatus.setValue(false);
+                        Exception exception = task.getException();
+                        String errorMessage = "Registration failed. Please try again.";
+
+                        if (exception != null) {
+                            if (exception instanceof FirebaseAuthUserCollisionException)
+                                errorMessage = "This email is in use. Please login or use a different one";
+                            else if (exception.getMessage() != null &&
+                                    exception.getMessage().contains("PASSWORD_DOES_NOT_MEET_REQUIREMENTS"))
+                                errorMessage = "Password must contain at least 8 characters and a number.";
+                        }
+                        messageLiveData.setValue(errorMessage);
                     }
                 });
-        return registrationStatus;
     }
 
     public void checkLogin(MutableLiveData<Boolean> loggedIn, MutableLiveData<User> userLiveData) {
