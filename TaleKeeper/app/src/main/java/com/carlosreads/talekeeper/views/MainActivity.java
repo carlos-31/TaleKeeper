@@ -46,12 +46,14 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("navigateTo")) {
-            if (intent.getStringExtra("navigateTo").equalsIgnoreCase("profile")) {
-                navController.navigate(R.id.profile_flow);
+        if (savedInstanceState == null) {
+            Intent intent = getIntent();
+            if (intent != null && intent.hasExtra("navigateTo")) {
+                if (intent.getStringExtra("navigateTo").equalsIgnoreCase("profile")) {
+                    navController.navigate(R.id.navigation_profile);
+                }
+                intent.removeExtra("navigateTo");
             }
-            intent.removeExtra("navigateTo");
         }
 
         binding.navView.setOnItemReselectedListener(item -> {
