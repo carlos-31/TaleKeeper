@@ -50,9 +50,21 @@ public class BookListFragment extends Fragment implements BookAdapter.OnItemClic
         if (args != null) {
             if (args.containsKey("content")) {
                 content = args.getString("content", "null");
-                viewModel.loadBooksByGenre(content);
-                if (activity.getSupportActionBar() != null) {
-                    activity.getSupportActionBar().setTitle(content);
+                if (content.equalsIgnoreCase("es")){
+                    viewModel.loadBooksByLanguage(content);
+                    if (activity.getSupportActionBar() != null) {
+                        activity.getSupportActionBar().setTitle(R.string.spanish);
+                    }
+                } else if (content.equalsIgnoreCase("en")) {
+                    viewModel.loadBooksByLanguage(content);
+                    if (activity.getSupportActionBar() != null) {
+                        activity.getSupportActionBar().setTitle(R.string.english);
+                    }
+                }else{
+                    viewModel.loadBooksByGenre(content);
+                    if (activity.getSupportActionBar() != null) {
+                        activity.getSupportActionBar().setTitle(content);
+                    }
                 }
             } else if (args.containsKey("listType")) {
                 viewModel.loadBooksByList(args.getString("listType").toLowerCase());

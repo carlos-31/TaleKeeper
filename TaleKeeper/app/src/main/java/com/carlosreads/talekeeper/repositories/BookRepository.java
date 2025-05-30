@@ -23,7 +23,7 @@ public class BookRepository {
     private final DatabaseReference devBooksRef;
 
     public BookRepository() {
-        // sets up references to the tables being used from realtime database
+// sets up references to the tables being used from realtime database
         bookRef = FirebaseDatabase.getInstance().getReference("books_table");
         devBooksRef = FirebaseDatabase.getInstance().getReference("dev_favs");
     }
@@ -35,19 +35,19 @@ public class BookRepository {
             public void onDataChange(DataSnapshot snapshot) {
                 List<String> books = new ArrayList<>();
                 for (DataSnapshot child : snapshot.getChildren()) {
-                    // makes a list of all the isbn in the dev_favs table
+// makes a list of all the isbn in the dev_favs table
                     String isbn = child.getValue(String.class);
                     if (isbn != null) {
                         books.add(isbn);
                     }
                 }
 
-                // uses today's date as a seed to shuffle the list of books
-                // making it so the output is the same, but changes every day
+// uses today's date as a seed to shuffle the list of books
+// making it so the output is the same, but changes every day
                 String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
                 Collections.shuffle(books, new java.util.Random(date.hashCode()));
 
-                // sets the first book in the list after shuffling in the spotlight
+// sets the first book in the list after shuffling in the spotlight
                 getBookByIsbn(books.get(0), bookLiveData);
 
             }
@@ -60,7 +60,7 @@ public class BookRepository {
 
 
     public void getBookByIsbn(String isbn, MutableLiveData<Book> bookLiveData) {
-        // gets a specific book by its isbn (the key in the table)
+// gets a specific book by its isbn (the key in the table)
         bookRef.child(isbn).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -100,7 +100,7 @@ public class BookRepository {
                 List<Book> books = new ArrayList<>();
                 for (DataSnapshot child : snapshot.getChildren()) {
                     Book book = child.getValue(Book.class);
-                    // checks each book for the genre requested
+// checks each book for the genre requested
                     if (book.getGenres().toLowerCase().contains(genre.toLowerCase()))
                         books.add(book);
                 }
@@ -135,6 +135,29 @@ public class BookRepository {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 resultsLiveData.setValue(new ArrayList<>());
+            }
+        });
+    }
+
+    public void getBooksByLanguage(MutableLiveData<List<Book>> bookLiveData, String language) {
+        bookRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Book> books = new ArrayList<>();
+                for (DataSnapshot child : snapshot.getChildren()) {
+                    Book book = child.getValue(Book.class);
+                    if (book != null && book.getLanguage() != null &&
+                            book.getLanguage().equalsIgnoreCase(language)) {
+                            //if the book matches the language it gets added to the list
+                        books.add(book);
+                    }
+                }
+                bookLiveData.setValue(books);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                bookLiveData.setValue(new ArrayList<>());
             }
         });
     }
