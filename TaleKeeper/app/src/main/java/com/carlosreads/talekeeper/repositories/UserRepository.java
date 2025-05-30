@@ -14,6 +14,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,6 +43,21 @@ public class UserRepository {
         this.mAuth = FirebaseAuth.getInstance();
         this.usersInfoRef = FirebaseDatabase.getInstance().getReference("user_info");
 
+    }
+
+    public void loginUser(String email, String password, MutableLiveData<String> messageLiveData) {
+        messageLiveData.setValue(null);
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        messageLiveData.setValue("Login successful!");
+                    } else {
+                        String errorMessage = "Login failed. Please try again later.";
+                        if (task.getException() instanceof FirebaseAuthInvalidCredentialsException)
+                            errorMessage = "Incorrect password. Please try again.";
+                        messageLiveData.setValue(errorMessage);
+                    }
+                });
     }
 
     public LiveData<Boolean> registerUser(User user, String password) {
@@ -72,25 +91,6 @@ public class UserRepository {
                 });
         return registrationStatus;
     }
-
-
-    public LiveData<Boolean> loginUser(String email, String password) {
-        loginStatus.setValue(null);
-
-        //logs in the user with their info
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        //if login successful sets value true to handle log in
-                        loginStatus.setValue(true);
-                        Log.d(TAG, "login: " + mAuth.getCurrentUser());
-                    } else {
-                        loginStatus.setValue(false);
-                    }
-                });
-        return loginStatus;
-    }
-
 
     public void checkLogin(MutableLiveData<Boolean> loggedIn, MutableLiveData<User> userLiveData) {
         //checks if theres a user logged in
@@ -408,13 +408,13 @@ public class UserRepository {
         data.put("req_by_user", userId);
 
         FirebaseDatabase.getInstance().getReference("requested_books")
-                .push().setValue(data).addOnCompleteListener( task -> {
+                .push().setValue(data).addOnCompleteListener(task -> {
                     if (task.isSuccessful())
                         toastMessage.setValue("Request sent. Thanks!");
                     else
                         toastMessage.setValue("Something went wrong. Try again later");
 
-        });
+                });
 
     }
 }
