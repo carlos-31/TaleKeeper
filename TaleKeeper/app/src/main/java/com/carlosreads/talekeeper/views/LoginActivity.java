@@ -65,10 +65,9 @@ public class LoginActivity extends AppCompatActivity {
         viewModel.getLoginStatus().observe(this, status -> {
             if (status != null) {
                 if (status) {
-                    //if login successful, sends the user home
-                    Intent home = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(home);
-                    finish();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("navigateTo", "profile");
+                    startActivity(intent);
                 } else
                     Toast.makeText(this, "Error while loging in", Toast.LENGTH_SHORT).show();
             }

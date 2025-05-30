@@ -1,6 +1,7 @@
 package com.carlosreads.talekeeper.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -45,6 +46,13 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("navigateTo")) {
+            if (intent.getStringExtra("navigateTo").equalsIgnoreCase("profile")) {
+                navController.navigate(R.id.profile_flow);
+            }
+            intent.removeExtra("navigateTo");
+        }
 
         binding.navView.setOnItemReselectedListener(item -> {
             int reselectedMenuItemId = item.getItemId();
