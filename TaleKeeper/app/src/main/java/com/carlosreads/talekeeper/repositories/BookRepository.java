@@ -100,9 +100,16 @@ public class BookRepository {
                 List<Book> books = new ArrayList<>();
                 for (DataSnapshot child : snapshot.getChildren()) {
                     Book book = child.getValue(Book.class);
-// checks each book for the genre requested
-                    if (book.getGenres().toLowerCase().contains(genre.toLowerCase()))
-                        books.add(book);
+                    // checks each book for the genre requested
+                    if (book.getLanguage().equalsIgnoreCase("es")) {
+                        //if the book is in spanish, filter using genres_en instead
+                        String test = book.getGenres_en();
+                        if (book.getGenres_en().toLowerCase().contains(genre.toLowerCase()))
+                            books.add(book);
+                    } else {
+                        if (book.getGenres().toLowerCase().contains(genre.toLowerCase()))
+                            books.add(book);
+                    }
                 }
                 bookLiveData.setValue(books);
             }
@@ -148,7 +155,7 @@ public class BookRepository {
                     Book book = child.getValue(Book.class);
                     if (book != null && book.getLanguage() != null &&
                             book.getLanguage().equalsIgnoreCase(language)) {
-                            //if the book matches the language it gets added to the list
+                        //if the book matches the language it gets added to the list
                         books.add(book);
                     }
                 }
