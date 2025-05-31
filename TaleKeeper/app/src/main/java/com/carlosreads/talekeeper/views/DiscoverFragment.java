@@ -126,6 +126,20 @@ public class DiscoverFragment extends Fragment implements BookAdapter.OnItemClic
                 navController.navigate(R.id.action_discover_to_user_actions_in_discover, bundle);
             }
         });
+
+        binding.spanishBtn.setOnClickListener(v -> {
+            NavController navController = Navigation.findNavController(v);
+            Bundle bundle = new Bundle();
+            bundle.putString("content", "es");
+            navController.navigate(R.id.action_discover_to_bookList_in_discover, bundle);
+        });
+
+        binding.englishBtn.setOnClickListener(v -> {
+            NavController navController = Navigation.findNavController(v);
+            Bundle bundle = new Bundle();
+            bundle.putString("content", "en");
+            navController.navigate(R.id.action_discover_to_bookList_in_discover, bundle);
+        });
     }
 
     @Override

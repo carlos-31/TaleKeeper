@@ -101,4 +101,14 @@ public class BookListViewModel extends ViewModel {
             currentIsbnLiveData.removeObserver(currentIsbnObserver);
         }
     }
+
+    public void loadBooksByLanguage(String language) {
+        if (currentIsbnLiveData != null && currentIsbnObserver != null) {
+            currentIsbnLiveData.removeObserver(currentIsbnObserver);
+            currentIsbnObserver = null;
+            currentIsbnLiveData = null;
+        }
+
+        bookRepository.getBooksByLanguage(bookLiveData, language.toLowerCase());
+    }
 }

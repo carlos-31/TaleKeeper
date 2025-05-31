@@ -44,7 +44,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
-                        android:text="Appearance"
+                        android:text="@string/appearance"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:textColor="?attr/colorPrimary" />
 
@@ -53,7 +53,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:minHeight="48dp"
-                        android:text="Dark Mode"
+                        android:text="@string/dark_mode"
                         android:textAppearance="?attr/textAppearanceBodyLarge" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -81,11 +81,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
-                        android:text="Language"
+                        android:text="@string/language"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:textColor="?attr/colorPrimary" />
 
                     <RadioGroup
+                        android:id="@+id/langRadioBtnGroup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -94,7 +95,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:minHeight="48dp"
-                            android:text="English"
+                            android:text="@string/english"
                             android:textAppearance="?attr/textAppearanceBodyLarge" />
 
                         <RadioButton
@@ -102,7 +103,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:minHeight="48dp"
-                            android:text="Spanish"
+                            android:text="@string/spanish"
                             android:textAppearance="?attr/textAppearanceBodyLarge" />
                     </RadioGroup>
                 </LinearLayout>
@@ -131,7 +132,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
-                        android:text="Account Management"
+                        android:text="@string/account_management"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:textColor="?attr/colorPrimary" />
 
@@ -141,14 +142,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
-                        android:text="Change Password" />
+                        android:text="@string/change_password" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/deleteAccountButton"
                         style="?attr/materialButtonOutlinedStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Delete Account"
+                        android:text="@string/delete_account"
                         android:textColor="?attr/colorError"
                         app:strokeColor="?attr/colorError" />
                 </LinearLayout>

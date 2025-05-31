@@ -1,5 +1,7 @@
 package com.carlosreads.talekeeper.viewmodels;
 
+import android.content.Context;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -7,7 +9,7 @@ import com.carlosreads.talekeeper.repositories.UserRepository;
 
 public class LoginViewModel extends ViewModel {
     private UserRepository userRepository;
-    private MutableLiveData<String> resutlMessage = new MutableLiveData<>();
+    private MutableLiveData<Integer> resutlMessage = new MutableLiveData<>();
 //    private MutableLiveData<Boolean> loginStatus = new MutableLiveData<>();
 
     public LoginViewModel(){
@@ -19,7 +21,7 @@ public class LoginViewModel extends ViewModel {
 //    }
 
 
-    public MutableLiveData<String> getResutlMessage() {
+    public MutableLiveData<Integer> getResutlMessage() {
         return resutlMessage;
     }
 

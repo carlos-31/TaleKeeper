@@ -75,12 +75,12 @@ public class UserActionsFragment extends Fragment {
 
         setUpListeners(actionString);
 
-        viewModel.getToastMessage().observe(getViewLifecycleOwner(), new Observer<String>() {
+        viewModel.getToastMessage().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
-            public void onChanged(String s) {
-                if (s != null) {
-                    Toast.makeText(requireContext(), s, Toast.LENGTH_SHORT).show();
-                    if (s.equalsIgnoreCase("Account was successfully deleted")) {
+            public void onChanged(Integer message) {
+                if (message != null) {
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+                    if (message == R.string.delete_acc_success) {
                         NavController navController = Navigation.findNavController(requireView());
                         navController.navigate(R.id.navigation_profile);
                     }

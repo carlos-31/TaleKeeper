@@ -65,19 +65,16 @@ public class BookDetailFragment extends Fragment {
         binding.bookStatusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                String selectedStatus = parentView.getItemAtPosition(position).toString();
-
                 // Only proceed if it's not the initial load
                     //so loading the fragment doesn't make a call to the viewmodel & repo
                 if (!isInitialSpinnerLoad) {
-                    if (position == parentView.getCount() - 1 || position == 0) {
-                        binding.bookStatusSpinner.setSelection(0);
-                        viewModel.updateBookStatus("remove");
+                    String[] bookStatusKeys = getResources().getStringArray(R.array.book_status_keys);
+                    String selectedKey = bookStatusKeys[position];
 
-                    } else
-                        viewModel.updateBookStatus(selectedStatus);
+                    //uses string from the keys array instead of the string from the options
+                    viewModel.updateBookStatus(selectedKey);
                 } else {
-                    isInitialSpinnerLoad = false; // Reset the flag after the first selection
+                    isInitialSpinnerLoad = false;
                 }
             }
 
@@ -119,23 +116,22 @@ public class BookDetailFragment extends Fragment {
             }
         });
 
-        viewModel.getBookStatus().observe(getViewLifecycleOwner(), listStatus -> {
-            if (listStatus != null) {
-                String[] bookStatusOptions = getResources().getStringArray(R.array.book_status_options);
+        viewModel.getBookStatus().observe(getViewLifecycleOwner(), listStatusKey -> {
+            if (listStatusKey != null) {
+                String[] bookStatusKeys = getResources().getStringArray(R.array.book_status_keys);
                 int spinnerPosition = -1;
-                // Goes through the array of the options for the spinner
-                for (int i = 0; i < bookStatusOptions.length; i++) {
-                    if (bookStatusOptions[i].equalsIgnoreCase(listStatus)) {
-                        //when it finds the option received from the ViewModel, save its position
+
+                //find the position of the key in our key array
+                for (int i = 0; i < bookStatusKeys.length; i++) {
+                    if (bookStatusKeys[i].equals(listStatusKey)) {
                         spinnerPosition = i;
                         break;
                     }
                 }
                 if (spinnerPosition != -1) {
-                    //sets the correct option in the spinner to match the status of the book
                     binding.bookStatusSpinner.setSelection(spinnerPosition);
                 } else {
-                    binding.bookStatusSpinner.setSelection(0); // Default to "Add Book"
+                    binding.bookStatusSpinner.setSelection(0);
                 }
             }
         });

@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.os.LocaleListCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -25,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         SharedPreferences sharedPref = getSharedPreferences("AppConfig", Context.MODE_PRIVATE);
+
+        String language = sharedPref.getString("language", "en");
+        LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(language);
+        AppCompatDelegate.setApplicationLocales(appLocale);
+
         if (sharedPref.getBoolean("darkMode", false))
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         else

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TaleKeeper</string>
+    <string name="app_name" translatable="false">TaleKeeper</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="library">Library</string>
     <string name="discover">Discover</string>
@@ -48,7 +48,35 @@
     <string name="reading_list_icon">Reading list icon</string>
     <string name="reading">Reading</string>
     <string name="log_out">Log out</string>
-
+    <string name="change_your_password">Change your password</string>
+    <string name="current_password">Current password</string>
+    <string name="new_password">New password</string>
+    <string name="confirm_new_password">Confirm new password</string>
+    <string name="change_password">Change Password</string>
+    <string name="delete_your_account">Delete Your Account</string>
+    <string name="account_deletion_warning">This action is irreversible and will permanently delete your account along with all associated data.\nAre you sure you want to continue?</string>
+    <string name="confirm_deletion">Confirm Deletion</string>
+    <string name="cancel">Cancel</string>
+    <string name="request_a_new_book">Request a new book</string>
+    <string name="book_title">Book title</string>
+    <string name="author">Author</string>
+    <string name="isbn_13_optional">ISBN-13 (optional)</string>
+    <string name="submit_request">Submit Request</string>
+    <string name="spanish">Spanish</string>
+    <string name="english">English</string>
+    <string name="language">Language</string>
+    <string name="appearance">Appearance</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="account_management">Account Management</string>
+    <string name="request_a_book">Request a book</string>
+    <string name="welcome_msg">Welcome back, %1$s!</string>
+    <string name="browse_by_languages">Browse by languages</string>
+    <string name="request_book_subtitle_logged_in">It seems like we don\'t have that book in out database yet.\nWould you like to request it?</string>
+    <string name="request_book_subtitle_not_logged_in">It seems like we don\'t have that book in out database yet.\nIf you log into your account, you can make a request for us to add it!</string>
+    <string name="we_couldn_t_find_that_one">We couldn\'t find that one</string>
+    <string name="published_in">Published in %1$s</string>
+    <string name="page_count">%1$d pages</string>
 
     <string-array name="book_status_options">
         <item>Add book</item>
@@ -57,4 +85,35 @@
         <item>Read</item>
         <item>Remove book</item>
     </string-array>
+
+    <string-array name="book_status_keys" translatable="false">
+        <item>ADD</item>
+        <item>TBR</item>
+        <item>READING</item>
+        <item>READ</item>
+        <item>REMOVE</item>
+    </string-array>
+
+    <string name="login_success">Login successful!</string>
+    <string name="login_failed_default">Login failed. Please try again later.</string>
+    <string name="login_incorrect_password">Incorrect password. Please try again.</string>
+    <string name="reg_success">Registration successful!</string>
+    <string name="reg_error_contact">Registration error. Please contact us for help.</string>
+    <string name="reg_failed_default">Registration failed. Please try again.</string>
+    <string name="reg_email_in_use">This email is in use. Please login or use a different one.</string>
+    <string name="reg_password_requirements">Password must contain at least 8 characters and a number.</string>
+    <string name="change_pass_success">Password changed successfully</string>
+    <string name="change_pass_error">Error changing password. Please try again later.</string>
+    <string name="change_pass_incorrect">Current password is incorrect.</string>
+    <string name="delete_acc_success">Account was successfully deleted</string>
+    <string name="delete_acc_error_contact">Error deleting the account, please contact us.</string>
+    <string name="delete_acc_error">Error deleting the account, please ry again later</string>
+    <string name="req_book_login_required">You must be logged in for this.</string>
+    <string name="req_book_success">Request sent. Thanks!</string>
+    <string name="req_book_error">Something went wrong. Try again later.</string>
+    <string name="validation_invalid_email">The email is not valid.</string>
+    <string name="validation_passwords_no_match">The passwords don\'t match.</string>
+    <string name="validation_new_passwords_no_match">New passwords don\'t match.</string>
+    <string name="validation_missing_info">Some information is missing.</string>
+    <string name="validation_required_fields">Please fill out the required fields.</string>
 </resources>

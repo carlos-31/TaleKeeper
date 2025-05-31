@@ -118,7 +118,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
                                 android:gravity="center"
-                                android:text="We couldn't find that one"
+                                android:text="@string/we_couldn_t_find_that_one"
                                 android:textSize="18sp" />
 
                             <TextView
@@ -126,7 +126,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="It seems like we don't have that book in out database yet.\nIf you log into your account, you can make a request for us to add it!"
+                                android:text="@string/request_book_subtitle_not_logged_in"
                                 android:visibility="@{viewModel.loggedIn == null || !viewModel.loggedIn ? View.VISIBLE : View.GONE}" />
 
                             <TextView
@@ -134,7 +134,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="It seems like we don't have that book in out database yet.\nWould you like to request it?"
+                                android:text="@string/request_book_subtitle_logged_in"
                                 android:visibility="@{viewModel.loggedIn != null &amp;&amp; viewModel.loggedIn ? View.VISIBLE : View.GONE}" />
 
                             <com.google.android.material.button.MaterialButton
@@ -142,7 +142,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="24dp"
-                                android:text="Request a book"
+                                android:text="@string/request_a_book"
                                 android:visibility="@{viewModel.loggedIn != null &amp;&amp; viewModel.loggedIn ? View.VISIBLE : View.GONE}" />
 
                         </LinearLayout>
@@ -265,6 +265,66 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/languageCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="32dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/genreCard"
+                    app:strokeColor="?attr/colorOutline"
+                    app:strokeWidth="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:id="@+id/languageTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/browse_by_languages"
+                            android:textColor="?android:textColorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/englishBtn"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/english"
+                            app:layout_constraintEnd_toStartOf="@+id/spanishBtn"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/languageTitle" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/spanishBtn"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/spanish"
+                            app:layout_constraintBottom_toBottomOf="@id/englishBtn"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/englishBtn"
+                            app:layout_constraintTop_toTopOf="@id/englishBtn" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
