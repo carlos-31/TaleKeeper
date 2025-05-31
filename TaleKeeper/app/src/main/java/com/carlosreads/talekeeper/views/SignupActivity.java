@@ -75,8 +75,11 @@ public class SignupActivity extends AppCompatActivity {
                 if (message != null) {
                     Toast.makeText(SignupActivity.this, message, Toast.LENGTH_SHORT).show();
                     if (message == R.string.reg_success) {
-                        startActivity(new Intent(SignupActivity.this,
-                                LoginActivity.class));
+                        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        intent.putExtra("navigateTo", "profile");
+                        startActivity(intent);
+                        finish();
                     }
                 }
             }
