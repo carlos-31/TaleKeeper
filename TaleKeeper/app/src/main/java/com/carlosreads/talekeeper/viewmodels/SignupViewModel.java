@@ -13,13 +13,13 @@ import com.carlosreads.talekeeper.repositories.UserRepository;
 
 public class SignupViewModel extends ViewModel {
     private UserRepository userRepository;
-    private MutableLiveData<String> resultMessage = new MutableLiveData<>();
+    private MutableLiveData<Integer> resultMessage = new MutableLiveData<>();
 
     public SignupViewModel() {
         userRepository = new UserRepository();
     }
 
-    public MutableLiveData<String> getResultMessage() {
+    public MutableLiveData<Integer> getResultMessage() {
         return resultMessage;
     }
 
@@ -27,16 +27,16 @@ public class SignupViewModel extends ViewModel {
         resultMessage.setValue(null);
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            resultMessage.setValue(context.getString(R.string.validation_invalid_email));
+            resultMessage.setValue(R.string.validation_invalid_email);
             return;
         }
         if (!password.equals(password2) || password.isEmpty()) {
-            resultMessage.setValue(context.getString(R.string.validation_passwords_no_match));
+            resultMessage.setValue(R.string.validation_passwords_no_match);
             return;
         }
 
         User user = new User(name, email);
-        userRepository.registerUser(context, user, password, resultMessage);
+        userRepository.registerUser(user, password, resultMessage);
 
     }
     

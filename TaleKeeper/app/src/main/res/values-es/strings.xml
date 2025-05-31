@@ -87,11 +87,24 @@
     </string-array>
 
     <string name="login_success">¡Inicio de sesión exitoso!</string>
-    <string name="login_failed_default">Error al iniciar sesión. Por favor, inténtalo más tarde.</string>
-    <string name="login_incorrect_password">Contraseña incorrecta. Por favor, inténtalo de nuevo.</string>
+    <string name="login_failed_default">Error al iniciar sesión. Por favor, inténtalo más tarde</string>
+    <string name="login_incorrect_password">Contraseña incorrecta. Por favor, inténtalo de nuevo</string>
     <string name="reg_success">¡Registro exitoso!</string>
-    <string name="reg_error_contact">Error en el registro. Por favor, contáctanos para obtener ayuda.</string>
-    <string name="reg_failed_default">Error en el registro. Por favor, inténtalo de nuevo.</string>
-    <string name="reg_email_in_use">Este correo ya está en uso. Por favor, inicia sesión o usa uno diferente.</string>
-    <string name="reg_password_requirements">La contraseña debe tener al menos 8 caracteres y un número.</string>
+    <string name="reg_error_contact">Error en el registro. Por favor, contáctanos para obtener ayuda</string>
+    <string name="reg_failed_default">Error en el registro. Por favor, inténtalo de nuevo</string>
+    <string name="reg_email_in_use">Este correo ya está en uso. Por favor, inicia sesión o usa uno diferente</string>
+    <string name="reg_password_requirements">La contraseña debe tener al menos 8 caracteres y un número</string>
+    <string name="change_pass_success">Contraseña cambiada con éxito</string>
+    <string name="change_pass_error">Error al cambiar la contraseña Inténtalo más tarde</string>
+    <string name="change_pass_incorrect">La contraseña actual es incorrecta</string>
+    <string name="delete_acc_success">La cuenta ha sido eliminada con éxito</string>
+    <string name="delete_acc_error">Error al eliminar la cuenta. Inténtalo más tarde o contáctanos</string>
+    <string name="req_book_login_required">Debes iniciar sesión para hacer esto</string>
+    <string name="req_book_success">Solicitud enviada ¡Gracias!</string>
+    <string name="req_book_error">Algo salió mal, inténtalo de nuevo más tarde</string>
+    <string name="validation_invalid_email">El correo electrónico no es válido</string>
+    <string name="validation_passwords_no_match">Las contraseñas no coinciden</string>
+    <string name="validation_new_passwords_no_match">Las nuevas contraseñas no coinciden</string>
+    <string name="validation_missing_info">Falta información</string>
+    <string name="validation_required_fields">Por favor, rellena los campos obligatorios</string>
 </resources>

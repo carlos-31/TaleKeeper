@@ -102,4 +102,17 @@
     <string name="reg_failed_default">Registration failed. Please try again.</string>
     <string name="reg_email_in_use">This email is in use. Please login or use a different one.</string>
     <string name="reg_password_requirements">Password must contain at least 8 characters and a number.</string>
+    <string name="change_pass_success">Password changed successfully</string>
+    <string name="change_pass_error">Error changing password. Please try again later.</string>
+    <string name="change_pass_incorrect">Current password is incorrect.</string>
+    <string name="delete_acc_success">Account was successfully deleted</string>
+    <string name="delete_acc_error">Error deleting the account. Try again later or contact us.</string>
+    <string name="req_book_login_required">You must be logged in for this.</string>
+    <string name="req_book_success">Request sent. Thanks!</string>
+    <string name="req_book_error">Something went wrong. Try again later.</string>
+    <string name="validation_invalid_email">The email is not valid.</string>
+    <string name="validation_passwords_no_match">The passwords don\'t match.</string>
+    <string name="validation_new_passwords_no_match">New passwords don\'t match.</string>
+    <string name="validation_missing_info">Some information is missing.</string>
+    <string name="validation_required_fields">Please fill out the required fields.</string>
 </resources>

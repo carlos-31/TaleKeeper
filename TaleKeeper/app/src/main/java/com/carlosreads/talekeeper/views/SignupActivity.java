@@ -69,12 +69,12 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-        viewModel.getResultMessage().observe(this, new Observer<String>() {
+        viewModel.getResultMessage().observe(this, new Observer<Integer>() {
             @Override
-            public void onChanged(String message) {
-                if (message != null && !message.isEmpty()) {
+            public void onChanged(Integer message) {
+                if (message != null) {
                     Toast.makeText(SignupActivity.this, message, Toast.LENGTH_SHORT).show();
-                    if (message.equalsIgnoreCase(getString(R.string.reg_success))) {
+                    if (message == R.string.reg_success) {
                         startActivity(new Intent(SignupActivity.this,
                                 LoginActivity.class));
                     }

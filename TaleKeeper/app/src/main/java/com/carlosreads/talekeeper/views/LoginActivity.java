@@ -62,15 +62,15 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this,
                             getString(R.string.validation_missing_info), Toast.LENGTH_SHORT).show();
                 else
-                    viewModel.login(context, email, password);
+                    viewModel.login(email, password);
             }
         });
 
         viewModel.getResutlMessage().observe(this, message -> {
-            if (message != null && !message.isEmpty()) {
+            if (message != null) {
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 
-                if (message.equals(getString(R.string.login_success))) {
+                if (message == R.string.login_success) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("navigateTo", "profile");
                     startActivity(intent);

@@ -49,25 +49,25 @@ public class UserRepository {
 
     }
 
-    public void loginUser(Context context, String email, String password, MutableLiveData<String> messageLiveData) {
+    public void loginUser(String email, String password, MutableLiveData<Integer> messageLiveData) {
         messageLiveData.setValue(null);
         //logs the user in with the provided credentials
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        messageLiveData.setValue(context.getString(R.string.login_success));
+                        messageLiveData.setValue(R.string.login_success);
                     } else {
                         //handles errors to inform the user
-                        String errorMessage = context.getString(R.string.login_failed_default);
+                        int errorMessage = R.string.login_failed_default;
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException)
                             // if the error was the credentials
-                            errorMessage = context.getString(R.string.login_incorrect_password);
+                            errorMessage = R.string.login_incorrect_password;
                         messageLiveData.setValue(errorMessage);
                     }
                 });
     }
 
-    public void registerUser(Context context, User user, String password, MutableLiveData<String> messageLiveData) {
+    public void registerUser(User user, String password, MutableLiveData<Integer> messageLiveData) {
         messageLiveData.setValue(null);
         mAuth.createUserWithEmailAndPassword(user.getEmail(), password)
                 .addOnCompleteListener(task -> {
@@ -81,20 +81,20 @@ public class UserRepository {
                                 .setValue(userMap)
                                 .addOnCompleteListener(databaseTask -> {
                                     if (databaseTask.isSuccessful())
-                                        messageLiveData.setValue(context.getString(R.string.reg_success));
+                                        messageLiveData.setValue(R.string.reg_success);
                                     else
-                                        messageLiveData.setValue(context.getString(R.string.reg_error_contact));
+                                        messageLiveData.setValue(R.string.reg_error_contact);
                                 });
                     } else {
                         Exception exception = task.getException();
-                        String errorMessage = context.getString(R.string.reg_failed_default);
+                        int errorMessage = R.string.reg_failed_default;
 
                         if (exception != null) {
                             if (exception instanceof FirebaseAuthUserCollisionException)
-                                errorMessage = context.getString(R.string.reg_email_in_use);
+                                errorMessage = R.string.reg_email_in_use;
                             else if (exception.getMessage() != null &&
                                     exception.getMessage().contains("PASSWORD_DOES_NOT_MEET_REQUIREMENTS"))
-                                errorMessage = context.getString(R.string.reg_password_requirements);
+                                errorMessage = R.string.reg_password_requirements;
                         }
                         messageLiveData.setValue(errorMessage);
                     }
