@@ -69,10 +69,12 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="delete_account">Delete Account</string>
     <string name="account_management">Account Management</string>
-    <string name="we_couldn_t_find_that_one">We couldn\'t find that one</string>
-    <string name="book_request_subtitle">It seems like we don\'t have that book in out database yet. Would you like to request it?</string>
     <string name="request_a_book">Request a book</string>
     <string name="welcome_msg">Welcome back, %1$s!</string>
+    <string name="browse_by_languages">Browse by languages</string>
+    <string name="request_book_subtitle_logged_in">It seems like we don\'t have that book in out database yet.\nWould you like to request it?</string>
+    <string name="request_book_subtitle_not_logged_in">It seems like we don\'t have that book in out database yet.\nIf you log into your account, you can make a request for us to add it!</string>
+    <string name="we_couldn_t_find_that_one">We couldn\'t find that one</string>
 
 
     <string-array name="book_status_options">

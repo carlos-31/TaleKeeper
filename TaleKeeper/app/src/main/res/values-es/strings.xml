@@ -69,8 +69,6 @@
     <string name="dark_mode">Modo Oscuro</string>
     <string name="delete_account">Eliminar Cuenta</string>
     <string name="account_management">Gestión de la Cuenta</string>
-    <string name="we_couldn_t_find_that_one">No hemos podido encontrarlo</string>
-    <string name="book_request_subtitle">Parece que todavía no tenemos ese libro en nuestra base de datos. ¿Te gustaría solicitarlo?</string>
     <string name="request_a_book">Solicitar un libro</string>
 
     <string name="welcome_msg">¡Te damos la bienvenida, %1$s!</string>
@@ -80,6 +78,6 @@
         <item>Por leer</item>
         <item>Leyendo</item>
         <item>Leído</item>
-        <item>Quitar libro</item>
+        <item>Eliminar libro</item>
     </string-array>
 </resources>

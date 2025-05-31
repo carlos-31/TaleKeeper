@@ -118,7 +118,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
                                 android:gravity="center"
-                                android:text="We couldn't find that one"
+                                android:text="@string/we_couldn_t_find_that_one"
                                 android:textSize="18sp" />
 
                             <TextView
@@ -126,7 +126,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="It seems like we don't have that book in out database yet.\nIf you log into your account, you can make a request for us to add it!"
+                                android:text="@string/request__book_subtitle_not_logged_in"
                                 android:visibility="@{viewModel.loggedIn == null || !viewModel.loggedIn ? View.VISIBLE : View.GONE}" />
 
                             <TextView
@@ -134,7 +134,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="It seems like we don't have that book in out database yet.\nWould you like to request it?"
+                                android:text="@string/request_subtitle_logged_in"
                                 android:visibility="@{viewModel.loggedIn != null &amp;&amp; viewModel.loggedIn ? View.VISIBLE : View.GONE}" />
 
                             <com.google.android.material.button.MaterialButton
@@ -142,7 +142,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="24dp"
-                                android:text="Request a book"
+                                android:text="@string/request_a_book"
                                 android:visibility="@{viewModel.loggedIn != null &amp;&amp; viewModel.loggedIn ? View.VISIBLE : View.GONE}" />
 
                         </LinearLayout>
@@ -289,7 +289,7 @@
                             android:id="@+id/languageTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Browse by languages"
+                            android:text="@string/browse_by_languages"
                             android:textColor="?android:textColorPrimary"
                             android:textSize="20sp"
                             android:textStyle="bold"
