@@ -70,8 +70,10 @@
     <string name="delete_account">Eliminar Cuenta</string>
     <string name="account_management">Gestión de la Cuenta</string>
     <string name="request_a_book">Solicitar un libro</string>
-
     <string name="welcome_msg">¡Te damos la bienvenida, %1$s!</string>
+
+    <string name="published_in">Publicado en %1$s</string>
+    <string name="page_count">%1$d páginas</string>
 
     <string-array name="book_status_options">
         <item>Añadir libro</item>

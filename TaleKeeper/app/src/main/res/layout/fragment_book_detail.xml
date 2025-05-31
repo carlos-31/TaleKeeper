@@ -162,7 +162,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="false"
                     android:clickable="false"
-                    android:text='@{"Published in " + viewModel.bookLiveData.pub_year}'
+                    android:text="@{@string/published_in(String.valueOf(viewModel.bookLiveData.pub_year))}"
                     android:textColor="?android:textColorPrimary"
                     app:chipBackgroundColor="?attr/chipColour"
                     app:closeIcon="@null" />
@@ -174,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="false"
                     android:clickable="false"
-                    android:text='@{viewModel.bookLiveData.page_count + " pages"}'
+                    android:text="@{@string/page_count(viewModel.bookLiveData.page_count)}"
                     android:textColor="?android:textColorPrimary"
                     app:chipBackgroundColor="?attr/chipColour"
                     app:closeIcon="@null" />

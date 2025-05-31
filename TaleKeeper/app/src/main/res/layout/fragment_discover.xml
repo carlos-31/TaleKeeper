@@ -126,7 +126,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="@string/request__book_subtitle_not_logged_in"
+                                android:text="@string/request_book_subtitle_not_logged_in"
                                 android:visibility="@{viewModel.loggedIn == null || !viewModel.loggedIn ? View.VISIBLE : View.GONE}" />
 
                             <TextView
@@ -134,7 +134,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="@string/request_subtitle_logged_in"
+                                android:text="@string/request_book_subtitle_logged_in"
                                 android:visibility="@{viewModel.loggedIn != null &amp;&amp; viewModel.loggedIn ? View.VISIBLE : View.GONE}" />
 
                             <com.google.android.material.button.MaterialButton

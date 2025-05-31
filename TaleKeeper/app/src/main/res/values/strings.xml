@@ -76,6 +76,8 @@
     <string name="request_book_subtitle_not_logged_in">It seems like we don\'t have that book in out database yet.\nIf you log into your account, you can make a request for us to add it!</string>
     <string name="we_couldn_t_find_that_one">We couldn\'t find that one</string>
 
+    <string name="published_in">Published in %1$s</string>
+    <string name="page_count">%1$d pages</string>
 
     <string-array name="book_status_options">
         <item>Add book</item>
