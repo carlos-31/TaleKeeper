@@ -64,6 +64,9 @@ public class BookDetailViewModel extends ViewModel {
             case "READ":
                 userRepository.addBookToList(isbn, "read");
                 break;
+            default:
+                bookStatus.setValue("ADD");
+                break;
         }
     }
 

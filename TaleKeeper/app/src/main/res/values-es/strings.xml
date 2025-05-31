@@ -85,4 +85,6 @@
         <item>Leído</item>
         <item>Eliminar libro</item>
     </string-array>
+
+    <string name="login_success">¡Inicio de sesión exitoso!</string>
 </resources>

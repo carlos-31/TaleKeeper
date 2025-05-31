@@ -1,5 +1,6 @@
 package com.carlosreads.talekeeper.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.carlosreads.talekeeper.viewmodels.LoginViewModel;
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
     private LoginViewModel viewModel;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+
+        context = this;
 
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
@@ -58,26 +62,15 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this,
                             "Please fill out your information", Toast.LENGTH_SHORT).show();
                 else
-                    viewModel.login(email, password);
+                    viewModel.login(context, email, password);
             }
         });
-
-//        viewModel.getLoginStatus().observe(this, status -> {
-//            if (status != null) {
-//                if (status) {
-//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                    intent.putExtra("navigateTo", "profile");
-//                    startActivity(intent);
-//                } else
-//                    Toast.makeText(this, "Error while loging in", Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
         viewModel.getResutlMessage().observe(this, message -> {
             if (message != null && !message.isEmpty()) {
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 
-                if (message.equals("Login successful!")) {
+                if (message.equals(getString(R.string.login_success))) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("navigateTo", "profile");
                     startActivity(intent);

@@ -1,5 +1,7 @@
 package com.carlosreads.talekeeper.viewmodels;
 
+import android.content.Context;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -23,8 +25,8 @@ public class LoginViewModel extends ViewModel {
         return resutlMessage;
     }
 
-    public void login(String email, String password) {
-        userRepository.loginUser(email, password, resutlMessage);
+    public void login(Context context, String email, String password) {
+        userRepository.loginUser(context, email, password, resutlMessage);
     }
 
 //    public void login(String email, String password){

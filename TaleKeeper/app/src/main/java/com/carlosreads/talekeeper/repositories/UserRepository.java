@@ -2,12 +2,14 @@ package com.carlosreads.talekeeper.repositories;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.carlosreads.talekeeper.R;
 import com.carlosreads.talekeeper.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -47,13 +49,13 @@ public class UserRepository {
 
     }
 
-    public void loginUser(String email, String password, MutableLiveData<String> messageLiveData) {
+    public void loginUser(Context context, String email, String password, MutableLiveData<String> messageLiveData) {
         messageLiveData.setValue(null);
         //logs the user in with the provided credentials
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        messageLiveData.setValue("Login successful!");
+                        messageLiveData.setValue(context.getString(R.string.login_success));
                     } else {
                         //handles errors to inform the user
                         String errorMessage = "Login failed. Please try again later."; //default error
