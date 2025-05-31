@@ -72,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (message == R.string.login_success) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     intent.putExtra("navigateTo", "profile");
                     startActivity(intent);
                     finish();

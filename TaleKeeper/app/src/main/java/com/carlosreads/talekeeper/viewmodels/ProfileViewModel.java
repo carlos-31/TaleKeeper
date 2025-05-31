@@ -22,8 +22,7 @@ public class ProfileViewModel extends ViewModel {
         bookRepository = new BookRepository();
         userLiveData = new MutableLiveData<>();
         loggedIn = new MutableLiveData<>();
-        checkLogin();
-        fetchListsCounts();
+        setUpFragment();
     }
 
     public MutableLiveData<Boolean> getLoggedIn() {
@@ -67,5 +66,10 @@ public class ProfileViewModel extends ViewModel {
         //logs out the user, and calls checkLogin so fragment shows correct layout
         userRepository.logoutUser();
         checkLogin();
+    }
+
+    public void setUpFragment() {
+        checkLogin();
+        fetchListsCounts();
     }
 }

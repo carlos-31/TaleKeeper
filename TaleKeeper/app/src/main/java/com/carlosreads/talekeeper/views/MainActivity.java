@@ -53,13 +53,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         if (savedInstanceState == null) {
-            Intent intent = getIntent();
-            if (intent != null && intent.hasExtra("navigateTo")) {
-                if (intent.getStringExtra("navigateTo").equalsIgnoreCase("profile")) {
-                    navController.navigate(R.id.navigation_profile);
-                }
-                intent.removeExtra("navigateTo");
-            }
+            handleIntent(getIntent());
         }
 
         binding.navView.setOnItemReselectedListener(item -> {
@@ -85,10 +79,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         //uses the NavigationUI to navigate up in the apps navigation hierarchy
-            //the superclass method works as a fallback
+        //the superclass method works as a fallback
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        // Handle the new intent, e.g., to navigate to the profile tab
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+        // Post the action to ensure the UI is ready.
+        binding.getRoot().post(() -> {
+            if (intent != null && intent.hasExtra("navigateTo")) {
+                String destination = intent.getStringExtra("navigateTo");
+                if ("profile".equalsIgnoreCase(destination)) {
+                    binding.navView.setSelectedItemId(R.id.profile_flow);
+                }
+                intent.removeExtra("navigateTo");
+            }
+        });
     }
 }
