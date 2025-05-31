@@ -11,9 +11,15 @@ import androidx.lifecycle.MutableLiveData;
 import com.carlosreads.talekeeper.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,56 +47,57 @@ public class UserRepository {
 
     }
 
-    public LiveData<Boolean> registerUser(User user, String password) {
-        MutableLiveData<Boolean> registrationStatus = new MutableLiveData<>();
-
-        // create the new user
-        mAuth.createUserWithEmailAndPassword(user.getEmail(), password)
+    public void loginUser(String email, String password, MutableLiveData<String> messageLiveData) {
+        messageLiveData.setValue(null);
+        //logs the user in with the provided credentials
+        mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        messageLiveData.setValue("Login successful!");
+                    } else {
+                        //handles errors to inform the user
+                        String errorMessage = "Login failed. Please try again later."; //default error
+                        if (task.getException() instanceof FirebaseAuthInvalidCredentialsException)
+                            // if the error was the credentials
+                            errorMessage = "Incorrect password. Please try again.";
+                        messageLiveData.setValue(errorMessage);
+                    }
+                });
+    }
+
+    public void registerUser(User user, String password, MutableLiveData<String> messageLiveData) {
+        messageLiveData.setValue(null);
+        mAuth.createUserWithEmailAndPassword(user.getEmail(), password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && mAuth.getCurrentUser() != null) {
                         String userId = mAuth.getCurrentUser().getUid();
                         HashMap<String, Object> userMap = new HashMap<>();
                         userMap.put("name", user.getName());
                         userMap.put("email", user.getEmail());
 
-                        // if successful, saves the user's info into the table "user_info"
                         usersInfoRef.child(userId)
                                 .setValue(userMap)
                                 .addOnCompleteListener(databaseTask -> {
-                                    if (databaseTask.isSuccessful()) {
-                                        Log.d(TAG, "user registered");
-                                        registrationStatus.setValue(true);
-                                    } else {
-                                        Log.e(TAG, "user register failed: " + databaseTask.getException());
-                                        registrationStatus.setValue(false);
-                                    }
+                                    if (databaseTask.isSuccessful())
+                                        messageLiveData.setValue("Registration successful!");
+                                    else
+                                        messageLiveData.setValue("Registration error. Please contact us for help");
                                 });
                     } else {
-                        Log.e(TAG, "error registering user: " + task.getException());
-                        registrationStatus.setValue(false);
+                        Exception exception = task.getException();
+                        String errorMessage = "Registration failed. Please try again.";
+
+                        if (exception != null) {
+                            if (exception instanceof FirebaseAuthUserCollisionException)
+                                errorMessage = "This email is in use. Please login or use a different one";
+                            else if (exception.getMessage() != null &&
+                                    exception.getMessage().contains("PASSWORD_DOES_NOT_MEET_REQUIREMENTS"))
+                                errorMessage = "Password must contain at least 8 characters and a number.";
+                        }
+                        messageLiveData.setValue(errorMessage);
                     }
                 });
-        return registrationStatus;
     }
-
-
-    public LiveData<Boolean> loginUser(String email, String password) {
-        loginStatus.setValue(null);
-
-        //logs in the user with their info
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        //if login successful sets value true to handle log in
-                        loginStatus.setValue(true);
-                        Log.d(TAG, "login: " + mAuth.getCurrentUser());
-                    } else {
-                        loginStatus.setValue(false);
-                    }
-                });
-        return loginStatus;
-    }
-
 
     public void checkLogin(MutableLiveData<Boolean> loggedIn, MutableLiveData<User> userLiveData) {
         //checks if theres a user logged in
@@ -408,13 +415,13 @@ public class UserRepository {
         data.put("req_by_user", userId);
 
         FirebaseDatabase.getInstance().getReference("requested_books")
-                .push().setValue(data).addOnCompleteListener( task -> {
+                .push().setValue(data).addOnCompleteListener(task -> {
                     if (task.isSuccessful())
                         toastMessage.setValue("Request sent. Thanks!");
                     else
                         toastMessage.setValue("Something went wrong. Try again later");
 
-        });
+                });
 
     }
 }

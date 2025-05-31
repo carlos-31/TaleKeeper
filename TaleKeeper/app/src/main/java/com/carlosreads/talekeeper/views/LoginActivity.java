@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -62,15 +62,27 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        viewModel.getLoginStatus().observe(this, status -> {
-            if (status != null) {
-                if (status) {
-                    //if login successful, sends the user home
-                    Intent home = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(home);
+//        viewModel.getLoginStatus().observe(this, status -> {
+//            if (status != null) {
+//                if (status) {
+//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                    intent.putExtra("navigateTo", "profile");
+//                    startActivity(intent);
+//                } else
+//                    Toast.makeText(this, "Error while loging in", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+        viewModel.getResutlMessage().observe(this, message -> {
+            if (message != null && !message.isEmpty()) {
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+
+                if (message.equals("Login successful!")) {
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("navigateTo", "profile");
+                    startActivity(intent);
                     finish();
-                } else
-                    Toast.makeText(this, "Error while loging in", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

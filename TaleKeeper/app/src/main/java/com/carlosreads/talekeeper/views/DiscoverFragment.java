@@ -155,4 +155,10 @@ public class DiscoverFragment extends Fragment implements BookAdapter.OnItemClic
         bundle.putString("isbn13", book.getIsbn13());
         navController.navigate(R.id.action_discover_to_discover_bookDetail, bundle);
     }
+
+    @Override
+    public void onResume() {
+        viewModel.checkUser();
+        super.onResume();
+    }
 }

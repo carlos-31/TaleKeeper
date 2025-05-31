@@ -34,7 +34,7 @@ public class SignupActivity extends AppCompatActivity {
 
         EdgeToEdge.enable(this);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -65,28 +65,16 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-        viewModel.getRegistrationStatus().observe(this, new Observer<Boolean>() {
+        viewModel.getResultMessage().observe(this, new Observer<String>() {
             @Override
-            public void onChanged(Boolean isRegistered) {
-                if (isRegistered != null) {
-                    if (isRegistered) {
-                        //if sign up succeeds, send user to login activity
-                        Toast.makeText(SignupActivity.this,
-                                "user registered successfully", Toast.LENGTH_SHORT).show();
+            public void onChanged(String message) {
+                if (message != null && !message.isEmpty()) {
+                    Toast.makeText(SignupActivity.this, message, Toast.LENGTH_SHORT).show();
+                    if (message.equalsIgnoreCase("User registered successfully!")) {
                         startActivity(new Intent(SignupActivity.this,
                                 LoginActivity.class));
-                    } else {
-                        Toast.makeText(SignupActivity.this,
-                                "something went wrong :(", Toast.LENGTH_SHORT).show();
                     }
                 }
-            }
-        });
-
-        viewModel.getValidationMessage().observe(this, message -> {
-            if (message != null) {
-                //gets the error message, and if not null displays it
-                Toast.makeText(SignupActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
 
