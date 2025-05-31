@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                 //checks info is filled out before calling the function
                 if (email.isEmpty() || password.isEmpty())
                     Toast.makeText(LoginActivity.this,
-                            getString(R.string.validation_missing_info), Toast.LENGTH_SHORT).show();
+                            getString(R.string.validation_required_fields), Toast.LENGTH_SHORT).show();
                 else
                     viewModel.login(email, password);
             }

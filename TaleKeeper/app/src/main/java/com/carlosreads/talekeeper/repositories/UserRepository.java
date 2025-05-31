@@ -362,7 +362,7 @@ public class UserRepository {
                 });
     }
 
-    public void changePassword(String currentPass, String newPass1, MutableLiveData<String> toastMessage) {
+    public void changePassword(String currentPass, String newPass1, MutableLiveData<Integer> toastMessage) {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null)
             return;
@@ -373,16 +373,16 @@ public class UserRepository {
             if (auth.isSuccessful()) {
                 user.updatePassword(newPass1).addOnCompleteListener(task -> {
                     if (task.isSuccessful())
-                        toastMessage.setValue("Password changed successfully");
+                        toastMessage.setValue(R.string.change_pass_success);
                     else
-                        toastMessage.setValue("Rerror changing password. Please try again later");
+                        toastMessage.setValue(R.string.change_pass_error);
                 });
             } else
-                toastMessage.setValue("Current password is incorrect");
+                toastMessage.setValue(R.string.change_pass_incorrect);
         });
     }
 
-    public void deleteAccount(MutableLiveData<String> toastMessage) {
+    public void deleteAccount(MutableLiveData<Integer> toastMessage) {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null)
             return;
@@ -391,20 +391,20 @@ public class UserRepository {
             if (task.isSuccessful()) {
                 user.delete().addOnCompleteListener(delete -> {
                     if (delete.isSuccessful()) {
-                        toastMessage.setValue("Account was successfully deleted");
+                        toastMessage.setValue(R.string.delete_acc_success);
                         logoutUser();
                     } else
-                        toastMessage.setValue("Error deleting the account. Try again later or contact us.");
+                        toastMessage.setValue(R.string.delete_acc_error_contact);
                 });
             } else
-                toastMessage.setValue("Error deleting the account. Try again later or contact us.");
+                toastMessage.setValue(R.string.delete_acc_error);
         });
     }
 
-    public void requestBook(String title, String author, String isbn, MutableLiveData<String> toastMessage) {
+    public void requestBook(String title, String author, String isbn, MutableLiveData<Integer> toastMessage) {
         String userId = getCurrentUserID();
         if (userId == null) {
-            toastMessage.setValue("You must be logged in for this");
+            toastMessage.setValue(R.string.req_book_login_required);
             return;
         }
         String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
@@ -419,9 +419,9 @@ public class UserRepository {
         FirebaseDatabase.getInstance().getReference("requested_books")
                 .push().setValue(data).addOnCompleteListener(task -> {
                     if (task.isSuccessful())
-                        toastMessage.setValue("Request sent. Thanks!");
+                        toastMessage.setValue(R.string.req_book_success);
                     else
-                        toastMessage.setValue("Something went wrong. Try again later");
+                        toastMessage.setValue(R.string.req_book_error);
 
                 });
 

@@ -98,7 +98,8 @@
     <string name="change_pass_error">Error al cambiar la contraseña Inténtalo más tarde</string>
     <string name="change_pass_incorrect">La contraseña actual es incorrecta</string>
     <string name="delete_acc_success">La cuenta ha sido eliminada con éxito</string>
-    <string name="delete_acc_error">Error al eliminar la cuenta. Inténtalo más tarde o contáctanos</string>
+    <string name="delete_acc_error_contact">Error al eliminar la cuenta, por favor contáctanos</string>
+    <string name="delete_acc_error">Error al eliminar la cuenta, inténtalo más tarde</string>
     <string name="req_book_login_required">Debes iniciar sesión para hacer esto</string>
     <string name="req_book_success">Solicitud enviada ¡Gracias!</string>
     <string name="req_book_error">Algo salió mal, inténtalo de nuevo más tarde</string>
