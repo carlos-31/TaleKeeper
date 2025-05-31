@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.carlosreads.talekeeper.viewmodels.DiscoverViewModel" />
@@ -120,17 +122,28 @@
                                 android:textSize="18sp" />
 
                             <TextView
+                                android:id="@+id/bookReqNotLoggedIn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="It seems like we don't have that book in out database yet. Would you like to request it?" />
+                                android:text="It seems like we don't have that book in out database yet.\nIf you log into your account, you can make a request for us to add it!"
+                                android:visibility="@{viewModel.loggedIn == null || !viewModel.loggedIn ? View.VISIBLE : View.GONE}" />
+
+                            <TextView
+                                android:id="@+id/bookReqLoggedIn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="It seems like we don't have that book in out database yet.\nWould you like to request it?"
+                                android:visibility="@{viewModel.loggedIn != null &amp;&amp; viewModel.loggedIn ? View.VISIBLE : View.GONE}" />
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/bookRequestBtn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="24dp"
-                                android:text="Request a book" />
+                                android:text="Request a book"
+                                android:visibility="@{viewModel.loggedIn != null &amp;&amp; viewModel.loggedIn ? View.VISIBLE : View.GONE}" />
 
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
