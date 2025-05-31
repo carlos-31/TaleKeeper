@@ -1,5 +1,6 @@
 package com.carlosreads.talekeeper.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.carlosreads.talekeeper.viewmodels.SignupViewModel;
 public class SignupActivity extends AppCompatActivity {
     private ActivitySignupBinding binding;
     private SignupViewModel viewModel;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,8 @@ public class SignupActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(SignupViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
+
+        context = this;
 
         EdgeToEdge.enable(this);
 
@@ -59,9 +63,9 @@ public class SignupActivity extends AppCompatActivity {
                 //checks all info is filled in before calling viewmodel
                 if (name.isEmpty() || email.isEmpty() || password.isEmpty() || password2.isEmpty())
                     Toast.makeText(SignupActivity.this,
-                            "Please fill out your information", Toast.LENGTH_SHORT).show();
+                            getString(R.string.validation_missing_info), Toast.LENGTH_SHORT).show();
                 else
-                    viewModel.validateAndRegister(name, email, password, password2);
+                    viewModel.validateAndRegister(context, name, email, password, password2);
             }
         });
 
@@ -70,7 +74,7 @@ public class SignupActivity extends AppCompatActivity {
             public void onChanged(String message) {
                 if (message != null && !message.isEmpty()) {
                     Toast.makeText(SignupActivity.this, message, Toast.LENGTH_SHORT).show();
-                    if (message.equalsIgnoreCase("User registered successfully!")) {
+                    if (message.equalsIgnoreCase(getString(R.string.reg_success))) {
                         startActivity(new Intent(SignupActivity.this,
                                 LoginActivity.class));
                     }

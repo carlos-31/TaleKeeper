@@ -87,4 +87,11 @@
     </string-array>
 
     <string name="login_success">¡Inicio de sesión exitoso!</string>
+    <string name="login_failed_default">Error al iniciar sesión. Por favor, inténtalo más tarde.</string>
+    <string name="login_incorrect_password">Contraseña incorrecta. Por favor, inténtalo de nuevo.</string>
+    <string name="reg_success">¡Registro exitoso!</string>
+    <string name="reg_error_contact">Error en el registro. Por favor, contáctanos para obtener ayuda.</string>
+    <string name="reg_failed_default">Error en el registro. Por favor, inténtalo de nuevo.</string>
+    <string name="reg_email_in_use">Este correo ya está en uso. Por favor, inicia sesión o usa uno diferente.</string>
+    <string name="reg_password_requirements">La contraseña debe tener al menos 8 caracteres y un número.</string>
 </resources>

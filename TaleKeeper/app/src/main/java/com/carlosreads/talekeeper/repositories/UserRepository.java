@@ -58,16 +58,16 @@ public class UserRepository {
                         messageLiveData.setValue(context.getString(R.string.login_success));
                     } else {
                         //handles errors to inform the user
-                        String errorMessage = "Login failed. Please try again later."; //default error
+                        String errorMessage = context.getString(R.string.login_failed_default);
                         if (task.getException() instanceof FirebaseAuthInvalidCredentialsException)
                             // if the error was the credentials
-                            errorMessage = "Incorrect password. Please try again.";
+                            errorMessage = context.getString(R.string.login_incorrect_password);
                         messageLiveData.setValue(errorMessage);
                     }
                 });
     }
 
-    public void registerUser(User user, String password, MutableLiveData<String> messageLiveData) {
+    public void registerUser(Context context, User user, String password, MutableLiveData<String> messageLiveData) {
         messageLiveData.setValue(null);
         mAuth.createUserWithEmailAndPassword(user.getEmail(), password)
                 .addOnCompleteListener(task -> {
@@ -81,20 +81,20 @@ public class UserRepository {
                                 .setValue(userMap)
                                 .addOnCompleteListener(databaseTask -> {
                                     if (databaseTask.isSuccessful())
-                                        messageLiveData.setValue("Registration successful!");
+                                        messageLiveData.setValue(context.getString(R.string.reg_success));
                                     else
-                                        messageLiveData.setValue("Registration error. Please contact us for help");
+                                        messageLiveData.setValue(context.getString(R.string.reg_error_contact));
                                 });
                     } else {
                         Exception exception = task.getException();
-                        String errorMessage = "Registration failed. Please try again.";
+                        String errorMessage = context.getString(R.string.reg_failed_default);
 
                         if (exception != null) {
                             if (exception instanceof FirebaseAuthUserCollisionException)
-                                errorMessage = "This email is in use. Please login or use a different one";
+                                errorMessage = context.getString(R.string.reg_email_in_use);
                             else if (exception.getMessage() != null &&
                                     exception.getMessage().contains("PASSWORD_DOES_NOT_MEET_REQUIREMENTS"))
-                                errorMessage = "Password must contain at least 8 characters and a number.";
+                                errorMessage = context.getString(R.string.reg_password_requirements);
                         }
                         messageLiveData.setValue(errorMessage);
                     }

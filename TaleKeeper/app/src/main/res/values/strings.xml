@@ -95,4 +95,11 @@
     </string-array>
 
     <string name="login_success">Login successful!</string>
+    <string name="login_failed_default">Login failed. Please try again later.</string>
+    <string name="login_incorrect_password">Incorrect password. Please try again.</string>
+    <string name="reg_success">Registration successful!</string>
+    <string name="reg_error_contact">Registration error. Please contact us for help.</string>
+    <string name="reg_failed_default">Registration failed. Please try again.</string>
+    <string name="reg_email_in_use">This email is in use. Please login or use a different one.</string>
+    <string name="reg_password_requirements">Password must contain at least 8 characters and a number.</string>
 </resources>
