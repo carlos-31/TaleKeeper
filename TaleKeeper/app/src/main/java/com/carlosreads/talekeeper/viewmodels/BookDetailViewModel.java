@@ -19,7 +19,7 @@ public class BookDetailViewModel extends ViewModel {
     public BookDetailViewModel() {
         bookRepository = new BookRepository();
         userRepository = new UserRepository();
-        bookStatus.setValue("Add book");
+        bookStatus.setValue("ADD");
         userRepository.checkLogin(userLoggegIn, new MutableLiveData<>());
     }
 
@@ -55,13 +55,13 @@ public class BookDetailViewModel extends ViewModel {
 
         //adds book into the list the user selected
         switch (newList) {
-            case "To be read":
+            case "TBR":
                 userRepository.addBookToList(isbn, "tbr");
                 break;
-            case "Reading":
+            case "READING":
                 userRepository.addBookToList(isbn, "reading");
                 break;
-            case "Read":
+            case "READ":
                 userRepository.addBookToList(isbn, "read");
                 break;
         }

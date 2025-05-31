@@ -86,4 +86,12 @@
         <item>Read</item>
         <item>Remove book</item>
     </string-array>
+
+    <string-array name="book_status_keys" translatable="false">
+        <item>ADD</item>
+        <item>TBR</item>
+        <item>READING</item>
+        <item>READ</item>
+        <item>REMOVE</item>
+    </string-array>
 </resources>

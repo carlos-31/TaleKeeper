@@ -197,7 +197,7 @@ public class UserRepository {
     public void getBookListStatus(String isbn, MutableLiveData<String> listStatusLiveData) {
         String userId = getCurrentUserID();
         if (userId == null || isbn == null) {
-            listStatusLiveData.setValue("Add book"); //default to "Add book"
+            listStatusLiveData.setValue("ADD"); //default to "Add book"
             return;
         }
         //checks which list the book is in, if any
@@ -211,19 +211,19 @@ public class UserRepository {
 
                 //checks each list for the book, if its found it sets the status to that list
                 if (readList.hasChild(isbn))
-                    listStatusLiveData.setValue("Read");
+                    listStatusLiveData.setValue("READ");
                 else if (tbrList.hasChild(isbn))
-                    listStatusLiveData.setValue("To be read");
+                    listStatusLiveData.setValue("TBR");
                 else if (readingList.hasChild(isbn))
-                    listStatusLiveData.setValue("Reading");
+                    listStatusLiveData.setValue("READING");
                 else
                     // if it isn't found, defaults to "Add book"
-                    listStatusLiveData.setValue("Add book");
+                    listStatusLiveData.setValue("ADD");
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                listStatusLiveData.setValue("Add book"); //defaults to "Add book"
+                listStatusLiveData.setValue("ADD"); //defaults to "Add book"
             }
         });
     }
