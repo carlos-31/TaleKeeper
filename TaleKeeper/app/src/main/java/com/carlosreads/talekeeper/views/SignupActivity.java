@@ -22,7 +22,6 @@ import com.carlosreads.talekeeper.viewmodels.SignupViewModel;
 public class SignupActivity extends AppCompatActivity {
     private ActivitySignupBinding binding;
     private SignupViewModel viewModel;
-    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +32,6 @@ public class SignupActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(SignupViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
-
-        context = this;
 
         EdgeToEdge.enable(this);
 
@@ -65,7 +62,7 @@ public class SignupActivity extends AppCompatActivity {
                     Toast.makeText(SignupActivity.this,
                             getString(R.string.validation_missing_info), Toast.LENGTH_SHORT).show();
                 else
-                    viewModel.validateAndRegister(context, name, email, password, password2);
+                    viewModel.validateAndRegister(name, email, password, password2);
             }
         });
 

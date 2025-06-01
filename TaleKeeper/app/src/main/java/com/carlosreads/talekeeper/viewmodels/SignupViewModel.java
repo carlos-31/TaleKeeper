@@ -23,7 +23,7 @@ public class SignupViewModel extends ViewModel {
         return resultMessage;
     }
 
-    public void validateAndRegister(Context context, String name, String email, String password, String password2) {
+    public void validateAndRegister(String name, String email, String password, String password2) {
         resultMessage.setValue(null);
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
