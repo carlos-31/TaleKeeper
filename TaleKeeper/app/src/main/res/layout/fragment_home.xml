@@ -42,7 +42,8 @@
                     android:text="@string/Library_card_home_title"
                     android:textColor="?android:textColorPrimary"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:gravity="center"/>
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/libraryCard"

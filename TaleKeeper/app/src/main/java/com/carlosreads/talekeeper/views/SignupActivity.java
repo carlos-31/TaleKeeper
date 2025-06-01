@@ -95,3 +95,55 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+                                                      /)
+                                              o__^^/_/)
+                                               \ ' \`-'     ___
+                                                `|  \______/--'`
+                                                 |         \
+                                               ././-------,.\
+                                   _
+                                (\ \)
+                              o__^\/     ,
+                               \ ' \    <   _  _
+' '  .                          `|  \____\   -   -
+       '      . .      ()        |        )  _   _
+         `.'       `.'         .//---_/-_/ _  _
+
+                        (\
+                       (\_\^^__o   .
+                       `-'\ ` /   `(
+                          |  \_____|
+                          |        |                _
+                        ./`,----./~|     .   .   . - ()
+
+                                                        (\
+                                                       (\_\_^__o
+                                                ___     `-'/ `_/
+                                               '`--\______/  |
+                                          '        /         |
+                                      `    .  '  -`/.------'\^-'
+
+
+       (BP_mic - https://ascii.co.uk/art/dogs)
+
+
+(i saw this and thought was too cute not to add it, if you found this, you're welcome)
+*/

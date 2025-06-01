@@ -155,6 +155,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/aboutCard"
                 android:layout_width="match_parent"
@@ -173,7 +174,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:orientation="vertical"
                     android:padding="16dp">
 
@@ -181,9 +181,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="16dp"
                         android:text="@string/about_app"
-                        android:textAlignment="center"
                         android:textAppearance="?attr/textAppearanceTitleMedium"
                         android:textColor="?attr/colorPrimary" />
 
@@ -191,29 +190,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/icon_by_flaticon"
-                        android:textAlignment="center"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?android:textColorSecondary" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="4dp"
-                        android:text="@string/theme_template_material_you"
-                        android:textAlignment="center"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?android:textColorSecondary" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="8dp"
                         android:text="@string/made_by"
-                        android:textAlignment="center"
                         android:textAppearance="?attr/textAppearanceBodyMedium"
                         android:textColor="?android:textColorSecondary" />
 
@@ -225,7 +202,6 @@
                         android:layout_marginTop="4dp"
                         android:autoLink="web"
                         android:text="@string/contact_github"
-                        android:textAlignment="center"
                         android:textAppearance="?attr/textAppearanceBodyMedium"
                         android:textColor="?attr/colorAccent" />
 
@@ -233,40 +209,66 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="12dp"
                         android:text="@string/hope_you_enjoy"
-                        android:textAlignment="center"
+                        android:textAppearance="?attr/textAppearanceBodySmall"
+                        android:textColor="?android:textColorSecondary" />
+
+                    <View
+                        android:layout_width="100dp"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="?attr/colorOutline" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:gravity="center_horizontal"
+                        android:text="@string/icon_by_flaticon"
                         android:textAppearance="?attr/textAppearanceBodyMedium"
                         android:textColor="?android:textColorSecondary" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="@string/theme_template_material_you"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?android:textColorSecondary" />
+
                 </LinearLayout>
-
-<!--
-
-
-OH!
-
-            A BOOK!
-
-
-                .-~~~~~~~~~-._       _.-~~~~~~~~~-.
-            __.'              ~.   .~              `.__
-          .'//                  \./                  \\`.
-        .'//                     |                     \\`.
-      .'// .-~"""""""~~~~-._     |     _,-~~~~"""""""~-. \\`.
-    .'//.-"                 `-.  |  .-'                 "-.\\`.
-  .'//______.============-..   \ | /   ..-============.______\\`.
-.'______________________________\|/______________________________`.
-
-
-
-                                                WOW!
-
-          (https://ascii.co.uk/art/books)
-
-
-
--->
             </com.google.android.material.card.MaterialCardView>
+
+
+            <!--
+
+
+            OH!
+
+                        A BOOK!
+
+
+                            .-~~~~~~~~~-._       _.-~~~~~~~~~-.
+                        __.'              ~.   .~              `.__
+                      .'//                  \./                  \\`.
+                    .'//                     |                     \\`.
+                  .'// .-~"""""""~~~~-._     |     _,-~~~~"""""""~-. \\`.
+                .'//.-"                 `-.  |  .-'                 "-.\\`.
+              .'//______.============-..   \ | /   ..-============.______\\`.
+            .'______________________________\|/______________________________`.
+
+
+
+                                                            WOW!
+
+                      (https://ascii.co.uk/art/books)
+
+
+
+            -->
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>
