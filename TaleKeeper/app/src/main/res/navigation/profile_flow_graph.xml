@@ -37,7 +37,7 @@
     <fragment
         android:id="@+id/settings_fragment"
         android:name="com.carlosreads.talekeeper.views.SettingsFragment"
-        android:label="Settings"
+        android:label="@string/settings"
         tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/action_settings_to_user_actions_in_profile"

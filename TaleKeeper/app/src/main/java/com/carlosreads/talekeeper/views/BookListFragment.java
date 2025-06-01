@@ -40,17 +40,15 @@ public class BookListFragment extends Fragment implements BookAdapter.OnItemClic
         binding.recyclerView.setAdapter(bookAdapter);
 
         AppCompatActivity activity = (AppCompatActivity) requireActivity();
-        //removes the back arrow from the toolbar, and sets the title to the genre sent in the bundle
-//        if (activity.getSupportActionBar() != null) {
-//            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-//        }
 
         Bundle args = getArguments();
         //gets the key of what will be shown
+        //also handles getting the correct title to display on the fragment
+        // depending on the data shown and the language the user chose
         if (args != null) {
             if (args.containsKey("content")) {
                 content = args.getString("content", "null");
-                if (content.equalsIgnoreCase("es")){
+                if (content.equalsIgnoreCase("es")) {
                     viewModel.loadBooksByLanguage(content);
                     if (activity.getSupportActionBar() != null) {
                         activity.getSupportActionBar().setTitle(R.string.spanish);
@@ -60,20 +58,69 @@ public class BookListFragment extends Fragment implements BookAdapter.OnItemClic
                     if (activity.getSupportActionBar() != null) {
                         activity.getSupportActionBar().setTitle(R.string.english);
                     }
-                }else{
+                } else {
                     viewModel.loadBooksByGenre(content);
                     if (activity.getSupportActionBar() != null) {
-                        activity.getSupportActionBar().setTitle(content);
+                        int genreTitle = 0;
+                        switch (content.toLowerCase()) {
+                            case "fantasy":
+                                genreTitle = R.string.fantasy;
+                                break;
+                            case "sci-fi":
+                                genreTitle = R.string.sci_fi;
+                                break;
+                            case "mystery":
+                                genreTitle = R.string.mystery;
+                                break;
+                            case "horror":
+                                genreTitle = R.string.horror;
+                                break;
+                            case "speculative":
+                                genreTitle = R.string.speculative;
+                                break;
+                            case "anthology":
+                                genreTitle = R.string.anthology;
+                                break;
+                            case "general fiction":
+                                genreTitle = R.string.fiction;
+                                break;
+                            case "nonfiction":
+                                genreTitle = R.string.nonfiction;
+                                break;
+                        }
+                        if (genreTitle != 0) {
+                            activity.getSupportActionBar().setTitle(genreTitle);
+                        } else {
+                            activity.getSupportActionBar().setTitle(""); //default to an empty label
+                        }
                     }
                 }
             } else if (args.containsKey("listType")) {
-                viewModel.loadBooksByList(args.getString("listType").toLowerCase());
+                String listType = args.getString("listType", "null").toLowerCase();
+                viewModel.loadBooksByList(listType);
+
                 if (activity.getSupportActionBar() != null) {
-                    if (args.getString("listType").equalsIgnoreCase("tbr"))
-                        //ensure that it uses "tbr" for the node in the database, but displays "To be read"
-                        activity.getSupportActionBar().setTitle("To be read");
-                    else
-                        activity.getSupportActionBar().setTitle(args.getString("listType"));
+                    int listTitle = 0;
+                    switch (listType) {
+                        case "tbr":
+                            listTitle = R.string.tbr_title;
+                            break;
+                        case "favourites":
+                            listTitle = R.string.favourites;
+                            break;
+                        case "read":
+                            listTitle = R.string.read;
+                            break;
+                        case "reading":
+                            listTitle = R.string.reading;
+                            break;
+                    }
+
+                    if (listTitle != 0) {
+                        activity.getSupportActionBar().setTitle(listTitle);
+                    } else {
+                        activity.getSupportActionBar().setTitle("");
+                    }
                 }
             }
         }

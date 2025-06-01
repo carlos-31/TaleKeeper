@@ -111,8 +111,10 @@
 
     <string name="about_app">Acerca de esta aplicación</string>
     <string name="made_by">Hecho por Carlos</string>
-    <string name="contact_github">Contacto: github.com/yourusername</string>
+    <string name="contact_github">Contacto: github.com/carlos-31</string>
     <string name="icon_by_flaticon">Ícono de FlatIcon</string>
     <string name="theme_template_material_you">Plantilla de tema de Material Theme Builder</string>
     <string name="hope_you_enjoy">¡Espero que lo disfrutes!</string>
+
+    <string name="settings">Ajustes</string>
 </resources>

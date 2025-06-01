@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="favourite_books">
+        <item quantity="one">Tienes un libro favorito</item>
+        <item quantity="many">Tienes %d favoritos</item>
+    </plurals>
+
+    <plurals name="read_books">
+        <item quantity="one">Has leído un libro</item>
+        <item quantity="many">Has leído %d libros</item>
+    </plurals>
+
+    <plurals name="reading_books">
+        <item quantity="one">Leyendo un libro</item>
+        <item quantity="many">Leyendo %d libros</item>
+    </plurals>
+
+    <plurals name="tbr_books">
+        <item quantity="one">Solo un libro en tu lista de "Por leer"</item>
+        <item quantity="many">%d libros en tu lista de "Por leer"</item>
+    </plurals>
+</resources>

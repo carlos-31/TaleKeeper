@@ -192,7 +192,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="8dp"
-                        android:text="@string/icons_by_flaticon"
+                        android:text="@string/icon_by_flaticon"
                         android:textAlignment="center"
                         android:textAppearance="?attr/textAppearanceBodyMedium"
                         android:textColor="?android:textColorSecondary" />
@@ -239,6 +239,33 @@
                         android:textAppearance="?attr/textAppearanceBodyMedium"
                         android:textColor="?android:textColorSecondary" />
                 </LinearLayout>
+
+<!--
+
+
+OH!
+
+            A BOOK!
+
+
+                .-~~~~~~~~~-._       _.-~~~~~~~~~-.
+            __.'              ~.   .~              `.__
+          .'//                  \./                  \\`.
+        .'//                     |                     \\`.
+      .'// .-~"""""""~~~~-._     |     _,-~~~~"""""""~-. \\`.
+    .'//.-"                 `-.  |  .-'                 "-.\\`.
+  .'//______.============-..   \ | /   ..-============.______\\`.
+.'______________________________\|/______________________________`.
+
+
+
+                                                WOW!
+
+          (https://ascii.co.uk/art/books)
+
+
+
+-->
             </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
