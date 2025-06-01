@@ -1,0 +1,86 @@
+{
+  "books_table": {
+    "9781529017229": {
+      "author": "Julia Armfield",
+      "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1722881053i/58659343.jpg",
+      "genres": "Horror, Speculative, General fiction",
+      "isbn13": "9781529017229",
+      "page_count": 240,
+      "pub_year": 2022,
+      "publisher": "Picador",
+      "synopsis": "Miri's wife, Leah, returns after a deep-sea research mission goes catastrophically wrong, leaving her submarine stranded on the ocean floor for months. Miri is overjoyed to have her back, but it soon becomes clear that Leah is not the same person who left. Something from the crushing darkness of the deep has come back with her, manifesting in strange physical changes and an unnerving detachment. As Miri struggles to care for the woman she loves, she grapples with the loss of the Leah she knew and the encroaching presence of the unknown. The narrative alternates between Miri's present-day efforts to navigate their altered life and Leah's haunting recollections of her time trapped in the abyss. This lyrical and unsettling novel explores themes of grief, love, loss, and the profound mysteries of the unknown, both in the depths of the ocean and within human relationships.",
+      "title": "Our Wives Under the Sea",
+      "language": "en"
+    },
+    "9781529111798": {
+      "author": "Jacqueline Harpman",
+      "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1554973792i/43208407.jpg",
+      "genres": "Speculative",
+      "isbn13": "9781529111798",
+      "page_count": 208,
+      "pub_year": 1997,
+      "publisher": "Vintage Publishing",
+      "synopsis": "In a desolate, sterile underground bunker, forty women are held captive in a cage, watched over by silent male guards who provide them with basic sustenance but no answers. The youngest of them, the narrator, has no memory of life before the cage, unlike the older women who recall fragments of a past world. Their days are monotonous, marked only by the artificial light. One day, an alarm sounds, and the guards vanish. The women manage to escape to the surface, only to find a barren, seemingly empty world. Led by the narrator, who is more adaptable due to her lack of preconceived notions, they embark on a journey of survival and discovery. They grapple with freedom, the meaning of their existence, their relationships with each other, and the profound loneliness of being perhaps the last humans alive in a world they don't understand. It is a stark, philosophical exploration of identity, memory, and human connection in the face of ultimate isolation.",
+      "title": "I Who Have Never Known Men",
+      "language": "en"
+    },
+    "9780316440882": {
+      "author": "Fonda Lee",
+      "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1547625704i/43587154.jpg",
+      "genres": "Fantasy",
+      "isbn13": "9780316440882",
+      "page_count": 560,
+      "pub_year": 2017,
+      "publisher": "Orbit",
+      "synopsis": "On the island of Kekon, jade is the lifeblood of society, granting enhanced abilities to Green Bone warriors who can wield it. The Kaul family, one of the two most powerful Green Bone clans, controls a significant portion of the capital city, Janloon. As a new generation of Kauls comes into power, they must navigate internal family dynamics, ruthless rivalries with the Ayt family, and the changing political landscape. The emergence of a new drug that allows anyone to use jade threatens to destabilize the established order and ignite an all-out war. Hilo, the Horn of the No Peak clan, his sister Shae, who has returned from overseas seeking a different life, and their adopted brother Anden, a student at the Green Bone academy, are all caught in the escalating conflict. They must protect their family's honor, their territory, and their control over the precious jade, even if it means making brutal choices.",
+      "title": "Jade City",
+      "language": "en"
+    },
+    "9786555980837": {
+      "author": "Silvia Moreno-Garcia",
+      "cover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1617371075i/57222859.jpg",
+      "genres": "Terror gótico, Misterio, Ficción histórica",
+      "isbn13": "9786555980837",
+      "page_count": 352,
+      "pub_year": 2020,
+      "publisher": "Minotauro",
+      "synopsis": "Años 50. Noemí Taboada, una joven glamurosa y decidida de Ciudad de México, recibe una carta desesperada de su prima recién casada, Catalina, quien afirma que su nuevo esposo inglés la está envenenando en una mansión aislada y lúgubre en el campo mexicano, conocida como High Place. Intrigada y preocupada, Noemí viaja a la mansión, donde se encuentra con una familia británica decadente, secretos oscuros y una atmósfera opresiva que parece afectar la cordura. Pronto, Noemí se ve atrapada en una red de violencia, seducción y horrores ancestrales que acechan entre las paredes de High Place.",
+      "title": "Gótico mexicano",
+      "language": "es",
+      "genres_en": "Horror, Mystery"
+    }
+  },
+  "dev_favs": {
+    "i_who_have_never_known_men": "9781529111798",
+    "our_wives_under_the_sea": "9781529017229"
+  },
+  "requested_books": {
+    "-OR7iSYr9U01z0fqBqUb": {
+      "author": "Grady Hendrix",
+      "isbn13": "N/A",
+      "req_by_user": "9l6UESbYH9P9kQfIZHBIxNka6w12",
+      "req_date": "25-05-2025",
+      "title": "How to sell a haunted house"
+    }
+  },
+  "user_info": {
+    "9l6UESbYH9P9kQfIZHBIxNka6w12": {
+      "email": "super@real.email",
+      "lists": {
+        "favourites": {
+          "9780316440882": true
+        },
+        "read": {
+          "9780316440882": true
+        },
+        "reading": {
+          "9781529017229": true
+        },
+        "tbr": {
+          "9781529111798": true
+        }
+      },
+      "name": "This is my name!"
+    }
+  }
+}
