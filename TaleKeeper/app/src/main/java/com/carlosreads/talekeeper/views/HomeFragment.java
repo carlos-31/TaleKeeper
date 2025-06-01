@@ -41,11 +41,12 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(Book book) {
                 currentBook = book;
+                int width = 640;
 
                 //loading the cover of the book into the ImageView from the url in the database
                 Glide.with(getContext())
                         .load(book.getCover_url())
-                        .override(630, (int) (630 * 1.6))
+                        .override(width, (int) (width * 1.6))
                         .fitCenter()
                         .into(binding.coverImg);
             }
