@@ -108,4 +108,11 @@
     <string name="validation_new_passwords_no_match">Las nuevas contraseñas no coinciden</string>
     <string name="validation_missing_info">Falta información</string>
     <string name="validation_required_fields">Por favor, rellena los campos obligatorios</string>
+
+    <string name="about_app">Acerca de esta aplicación</string>
+    <string name="made_by">Hecho por Carlos</string>
+    <string name="contact_github">Contacto: github.com/yourusername</string>
+    <string name="icon_by_flaticon">Ícono de FlatIcon</string>
+    <string name="theme_template_material_you">Plantilla de tema de Material Theme Builder</string>
+    <string name="hope_you_enjoy">¡Espero que lo disfrutes!</string>
 </resources>

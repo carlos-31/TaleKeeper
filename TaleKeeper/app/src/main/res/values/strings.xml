@@ -116,4 +116,11 @@
     <string name="validation_new_passwords_no_match">New passwords don\'t match.</string>
     <string name="validation_missing_info">Some information is missing.</string>
     <string name="validation_required_fields">Please fill out the required fields.</string>
+
+    <string name="about_app">About this app</string>
+    <string name="made_by">Made by Carlos</string>
+    <string name="contact_github">Contact: github.com/carlos-31</string>
+    <string name="icon_by_flaticon">Icon from FlatIcon</string>
+    <string name="theme_template_material_you">Theme template from Material Theme Builder</string>
+    <string name="hope_you_enjoy">Hope you enjoy!</string>
 </resources>
