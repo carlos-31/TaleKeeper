@@ -133,7 +133,8 @@ public class BookRepository {
 
                 for (DataSnapshot child : snapshot.getChildren()) {
                     Book book = child.getValue(Book.class);
-                    if (book.getTitle().toLowerCase().contains(query.toLowerCase()))
+                    if (book.getTitle().toLowerCase().contains(query.toLowerCase())
+                    || book.getAuthor().toLowerCase().contains(query.toLowerCase()))
                         books.add(book);
                 }
                 resultsLiveData.setValue(books);
