@@ -34,6 +34,8 @@ public class DiscoverViewModel extends ViewModel {
     }
 
     public void checkUser() {
+        //check for user, in this case the user itself is irrelevant, just need to know if one
+            // is logged in
         new UserRepository().checkLogin(loggedIn, new MutableLiveData<User>());
     }
 }

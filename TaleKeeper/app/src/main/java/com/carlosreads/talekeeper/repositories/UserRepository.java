@@ -40,12 +40,14 @@ import java.util.Map;
 public class UserRepository {
     private final FirebaseAuth mAuth;
     private DatabaseReference usersInfoRef;
+    private DatabaseReference bookRequest;
     private MutableLiveData<Boolean> loginStatus = new MutableLiveData<>();
 
 
     public UserRepository() {
         this.mAuth = FirebaseAuth.getInstance();
         this.usersInfoRef = FirebaseDatabase.getInstance().getReference("user_info");
+        this.bookRequest = FirebaseDatabase.getInstance().getReference("requested_books");
 
     }
 
@@ -407,17 +409,20 @@ public class UserRepository {
             toastMessage.setValue(R.string.req_book_login_required);
             return;
         }
+        //gets a string for the date of the request
         String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
         Map<String, Object> data = new HashMap<>();
         data.put("title", title);
         data.put("author", author);
         data.put("isbn13", (isbn != null && !isbn.trim().isEmpty() ? isbn : "N/A"));
+            //if there's no isbn provided, it sets the value to N/A as default
         data.put("req_date", date);
         data.put("req_by_user", userId);
 
-        FirebaseDatabase.getInstance().getReference("requested_books")
-                .push().setValue(data).addOnCompleteListener(task -> {
+            // adding the request using push, it generates an unique key for it, so it guarantees no other
+                // request has the same, even if multiple users do this simultaneously.
+        bookRequest.push().setValue(data).addOnCompleteListener(task -> {
                     if (task.isSuccessful())
                         toastMessage.setValue(R.string.req_book_success);
                     else

@@ -28,7 +28,6 @@ public class BookRepository {
         devBooksRef = FirebaseDatabase.getInstance().getReference("dev_favs");
     }
 
-
     public void loadSpotlight(MutableLiveData<Book> bookLiveData) {
         devBooksRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -49,7 +48,6 @@ public class BookRepository {
 
                 // sets the first book in the list after shuffling in the spotlight
                 getBookByIsbn(books.get(0), bookLiveData);
-
             }
 
             @Override
@@ -57,7 +55,6 @@ public class BookRepository {
             }
         });
     }
-
 
     public void getBookByIsbn(String isbn, MutableLiveData<Book> bookLiveData) {
         // gets a specific book by its isbn (the key in the table)
@@ -127,12 +124,14 @@ public class BookRepository {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<Book> books = new ArrayList<>();
                 if (query == null) {
+                    //in case a search gets here empty, sets an empty list
                     resultsLiveData.setValue(new ArrayList<>());
                     return;
                 }
 
                 for (DataSnapshot child : snapshot.getChildren()) {
                     Book book = child.getValue(Book.class);
+                    //if the book's title pr author contains the search string, it gets added to the list
                     if (book.getTitle().toLowerCase().contains(query.toLowerCase())
                     || book.getAuthor().toLowerCase().contains(query.toLowerCase()))
                         books.add(book);

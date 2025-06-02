@@ -106,7 +106,6 @@ public class UserActionsFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         viewModel.deleteAccount();
-                        Toast.makeText(requireContext(), "why u leavingggg :(", Toast.LENGTH_SHORT).show();
                     }
                 });
                 binding.cancelDeleteBtn.setOnClickListener(new View.OnClickListener() {
