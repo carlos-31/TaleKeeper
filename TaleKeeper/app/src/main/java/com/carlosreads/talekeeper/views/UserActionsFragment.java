@@ -68,7 +68,7 @@ public class UserActionsFragment extends Fragment {
                 binding.bookRequestLayout.setVisibility(View.VISIBLE);
                 break;
             default:
-                Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), getString(R.string.something_went_wrong_please_try_again), Toast.LENGTH_SHORT).show();
                 NavController navController = Navigation.findNavController(requireView());
                 navController.navigate(R.id.navigation_home);
         }
