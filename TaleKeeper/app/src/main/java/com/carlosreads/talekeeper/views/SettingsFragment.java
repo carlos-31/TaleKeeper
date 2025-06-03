@@ -2,7 +2,6 @@ package com.carlosreads.talekeeper.views;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.PaintFlagsDrawFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +21,6 @@ import androidx.navigation.Navigation;
 import com.carlosreads.talekeeper.R;
 import com.carlosreads.talekeeper.databinding.FragmentSettingsBinding;
 import com.carlosreads.talekeeper.viewmodels.SettingsViewModel;
-
-import java.nio.BufferUnderflowException;
 
 public class SettingsFragment extends Fragment {
     private SettingsViewModel mViewModel;
@@ -123,6 +120,4 @@ public class SettingsFragment extends Fragment {
             }
         });
     }
-
-
 }

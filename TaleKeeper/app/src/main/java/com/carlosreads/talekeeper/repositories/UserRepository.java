@@ -1,10 +1,5 @@
 package com.carlosreads.talekeeper.repositories;
 
-import static android.content.ContentValues.TAG;
-
-import android.content.Context;
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -13,15 +8,11 @@ import com.carlosreads.talekeeper.R;
 import com.carlosreads.talekeeper.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,14 +32,11 @@ public class UserRepository {
     private final FirebaseAuth mAuth;
     private DatabaseReference usersInfoRef;
     private DatabaseReference bookRequest;
-    private MutableLiveData<Boolean> loginStatus = new MutableLiveData<>();
-
 
     public UserRepository() {
         this.mAuth = FirebaseAuth.getInstance();
         this.usersInfoRef = FirebaseDatabase.getInstance().getReference("user_info");
         this.bookRequest = FirebaseDatabase.getInstance().getReference("requested_books");
-
     }
 
     public void loginUser(String email, String password, MutableLiveData<Integer> messageLiveData) {
@@ -416,19 +404,19 @@ public class UserRepository {
         data.put("title", title);
         data.put("author", author);
         data.put("isbn13", (isbn != null && !isbn.trim().isEmpty() ? isbn : "N/A"));
-            //if there's no isbn provided, it sets the value to N/A as default
+        //if there's no isbn provided, it sets the value to N/A as default
         data.put("req_date", date);
         data.put("req_by_user", userId);
 
-            // adding the request using push, it generates an unique key for it, so it guarantees no other
-                // request has the same, even if multiple users do this simultaneously.
+        // adding the request using push, it generates an unique key for it, so it guarantees no other
+        // request has the same, even if multiple users do this simultaneously.
         bookRequest.push().setValue(data).addOnCompleteListener(task -> {
-                    if (task.isSuccessful())
-                        toastMessage.setValue(R.string.req_book_success);
-                    else
-                        toastMessage.setValue(R.string.req_book_error);
+            if (task.isSuccessful())
+                toastMessage.setValue(R.string.req_book_success);
+            else
+                toastMessage.setValue(R.string.req_book_error);
 
-                });
+        });
 
     }
 }

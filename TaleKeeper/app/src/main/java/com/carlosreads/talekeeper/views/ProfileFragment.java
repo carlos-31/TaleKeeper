@@ -125,16 +125,6 @@ public class ProfileFragment extends Fragment {
 
     private void setClickListeners() {
         //sets up the listeners for all interactable items on screen
-//        binding.settingsFab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                NavController navController = Navigation.findNavController(requireView());
-//                Bundle bundle = new Bundle();
-//                bundle.putBoolean("userStatus", loggedInStatus);
-//                navController.navigate(R.id.action_profile_to_settings, bundle);
-//            }
-//        });
-
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

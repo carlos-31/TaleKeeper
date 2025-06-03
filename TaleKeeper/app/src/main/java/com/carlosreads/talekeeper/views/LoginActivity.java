@@ -1,6 +1,5 @@
 package com.carlosreads.talekeeper.views;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,7 +20,6 @@ import com.carlosreads.talekeeper.viewmodels.LoginViewModel;
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
     private LoginViewModel viewModel;
-    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +29,6 @@ public class LoginActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-
-        context = this;
 
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
@@ -73,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (message == R.string.login_success) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     //these flags make it so the previous instance of mainActivity to the front og the stack,
-                        // and if its already at the top it prevents  new one being created
+                    // and if its already at the top it prevents  new one being created
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     intent.putExtra("navigateTo", "profile");
                     startActivity(intent);
@@ -90,6 +86,5 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 }

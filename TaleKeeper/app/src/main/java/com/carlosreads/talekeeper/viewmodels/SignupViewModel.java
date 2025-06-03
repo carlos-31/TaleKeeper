@@ -1,9 +1,7 @@
 package com.carlosreads.talekeeper.viewmodels;
 
-import android.content.Context;
 import android.util.Patterns;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -40,7 +38,5 @@ public class SignupViewModel extends ViewModel {
 
         User user = new User(name, email);
         userRepository.registerUser(user, password, resultMessage);
-
     }
-    
 }

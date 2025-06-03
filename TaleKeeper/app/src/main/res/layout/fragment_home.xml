@@ -39,11 +39,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="14dp"
+                    android:gravity="center"
                     android:text="@string/Library_card_home_title"
                     android:textColor="?android:textColorPrimary"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:gravity="center"/>
+                    android:textStyle="bold" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/libraryCard"
@@ -102,16 +102,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:orientation="horizontal"
-                        android:padding="16dp"
-                        android:gravity="center">
+                        android:padding="16dp">
 
                         <ImageView
                             android:id="@+id/coverImg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:contentDescription="@string/book_cover"
-                            android:scaleType="centerCrop"/>
+                            android:scaleType="centerCrop" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 

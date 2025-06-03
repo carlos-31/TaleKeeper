@@ -12,7 +12,6 @@ public class UserActionsViewModel extends ViewModel {
 
     public UserActionsViewModel() {
         userRepository = new UserRepository();
-
     }
 
     public MutableLiveData<Integer> getToastMessage() {

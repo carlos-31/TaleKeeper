@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class BookRepository {
-
     private final DatabaseReference bookRef;
     private final DatabaseReference devBooksRef;
 
@@ -133,7 +132,7 @@ public class BookRepository {
                     Book book = child.getValue(Book.class);
                     //if the book's title pr author contains the search string, it gets added to the list
                     if (book.getTitle().toLowerCase().contains(query.toLowerCase())
-                    || book.getAuthor().toLowerCase().contains(query.toLowerCase()))
+                            || book.getAuthor().toLowerCase().contains(query.toLowerCase()))
                         books.add(book);
                 }
                 resultsLiveData.setValue(books);
@@ -168,5 +167,4 @@ public class BookRepository {
             }
         });
     }
-
 }

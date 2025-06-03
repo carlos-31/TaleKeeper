@@ -66,7 +66,7 @@ public class BookDetailFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // Only proceed if it's not the initial load
-                    //so loading the fragment doesn't make a call to the viewmodel & repo
+                //so loading the fragment doesn't make a call to the viewmodel & repo
                 if (!isInitialSpinnerLoad) {
                     String[] bookStatusKeys = getResources().getStringArray(R.array.book_status_keys);
                     String selectedKey = bookStatusKeys[position];

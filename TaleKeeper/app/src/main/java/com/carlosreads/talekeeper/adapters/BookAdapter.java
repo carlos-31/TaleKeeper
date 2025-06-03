@@ -62,7 +62,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                 .centerCrop()
                 .into(holder.binding.bookCover);
 
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +73,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                     //notifies the listener
                     listener.onItemClick(clickedBook);
                 }
-
             }
         });
 
