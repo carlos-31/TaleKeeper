@@ -57,6 +57,7 @@ public class UserActionsFragment extends Fragment {
     }
 
     private void setUpUI() {
+        //sets up the fragment according to where the user came from (which btn)
         switch (actionString) {
             case "passwordChange":
                 binding.passwordChangeLayout.setVisibility(View.VISIBLE);

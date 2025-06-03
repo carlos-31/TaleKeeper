@@ -72,6 +72,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (message == R.string.login_success) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    //these flags make it so the previous instance of mainActivity to the front og the stack,
+                        // and if its already at the top it prevents  new one being created
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     intent.putExtra("navigateTo", "profile");
                     startActivity(intent);

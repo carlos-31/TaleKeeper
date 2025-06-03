@@ -73,6 +73,7 @@ public class SettingsFragment extends Fragment {
         binding.themeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //handles the switching of the theme, and saving the choice in the SharedPreferences
                 if (isChecked) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 } else {
@@ -95,6 +96,7 @@ public class SettingsFragment extends Fragment {
                     currentLang = language;
                     prefs.edit().putString("language", language).apply();
 
+                    //updating the apps language
                     LocaleListCompat appLocale = LocaleListCompat.forLanguageTags(language);
                     AppCompatDelegate.setApplicationLocales(appLocale);
                 }

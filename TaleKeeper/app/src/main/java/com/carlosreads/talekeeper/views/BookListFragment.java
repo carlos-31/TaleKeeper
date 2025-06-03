@@ -126,6 +126,7 @@ public class BookListFragment extends Fragment implements BookAdapter.OnItemClic
         }
 
         viewModel.getBooks().observe(getViewLifecycleOwner(), books -> {
+            //toggles visibility if depending on weather theres books to show or not
             if (books.isEmpty())
                 binding.emptyListCard.setVisibility(View.VISIBLE);
             else
@@ -142,6 +143,7 @@ public class BookListFragment extends Fragment implements BookAdapter.OnItemClic
                 R.id.nav_host_fragment_activity_main);
         Bundle bundle = new Bundle();
         bundle.putString("isbn13", book.getIsbn13());
+        //sends the user to the detail with the isbn in the bundle
         navController.navigate(R.id.action_bookList_in_discover_to_discover_bookDetail, bundle);
     }
 

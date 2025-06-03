@@ -94,7 +94,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handleIntent(Intent intent) {
-        // Post the action to ensure the UI is ready.
+        // Post the action to ensure the UI is ready. making sure with using the post method that
+        // the activity and its ui is fully set up before taking the user to the profile so the app doesn't crash
         binding.getRoot().post(() -> {
             if (intent != null && intent.hasExtra("navigateTo")) {
                 String destination = intent.getStringExtra("navigateTo");

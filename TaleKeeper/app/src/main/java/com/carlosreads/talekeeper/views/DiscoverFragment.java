@@ -57,6 +57,7 @@ public class DiscoverFragment extends Fragment implements BookAdapter.OnItemClic
         viewModel.getSearchLiveData().observe(getViewLifecycleOwner(), books -> {
             bookAdapter.setBooks(books);
 
+            //toggles visibility depending on if the search found any books or not
             if (books.isEmpty()) {
                 binding.resutsRecyclerVIew.setVisibility(View.GONE);
                 binding.noResultsCard.setVisibility(View.VISIBLE);

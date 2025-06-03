@@ -131,6 +131,7 @@ public class BookDetailFragment extends Fragment {
                 if (spinnerPosition != -1) {
                     binding.bookStatusSpinner.setSelection(spinnerPosition);
                 } else {
+                    //if the user click 'remove', make it show 'add boo' again instead
                     binding.bookStatusSpinner.setSelection(0);
                 }
             }
