@@ -118,4 +118,5 @@
 
     <string name="settings">Ajustes</string>
     <string name="something_went_wrong_please_try_again">Algo no funcionó, intente de nuevo</string>
+    <string name="book_req_limit_reached">Tenemos demasiadas solicitudes, intentelo luego o contactenos</string>
 </resources>

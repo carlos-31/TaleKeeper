@@ -83,7 +83,6 @@ public class UserActionsFragment extends Fragment {
                         binding.currentPassword.setText("");
                         binding.newPassword.setText("");
                         binding.confirmNewPassword.setText("");
-
                     }
                 }
             }

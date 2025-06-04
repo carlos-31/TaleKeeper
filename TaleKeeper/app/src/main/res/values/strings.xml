@@ -125,4 +125,5 @@
     <string name="hope_you_enjoy">Hope you enjoy!</string>
     <string name="settings">Settings</string>
     <string name="something_went_wrong_please_try_again">Something went wrong. please try again</string>
+    <string name="book_req_limit_reached">We have too many requests, please try again later or contact us</string>
 </resources>
