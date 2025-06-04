@@ -79,6 +79,11 @@ public class UserActionsFragment extends Fragment {
                     if (message == R.string.delete_acc_success) {
                         NavController navController = Navigation.findNavController(requireView());
                         navController.navigate(R.id.navigation_profile);
+                    } else if (message == R.string.change_pass_success) {
+                        binding.currentPassword.setText("");
+                        binding.newPassword.setText("");
+                        binding.confirmNewPassword.setText("");
+
                     }
                 }
             }
