@@ -87,7 +87,8 @@ public class UserRepository {
                             if (exception instanceof FirebaseAuthUserCollisionException)
                                 errorMessage = R.string.reg_email_in_use;
                             else if (exception.getMessage() != null &&
-                                    exception.getMessage().contains("PASSWORD_DOES_NOT_MEET_REQUIREMENTS"))
+                                    exception.getMessage()
+                                             .contains("PASSWORD_DOES_NOT_MEET_REQUIREMENTS"))
                                 errorMessage = R.string.reg_password_requirements;
                         }
                         messageLiveData.setValue(errorMessage);
@@ -407,11 +408,13 @@ public class UserRepository {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Log.d(TAG, "en coso");
                 if (snapshot.getChildrenCount() >= 75)
-                    //currently limiting the node's children to 75 for both safety and to keep the request manageable
+                    //currently limiting the node's children to 75 for both safety
+                    // and to keep the request manageable
                     toastMessage.setValue(R.string.book_req_limit_reached);
                 else {
                     //gets a string for the date of the request
-                    String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                    String date = new SimpleDateFormat("dd-MM-yyyy",
+                                                        Locale.getDefault()).format(new Date());
 
                     Map<String, Object> data = new HashMap<>();
                     data.put("title", title);
@@ -421,8 +424,9 @@ public class UserRepository {
                     data.put("req_date", date);
                     data.put("req_by_user", userId);
 
-                    // adding the request using push, it generates an unique key for it, so it guarantees no other
-                    // request has the same, even if multiple users do this simultaneously.
+                    // adding the request using push, it generates an unique key for it,
+                    // so it guarantees no other request has the same, even if multiple
+                    // users do this simultaneously.
                     bookRequest.push().setValue(data).addOnCompleteListener(task -> {
                         if (task.isSuccessful())
                             toastMessage.setValue(R.string.req_book_success);
@@ -432,7 +436,6 @@ public class UserRepository {
                     });
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
