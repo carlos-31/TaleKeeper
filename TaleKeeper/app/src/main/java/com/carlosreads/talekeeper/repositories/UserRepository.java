@@ -8,10 +8,15 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.carlosreads.talekeeper.R;
 import com.carlosreads.talekeeper.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,72 +24,76 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class UserRepository {
     private final FirebaseAuth mAuth;
     private DatabaseReference usersInfoRef;
-    private MutableLiveData<Boolean> loginStatus = new MutableLiveData<>();
-
+    private DatabaseReference bookRequest;
 
     public UserRepository() {
         this.mAuth = FirebaseAuth.getInstance();
         this.usersInfoRef = FirebaseDatabase.getInstance().getReference("user_info");
-
+        this.bookRequest = FirebaseDatabase.getInstance().getReference("requested_books");
     }
 
-    public LiveData<Boolean> registerUser(User user, String password) {
-        MutableLiveData<Boolean> registrationStatus = new MutableLiveData<>();
-
-        // create the new user
-        mAuth.createUserWithEmailAndPassword(user.getEmail(), password)
+    public void loginUser(String email, String password, MutableLiveData<Integer> messageLiveData) {
+        messageLiveData.setValue(null);
+        //logs the user in with the provided credentials
+        mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        messageLiveData.setValue(R.string.login_success);
+                    } else {
+                        //handles errors to inform the user
+                        int errorMessage = R.string.login_failed_default;
+                        if (task.getException() instanceof FirebaseAuthInvalidCredentialsException)
+                            // if the error was the credentials
+                            errorMessage = R.string.login_incorrect_password;
+                        messageLiveData.setValue(errorMessage);
+                    }
+                });
+    }
+
+    public void registerUser(User user, String password, MutableLiveData<Integer> messageLiveData) {
+        messageLiveData.setValue(null);
+        mAuth.createUserWithEmailAndPassword(user.getEmail(), password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && mAuth.getCurrentUser() != null) {
                         String userId = mAuth.getCurrentUser().getUid();
                         HashMap<String, Object> userMap = new HashMap<>();
                         userMap.put("name", user.getName());
                         userMap.put("email", user.getEmail());
 
-                        // if successful, saves the user's info into the table "user_info"
                         usersInfoRef.child(userId)
                                 .setValue(userMap)
                                 .addOnCompleteListener(databaseTask -> {
-                                    if (databaseTask.isSuccessful()) {
-                                        Log.d(TAG, "user registered");
-                                        registrationStatus.setValue(true);
-                                    } else {
-                                        Log.e(TAG, "user register failed: " + databaseTask.getException());
-                                        registrationStatus.setValue(false);
-                                    }
+                                    if (databaseTask.isSuccessful())
+                                        messageLiveData.setValue(R.string.reg_success);
+                                    else
+                                        messageLiveData.setValue(R.string.reg_error_contact);
                                 });
                     } else {
-                        Log.e(TAG, "error registering user: " + task.getException());
-                        registrationStatus.setValue(false);
+                        Exception exception = task.getException();
+                        int errorMessage = R.string.reg_failed_default;
+
+                        if (exception != null) {
+                            if (exception instanceof FirebaseAuthUserCollisionException)
+                                errorMessage = R.string.reg_email_in_use;
+                            else if (exception.getMessage() != null &&
+                                    exception.getMessage().contains("PASSWORD_DOES_NOT_MEET_REQUIREMENTS"))
+                                errorMessage = R.string.reg_password_requirements;
+                        }
+                        messageLiveData.setValue(errorMessage);
                     }
                 });
-        return registrationStatus;
     }
-
-
-    public LiveData<Boolean> loginUser(String email, String password) {
-        loginStatus.setValue(null);
-
-        //logs in the user with their info
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        //if login successful sets value true to handle log in
-                        loginStatus.setValue(true);
-                        Log.d(TAG, "login: " + mAuth.getCurrentUser());
-                    } else {
-                        loginStatus.setValue(false);
-                    }
-                });
-        return loginStatus;
-    }
-
 
     public void checkLogin(MutableLiveData<Boolean> loggedIn, MutableLiveData<User> userLiveData) {
         //checks if theres a user logged in
@@ -184,7 +193,7 @@ public class UserRepository {
     public void getBookListStatus(String isbn, MutableLiveData<String> listStatusLiveData) {
         String userId = getCurrentUserID();
         if (userId == null || isbn == null) {
-            listStatusLiveData.setValue("Add book"); //default to "Add book"
+            listStatusLiveData.setValue("ADD"); //default to "Add book"
             return;
         }
         //checks which list the book is in, if any
@@ -198,19 +207,19 @@ public class UserRepository {
 
                 //checks each list for the book, if its found it sets the status to that list
                 if (readList.hasChild(isbn))
-                    listStatusLiveData.setValue("Read");
+                    listStatusLiveData.setValue("READ");
                 else if (tbrList.hasChild(isbn))
-                    listStatusLiveData.setValue("To be read");
+                    listStatusLiveData.setValue("TBR");
                 else if (readingList.hasChild(isbn))
-                    listStatusLiveData.setValue("Reading");
+                    listStatusLiveData.setValue("READING");
                 else
                     // if it isn't found, defaults to "Add book"
-                    listStatusLiveData.setValue("Add book");
+                    listStatusLiveData.setValue("ADD");
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                listStatusLiveData.setValue("Add book"); //defaults to "Add book"
+                listStatusLiveData.setValue("ADD"); //defaults to "Add book"
             }
         });
     }
@@ -345,5 +354,90 @@ public class UserRepository {
                         tbrCount.setValue(null);
                     }
                 });
+    }
+
+    public void changePassword(String currentPass, String newPass1, MutableLiveData<Integer> toastMessage) {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null)
+            return;
+
+        AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), currentPass);
+
+        user.reauthenticate(credential).addOnCompleteListener(auth -> {
+            if (auth.isSuccessful()) {
+                user.updatePassword(newPass1).addOnCompleteListener(task -> {
+                    if (task.isSuccessful())
+                        toastMessage.setValue(R.string.change_pass_success);
+                    else
+                        toastMessage.setValue(R.string.change_pass_error);
+                });
+            } else
+                toastMessage.setValue(R.string.change_pass_incorrect);
+        });
+    }
+
+    public void deleteAccount(MutableLiveData<Integer> toastMessage) {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null)
+            return;
+
+        usersInfoRef.child(user.getUid()).removeValue().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                user.delete().addOnCompleteListener(delete -> {
+                    if (delete.isSuccessful()) {
+                        toastMessage.setValue(R.string.delete_acc_success);
+                        logoutUser();
+                    } else
+                        toastMessage.setValue(R.string.delete_acc_error_contact);
+                });
+            } else
+                toastMessage.setValue(R.string.delete_acc_error);
+        });
+    }
+
+    public void requestBook(String title, String author, String isbn, MutableLiveData<Integer> toastMessage) {
+        String userId = getCurrentUserID();
+        if (userId == null) {
+            toastMessage.setValue(R.string.req_book_login_required);
+            return;
+        }
+
+        bookRequest.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d(TAG, "en coso");
+                if (snapshot.getChildrenCount() >= 75)
+                    //currently limiting the node's children to 75 for both safety and to keep the request manageable
+                    toastMessage.setValue(R.string.book_req_limit_reached);
+                else {
+                    //gets a string for the date of the request
+                    String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+
+                    Map<String, Object> data = new HashMap<>();
+                    data.put("title", title);
+                    data.put("author", author);
+                    data.put("isbn13", (isbn != null && !isbn.trim().isEmpty() ? isbn : "N/A"));
+                    //if there's no isbn provided, it sets the value to N/A as default
+                    data.put("req_date", date);
+                    data.put("req_by_user", userId);
+
+                    // adding the request using push, it generates an unique key for it, so it guarantees no other
+                    // request has the same, even if multiple users do this simultaneously.
+                    bookRequest.push().setValue(data).addOnCompleteListener(task -> {
+                        if (task.isSuccessful())
+                            toastMessage.setValue(R.string.req_book_success);
+                        else
+                            toastMessage.setValue(R.string.req_book_error);
+
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 }

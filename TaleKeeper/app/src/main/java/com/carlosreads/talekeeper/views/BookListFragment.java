@@ -29,8 +29,7 @@ public class BookListFragment extends Fragment implements BookAdapter.OnItemClic
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        viewModel =
-                new ViewModelProvider(this).get(BookListViewModel.class);
+        viewModel = new ViewModelProvider(this).get(BookListViewModel.class);
 
         binding = FragmentBookListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -40,35 +39,94 @@ public class BookListFragment extends Fragment implements BookAdapter.OnItemClic
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerView.setAdapter(bookAdapter);
 
-
         AppCompatActivity activity = (AppCompatActivity) requireActivity();
-        //removes the back arrow from the toolbar, and sets the title to the genre sent in the bundle
-        if (activity.getSupportActionBar() != null) {
-            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        }
 
         Bundle args = getArguments();
         //gets the key of what will be shown
+        //also handles getting the correct title to display on the fragment
+        // depending on the data shown and the language the user chose
         if (args != null) {
             if (args.containsKey("content")) {
                 content = args.getString("content", "null");
-                viewModel.loadBooksByGenre(content);
-                if (activity.getSupportActionBar() != null) {
-                    activity.getSupportActionBar().setTitle(content);
+                if (content.equalsIgnoreCase("es")) {
+                    viewModel.loadBooksByLanguage(content);
+                    if (activity.getSupportActionBar() != null) {
+                        activity.getSupportActionBar().setTitle(R.string.spanish);
+                    }
+                } else if (content.equalsIgnoreCase("en")) {
+                    viewModel.loadBooksByLanguage(content);
+                    if (activity.getSupportActionBar() != null) {
+                        activity.getSupportActionBar().setTitle(R.string.english);
+                    }
+                } else {
+                    viewModel.loadBooksByGenre(content);
+                    if (activity.getSupportActionBar() != null) {
+                        int genreTitle = 0;
+                        switch (content.toLowerCase()) {
+                            case "fantasy":
+                                genreTitle = R.string.fantasy;
+                                break;
+                            case "sci-fi":
+                                genreTitle = R.string.sci_fi;
+                                break;
+                            case "mystery":
+                                genreTitle = R.string.mystery;
+                                break;
+                            case "horror":
+                                genreTitle = R.string.horror;
+                                break;
+                            case "speculative":
+                                genreTitle = R.string.speculative;
+                                break;
+                            case "anthology":
+                                genreTitle = R.string.anthology;
+                                break;
+                            case "general fiction":
+                                genreTitle = R.string.fiction;
+                                break;
+                            case "nonfiction":
+                                genreTitle = R.string.nonfiction;
+                                break;
+                        }
+                        if (genreTitle != 0) {
+                            activity.getSupportActionBar().setTitle(genreTitle);
+                        } else {
+                            activity.getSupportActionBar().setTitle(""); //default to an empty label
+                        }
+                    }
                 }
             } else if (args.containsKey("listType")) {
-                viewModel.loadBooksByList(args.getString("listType").toLowerCase());
+                String listType = args.getString("listType", "null").toLowerCase();
+                viewModel.loadBooksByList(listType);
+
                 if (activity.getSupportActionBar() != null) {
-                    if (args.getString("listType").equalsIgnoreCase("tbr"))
-                        //ensure that it uses "tbr" for the node in the database, but displays "To be read"
-                        activity.getSupportActionBar().setTitle("To be read");
-                    else
-                        activity.getSupportActionBar().setTitle(args.getString("listType"));
+                    int listTitle = 0;
+                    switch (listType) {
+                        case "tbr":
+                            listTitle = R.string.tbr_title;
+                            break;
+                        case "favourites":
+                            listTitle = R.string.favourites;
+                            break;
+                        case "read":
+                            listTitle = R.string.read;
+                            break;
+                        case "reading":
+                            listTitle = R.string.reading;
+                            break;
+                    }
+
+                    if (listTitle != 0) {
+                        activity.getSupportActionBar().setTitle(listTitle);
+                    } else {
+                        activity.getSupportActionBar().setTitle("");
+                    }
                 }
             }
         }
 
         viewModel.getBooks().observe(getViewLifecycleOwner(), books -> {
+            //toggles visibility if depending on weather theres books to show or not
             if (books.isEmpty())
                 binding.emptyListCard.setVisibility(View.VISIBLE);
             else
@@ -85,7 +143,8 @@ public class BookListFragment extends Fragment implements BookAdapter.OnItemClic
                 R.id.nav_host_fragment_activity_main);
         Bundle bundle = new Bundle();
         bundle.putString("isbn13", book.getIsbn13());
-        navController.navigate(R.id.bookDetail, bundle);
+        //sends the user to the detail with the isbn in the bundle
+        navController.navigate(R.id.action_bookList_in_discover_to_discover_bookDetail, bundle);
     }
 
     @Override

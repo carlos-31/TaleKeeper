@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.bumptech.glide.Glide;
 import com.carlosreads.talekeeper.R;
@@ -41,11 +40,12 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(Book book) {
                 currentBook = book;
+                int width = 640;
 
                 //loading the cover of the book into the ImageView from the url in the database
                 Glide.with(getContext())
                         .load(book.getCover_url())
-                        .override(630, (int) (630 * 1.6))
+                        .override(width, (int) (width * 1.6))
                         .fitCenter()
                         .into(binding.coverImg);
             }
@@ -54,10 +54,8 @@ public class HomeFragment extends Fragment {
         binding.libraryCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(requireContext(), "library", Toast.LENGTH_SHORT).show();
-                NavController navController = Navigation.findNavController(requireActivity(),
-                        R.id.nav_host_fragment_activity_main);
-                navController.navigate(R.id.action_to_library);
+                NavController navController = NavHostFragment.findNavController(HomeFragment.this);
+                navController.navigate(R.id.action_home_to_library);
 
             }
         });
@@ -65,16 +63,13 @@ public class HomeFragment extends Fragment {
         binding.spotlight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController = Navigation.findNavController(requireActivity(),
-                        R.id.nav_host_fragment_activity_main);
+                NavController navController = NavHostFragment.findNavController(HomeFragment.this);
                 Bundle bundle = new Bundle();
                 bundle.putString("isbn13", currentBook.getIsbn13());
-                navController.navigate(R.id.bookDetail, bundle);
+                navController.navigate(R.id.action_home_to_home_bookDetail, bundle);
             }
         });
 
         return root;
     }
-
-
 }

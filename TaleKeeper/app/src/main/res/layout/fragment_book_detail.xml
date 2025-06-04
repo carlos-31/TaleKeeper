@@ -1,5 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -8,186 +10,193 @@
             type="com.carlosreads.talekeeper.viewmodels.BookDetailViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="20dp"
-        android:paddingTop="?attr/actionBarSize"
-        android:paddingBottom="?attr/actionBarSize">
+        android:fillViewport="true"
+        android:paddingStart="24dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="24dp">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/backBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:contentDescription="Back button"
-            android:src="@drawable/ic_back"
-            app:elevation="6dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <android.widget.ScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp"
-            app:layout_constraintTop_toBottomOf="@id/backBtn">
+            android:layout_height="wrap_content">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/bookCover"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/book_cover"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
 
-                <ImageView
-                    android:id="@+id/bookCover"
+            <TextView
+                android:id="@+id/bookTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text='@{viewModel.bookLiveData.title}'
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bookCover" />
+
+            <TextView
+                android:id="@+id/bookAuthor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text='@{viewModel.bookLiveData.author}'
+                android:textAlignment="center"
+                android:textColor="?attr/colorSecondary"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bookTitle" />
+
+            <LinearLayout
+                android:id="@+id/userBtnBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bookAuthor">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/favBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="26dp"
-                    android:contentDescription="@string/book_cover"
-                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="?attr/buttonsType1"
+                    android:contentDescription="@string/fav_btn_desc"
+                    app:elevation="6dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="56dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="6dp"
+                    app:strokeColor="?attr/colorOutline"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="0dp">
+
+                        <Spinner
+                            android:id="@+id/bookStatusSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/book_status_options"
+                            android:minHeight="48dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/bookSynopsis"
+                android:layout_width="0dp"
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="1.2"
+                android:text='@{viewModel.bookLiveData.synopsis}'
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/userBtnBox" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chipsContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bookSynopsis">
+
+                <androidx.constraintlayout.helper.widget.Flow
+                    android:id="@+id/statsFlow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="0dp"
+                    app:constraint_referenced_ids="pubYearChip,pageCountChip,genreChip,publisherChip"
+                    app:flow_horizontalAlign="center"
+                    app:flow_horizontalGap="8dp"
+                    app:flow_verticalGap="8dp"
+                    app:flow_wrapMode="chain"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/bookTitle"
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/pubYearChip"
+                    style="@style/Widget.MaterialComponents.Chip.Entry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text='@{viewModel.bookLiveData.title}'
-                    android:textAlignment="center"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/bookCover" />
+                    android:checkable="false"
+                    android:clickable="false"
+                    android:text="@{@string/published_in(String.valueOf(viewModel.bookLiveData.pub_year))}"
+                    android:textColor="?android:textColorPrimary"
+                    app:chipBackgroundColor="?attr/chipColour"
+                    app:closeIcon="@null" />
 
-                <TextView
-                    android:id="@+id/bookAuthor"
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/pageCountChip"
+                    style="@style/Widget.MaterialComponents.Chip.Entry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text='@{viewModel.bookLiveData.author}'
-                    android:textColor="?attr/colorSecondary"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/bookTitle" />
+                    android:checkable="false"
+                    android:clickable="false"
+                    android:text="@{@string/page_count(viewModel.bookLiveData.page_count)}"
+                    android:textColor="?android:textColorPrimary"
+                    app:chipBackgroundColor="?attr/chipColour"
+                    app:closeIcon="@null" />
 
-                <LinearLayout
-                    android:id="@+id/userBtnBox"
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/genreChip"
+                    style="@style/Widget.MaterialComponents.Chip.Entry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="22dp"
-                    android:layout_marginBottom="24dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/bookAuthor">
+                    android:checkable="false"
+                    android:clickable="false"
+                    android:text="@{viewModel.bookLiveData.genres}"
+                    android:textColor="?android:textColorPrimary"
+                    app:chipBackgroundColor="?attr/chipColour"
+                    app:closeIcon="@null" />
 
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/favBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="24dp"
-                        app:elevation="6dp" />
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:cardCornerRadius="12dp"
-                        app:cardElevation="6dp"
-                        app:strokeColor="?attr/colorOutline"
-                        app:strokeWidth="1dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="8dp">
-
-                            <Spinner
-                                android:id="@+id/bookStatusSpinner"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:entries="@array/book_status_options" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/bookSynopsis"
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/publisherChip"
+                    style="@style/Widget.MaterialComponents.Chip.Entry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="18dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="18dp"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:justificationMode="inter_word"
-                    android:text='@{viewModel.bookLiveData.synopsis}'
-                    android:textSize="15sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/userBtnBox" />
+                    android:checkable="false"
+                    android:clickable="false"
+                    android:text="@{viewModel.bookLiveData.publisher}"
+                    android:textColor="?android:textColorPrimary"
+                    app:chipBackgroundColor="?attr/chipColour"
+                    app:closeIcon="@null" />
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/statsChipGroup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/bookSynopsis"
-                    app:singleLine="false">
-
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.MaterialComponents.Chip.Entry"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="false"
-                        android:clickable="false"
-                        android:text='@{"Published in " + viewModel.bookLiveData.pub_year}'
-                        android:textColor="?android:textColorPrimary"
-                        app:chipBackgroundColor="?attr/colorSecondaryContainer"
-                        app:closeIcon="@null" />
-
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.MaterialComponents.Chip.Entry"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="false"
-                        android:clickable="false"
-                        android:text='@{viewModel.bookLiveData.page_count + " pages"}'
-                        android:textColor="?android:textColorPrimary"
-                        app:chipBackgroundColor="?attr/colorSecondaryContainer"
-                        app:closeIcon="@null" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/genreChip"
-                        style="@style/Widget.MaterialComponents.Chip.Entry"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="false"
-                        android:clickable="false"
-                        android:text="@{viewModel.bookLiveData.genres}"
-                        android:textColor="?android:textColorPrimary"
-                        app:chipBackgroundColor="?attr/colorSecondaryContainer"
-                        app:closeIcon="@null" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/publisherChip"
-                        style="@style/Widget.MaterialComponents.Chip.Entry"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="false"
-                        android:clickable="false"
-                        android:text="@{viewModel.bookLiveData.publisher}"
-                        android:textColor="?android:textColorPrimary"
-                        app:chipBackgroundColor="?attr/colorSecondaryContainer"
-                        app:closeIcon="@null" />
-                </com.google.android.material.chip.ChipGroup>
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </android.widget.ScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

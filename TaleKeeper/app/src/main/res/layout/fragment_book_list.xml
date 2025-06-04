@@ -4,15 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="?attr/actionBarSize"
-    android:paddingBottom="?attr/actionBarSize"
     tools:context=".views.BookListFragment">
 
     <LinearLayout
         android:id="@+id/recyclerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="20dp"
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -59,14 +56,13 @@
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:text="@string/no_books_found_here"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/try_a_different_category_or_try_again_later"/>
+                android:text="@string/try_a_different_category_or_try_again_later" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
-
 </FrameLayout>

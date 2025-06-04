@@ -1,10 +1,7 @@
 package com.carlosreads.talekeeper.views;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -36,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -59,23 +56,27 @@ public class LoginActivity extends AppCompatActivity {
                 //checks info is filled out before calling the function
                 if (email.isEmpty() || password.isEmpty())
                     Toast.makeText(LoginActivity.this,
-                            "Please fill out your information", Toast.LENGTH_SHORT).show();
+                            getString(R.string.validation_required_fields), Toast.LENGTH_SHORT).show();
                 else
-                    viewModel.login(email,password);
+                    viewModel.login(email, password);
             }
         });
 
-        viewModel.getLoginStatus().observe(this, status -> {
-            if (status != null){
-                if (status) {
-                    //if login successful, sends the user home
-                    Intent home = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(home);
+        viewModel.getResutlMessage().observe(this, message -> {
+            if (message != null) {
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+
+                if (message == R.string.login_success) {
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    //these flags make it so the previous instance of mainActivity to the front og the stack,
+                    // and if its already at the top it prevents  new one being created
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.putExtra("navigateTo", "profile");
+                    startActivity(intent);
                     finish();
                 }
-                else
-                    Toast.makeText(this, "Error while loging in", Toast.LENGTH_SHORT).show();
-            }});
+            }
+        });
 
         binding.signupText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +86,5 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 }

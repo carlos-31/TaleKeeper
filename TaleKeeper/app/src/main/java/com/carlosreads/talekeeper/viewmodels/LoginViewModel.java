@@ -7,22 +7,18 @@ import com.carlosreads.talekeeper.repositories.UserRepository;
 
 public class LoginViewModel extends ViewModel {
     private UserRepository userRepository;
-    private MutableLiveData<Boolean> loginStatus = new MutableLiveData<>();
+    private MutableLiveData<Integer> resutlMessage = new MutableLiveData<>();
 
-    public LoginViewModel(){
+    public LoginViewModel() {
         userRepository = new UserRepository();
     }
 
-    public MutableLiveData<Boolean> getLoginStatus(){
-        return loginStatus;
+    public MutableLiveData<Integer> getResutlMessage() {
+        return resutlMessage;
     }
 
-    public void login(String email, String password){
-        userRepository.loginUser(email, password).observeForever(result -> {
-            //logs in user and stores if result was seuccesful or not
-            loginStatus.setValue(result);
-        });
-
+    public void login(String email, String password) {
+        userRepository.loginUser(email, password, resutlMessage);
     }
 
 }

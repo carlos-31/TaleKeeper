@@ -1,10 +1,7 @@
 package com.carlosreads.talekeeper.views;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -37,7 +34,7 @@ public class SignupActivity extends AppCompatActivity {
 
         EdgeToEdge.enable(this);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -62,34 +59,25 @@ public class SignupActivity extends AppCompatActivity {
                 //checks all info is filled in before calling viewmodel
                 if (name.isEmpty() || email.isEmpty() || password.isEmpty() || password2.isEmpty())
                     Toast.makeText(SignupActivity.this,
-                            "Please fill out your information", Toast.LENGTH_SHORT).show();
+                            getString(R.string.validation_missing_info), Toast.LENGTH_SHORT).show();
                 else
-                    viewModel.validateAndRegister(name, email,password, password2);
+                    viewModel.validateAndRegister(name, email, password, password2);
             }
         });
 
-        viewModel.getRegistrationStatus().observe(this, new Observer<Boolean>() {
+        viewModel.getResultMessage().observe(this, new Observer<Integer>() {
             @Override
-            public void onChanged(Boolean isRegistered) {
-                if (isRegistered != null) {
-                    if (isRegistered) {
-                        //if sign up succeeds, send user to login activity
-                        Toast.makeText(SignupActivity.this,
-                                "user registered successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(SignupActivity.this,
-                                                    LoginActivity.class));
-                    } else {
-                        Toast.makeText(SignupActivity.this,
-                                "something went wrong :(", Toast.LENGTH_SHORT).show();
+            public void onChanged(Integer message) {
+                if (message != null) {
+                    Toast.makeText(SignupActivity.this, message, Toast.LENGTH_SHORT).show();
+                    if (message == R.string.reg_success) {
+                        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        intent.putExtra("navigateTo", "profile");
+                        startActivity(intent);
+                        finish();
                     }
                 }
-            }
-        });
-
-        viewModel.getValidationMessage().observe(this, message -> {
-            if (message != null) {
-                //gets the error message, and if not null displays it
-                Toast.makeText(SignupActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -103,3 +91,55 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+                                                      /)
+                                              o__^^/_/)
+                                               \ ' \`-'     ___
+                                                `|  \______/--'`
+                                                 |         \
+                                               ././-------,.\
+                                   _
+                                (\ \)
+                              o__^\/     ,
+                               \ ' \    <   _  _
+' '  .                          `|  \____\   -   -
+       '      . .      ()        |        )  _   _
+         `.'       `.'         .//---_/-_/ _  _
+
+                        (\
+                       (\_\^^__o   .
+                       `-'\ ` /   `(
+                          |  \_____|
+                          |        |                _
+                        ./`,----./~|     .   .   . - ()
+
+                                                        (\
+                                                       (\_\_^__o
+                                                ___     `-'/ `_/
+                                               '`--\______/  |
+                                          '        /         |
+                                      `    .  '  -`/.------'\^-'
+
+
+       (BP_mic - https://ascii.co.uk/art/dogs)
+
+
+(i saw this and thought was too cute not to add it, if you found this, you're welcome)
+*/

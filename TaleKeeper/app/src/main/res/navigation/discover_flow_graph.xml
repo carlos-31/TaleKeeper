@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/discover_flow"
+    app:startDestination="@id/navigation_discover">
+
+    <fragment
+        android:id="@+id/navigation_discover"
+        android:name="com.carlosreads.talekeeper.views.DiscoverFragment"
+        android:label="@string/discover"
+        tools:layout="@layout/fragment_discover">
+        <action
+            android:id="@+id/action_discover_to_bookList_in_discover"
+            app:destination="@id/bookList_in_discover" />
+        <action
+            android:id="@+id/action_discover_to_discover_bookDetail"
+            app:destination="@id/bookDetail_in_discover" />
+        <action
+            android:id="@+id/action_discover_to_user_actions_in_discover"
+            app:destination="@+id/user_actions_fragment_discover" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bookList_in_discover"
+        android:name="com.carlosreads.talekeeper.views.BookListFragment"
+        android:label="Book List"
+        tools:layout="@layout/fragment_book_list">
+        <action
+            android:id="@+id/action_bookList_in_discover_to_discover_bookDetail"
+            app:destination="@id/bookDetail_in_discover" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bookDetail_in_discover"
+        android:name="com.carlosreads.talekeeper.views.BookDetailFragment"
+        tools:layout="@layout/fragment_book_detail" />
+
+    <fragment
+        android:id="@+id/user_actions_fragment_discover"
+        android:name="com.carlosreads.talekeeper.views.UserActionsFragment"
+        tools:layout="@layout/fragment_user_actions" />
+
+</navigation>

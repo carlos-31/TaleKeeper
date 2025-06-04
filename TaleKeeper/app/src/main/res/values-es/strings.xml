@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="library">Biblioteca</string>
+    <string name="discover">Descubrir</string>
+    <string name="profile">Perfil</string>
+    <string name="home">Inicio</string>
+    <string name="sign_up_link">¿No tienes una cuenta?\n¡Crea una aquí!</string>
+    <string name="log_in">Iniciar sesión</string>
+    <string name="password">Contraseña</string>
+    <string name="login_title">¡Inicia sesión en tu cuenta!</string>
+    <string name="home_FAB">Botón para volver a inicio</string>
+    <string name="signup_title">Crear una cuenta nueva</string>
+    <string name="name">Nombre</string>
+    <string name="email">Correo electrónico</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="sign_up">Registrarse</string>
+    <string name="book_cover">La portada del libro</string>
+    <string name="spotlight_subtitle">Vuelve mañana para una nueva recomendación!</string>
+    <string name="spotlight_title">Libro favorito de hoy:</string>
+    <string name="Library_card_home_title">¡Echa un vistazo a nuestro catálogo completo!</string>
+    <string name="genres_card_title">Explora nuestros géneros</string>
+    <string name="fantasy">Fantasía</string>
+    <string name="sci_fi">Ciencia Ficción</string>
+    <string name="mystery">Misterio</string>
+    <string name="horror">Terror</string>
+    <string name="speculative">Especulativa</string>
+    <string name="anthology">Antología</string>
+    <string name="Search_bar_hint">¿Qué estás buscando?</string>
+    <string name="search">Buscar</string>
+    <string name="not_logged_in_msg">Esta área es solo para usuarios.\nPor favor, inicia sesión o crea una cuenta</string>
+    <string name="not_logged_in_title">Parece que no has iniciado sesión…</string>
+    <string name="favourites">Favoritos</string>
+    <string name="tbr_title">Por leer</string>
+    <string name="read">Leídos</string>
+    <string name="no_favs">No hay libros marcados como favoritos</string>
+    <string name="no_read_books">No hay libros marcados como leídos</string>
+    <string name="no_reading_books">Tu lista de lectura está vacía</string>
+    <string name="no_tbr">No hay libros en tu lista de "Por leer"</string>
+    <string name="no_books_found_here">¡No se encontraron libros aquí!</string>
+    <string name="try_a_different_category_or_try_again_later">Prueba una categoría diferente o inténtalo de nuevo más tarde</string>
+    <string name="fiction">Ficción</string>
+    <string name="nonfiction">No ficción</string>
+    <string name="login_link">¿Ya tienes una cuenta?\n Haz clic aquí para iniciar sesión</string>
+    <string name="back_button">Botón de retroceso</string>
+    <string name="fav_btn_desc">Botón para marcar como favorito</string>
+    <string name="settings_btn">Botón de ajustes</string>
+    <string name="reading_list_icon">Icono de lista de lectura</string>
+    <string name="reading">Leyendo</string>
+    <string name="log_out">Cerrar sesión</string>
+    <string name="change_your_password">Cambiar tu contraseña</string>
+    <string name="current_password">Contraseña actual</string>
+    <string name="new_password">Nueva contraseña</string>
+    <string name="confirm_new_password">Confirmar nueva contraseña</string>
+    <string name="change_password">Cambiar contraseña</string>
+    <string name="delete_your_account">Eliminar tu cuenta</string>
+    <string name="account_deletion_warning">Esta acción es irreversible y eliminará permanentemente tu cuenta junto con todos los datos asociados.\n¿Estás seguro de que quieres continuar?</string>
+    <string name="confirm_deletion">Confirmar eliminación</string>
+    <string name="cancel">Cancelar</string>
+    <string name="request_a_new_book">Solicitar un libro nuevo</string>
+    <string name="book_title">Título del libro</string>
+    <string name="author">Autor</string>
+    <string name="isbn_13_optional">ISBN-13 (opcional)</string>
+    <string name="submit_request">Enviar solicitud</string>
+    <string name="spanish">Español</string>
+    <string name="english">Inglés</string>
+    <string name="language">Idioma</string>
+    <string name="appearance">Apariencia</string>
+    <string name="dark_mode">Modo oscuro</string>
+    <string name="delete_account">Eliminar cuenta</string>
+    <string name="account_management">Gestión de la cuenta</string>
+    <string name="request_a_book">Solicitar un libro</string>
+    <string name="welcome_msg">Hola de nuevo, %1$s!</string>
+    <string name="browse_by_languages">Explorar por idiomas</string>
+    <string name="request_book_subtitle_logged_in">Parece que aún no tenemos ese libro en nuestra base de datos.\nTe gustaría solicitarlo?</string>
+    <string name="request_book_subtitle_not_logged_in">Parece que aún no tenemos ese libro en nuestra base de datos.\nSi inicias sesión en tu cuenta, puedes solicitar que lo añadamos!</string>
+    <string name="we_couldn_t_find_that_one">No hemos podido encontrarlo</string>
+    <string name="published_in">Publicado en %1$s</string>
+    <string name="page_count">%1$d páginas</string>
+
+    <string-array name="book_status_options">
+        <item>Añadir libro</item>
+        <item>Por leer</item>
+        <item>Leyendo</item>
+        <item>Leído</item>
+        <item>Eliminar libro</item>
+    </string-array>
+
+    <string name="login_success">¡Inicio de sesión exitoso!</string>
+    <string name="login_failed_default">Error al iniciar sesión. Por favor, inténtalo más tarde</string>
+    <string name="login_incorrect_password">Contraseña incorrecta. Por favor, inténtalo de nuevo</string>
+    <string name="reg_success">¡Registro exitoso!</string>
+    <string name="reg_error_contact">Error en el registro. Por favor, contáctanos para obtener ayuda</string>
+    <string name="reg_failed_default">Error en el registro. Por favor, inténtalo de nuevo</string>
+    <string name="reg_email_in_use">Este correo ya está en uso. Por favor, inicia sesión o usa uno diferente</string>
+    <string name="reg_password_requirements">La contraseña debe tener al menos 8 caracteres y un número</string>
+    <string name="change_pass_success">Contraseña cambiada con éxito</string>
+    <string name="change_pass_error">Error al cambiar la contraseña Inténtalo más tarde</string>
+    <string name="change_pass_incorrect">La contraseña actual es incorrecta</string>
+    <string name="delete_acc_success">La cuenta ha sido eliminada con éxito</string>
+    <string name="delete_acc_error_contact">Error al eliminar la cuenta, por favor contáctanos</string>
+    <string name="delete_acc_error">Error al eliminar la cuenta, inténtalo más tarde</string>
+    <string name="req_book_login_required">Debes iniciar sesión para hacer esto</string>
+    <string name="req_book_success">Solicitud enviada ¡Gracias!</string>
+    <string name="req_book_error">Algo salió mal, inténtalo de nuevo más tarde</string>
+    <string name="validation_invalid_email">El correo electrónico no es válido</string>
+    <string name="validation_passwords_no_match">Las contraseñas no coinciden</string>
+    <string name="validation_new_passwords_no_match">Las nuevas contraseñas no coinciden</string>
+    <string name="validation_missing_info">Falta información</string>
+    <string name="validation_required_fields">Por favor, rellena los campos obligatorios</string>
+
+    <string name="about_app">Acerca de esta aplicación</string>
+    <string name="made_by">Hecho por Carlos</string>
+    <string name="contact_github">Contacto: github.com/carlos-31</string>
+    <string name="icon_by_flaticon">Ícono de FlatIcon</string>
+    <string name="theme_template_material_you">Plantilla de tema de Material Theme Builder</string>
+    <string name="hope_you_enjoy">¡Espero que lo disfrutes!</string>
+
+    <string name="settings">Ajustes</string>
+    <string name="something_went_wrong_please_try_again">Algo no funcionó, intente de nuevo</string>
+    <string name="book_req_limit_reached">Tenemos demasiadas solicitudes, intentelo luego o contactenos</string>
+</resources>
