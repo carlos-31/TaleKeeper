@@ -61,7 +61,39 @@ This application serves as a complete mobile companion for book lovers. Users ca
 
 ## 📸 Screenshots
 
+**Here are some screenshots from my app:**
 
+<div align="center">
+<p>
+Home screen (All variations)
+</p>
+<p>
+<img src="ReadMeImages/home.png" alt="Home screen" height="500">
+<img src="ReadMeImages/home_es.png" alt="Home screen" height="500">
+<img src="ReadMeImages/home_light_mode.png" alt="Home screen" height="500">
+</p>  
+</div>
+
+<div align="center">
+<p>
+Discover screen, book search and book's details
+</p>
+<p>
+<img src="ReadMeImages/discover.png" alt="Home screen" height="500">
+<img src="ReadMeImages/book_search.png" alt="Home screen" height="500">
+<img src="ReadMeImages/book_detail.png" alt="Home screen" height="500">
+</p>  
+</div>
+
+<div align="center">
+<p>
+User's profile, and their favourites list
+</p>
+<p>
+<img src="ReadMeImages/profile.png" alt="Home screen" height="500">
+<img src="ReadMeImages/fav_list.png" alt="Home screen" height="500">
+</p>  
+</div>
 
 ---
 
